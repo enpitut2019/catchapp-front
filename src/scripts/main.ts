@@ -14,12 +14,14 @@ const appendPapers = (papers: Paper[]): void => {
     const urlElement = document.createElement("div");
     const dateElement = document.createElement("div");
     const linkElement = document.createElement("a");
+    const abstractElement = document.createElement("section");
 
     // Elementにクラスを適用
     paperElement.classList.add("paper");
     titleElement.classList.add("paper--title");
     urlElement.classList.add("paper--url");
     dateElement.classList.add("paper--date");
+    abstractElement.classList.add("paper--abstract");
 
     // Elementにテキストを挿入
     titleElement.textContent = paper.title;
@@ -31,10 +33,13 @@ const appendPapers = (papers: Paper[]): void => {
       new Date(paper.created_at),
       "yyyy年MM月dd日"
     );
+    abstractElement.textContent = paper.abstract;
+
     // 子Elementをpaper Elementに挿入
     paperElement.appendChild(titleElement);
-    paperElement.appendChild(urlElement);
     paperElement.appendChild(dateElement);
+    paperElement.appendChild(urlElement);
+    paperElement.appendChild(abstractElement);
 
     // bodyにpaper elementを挿入
     if (mainElement === null) return;
@@ -44,8 +49,11 @@ const appendPapers = (papers: Paper[]): void => {
 
 window.addEventListener("DOMContentLoaded", () => {
   // Production: https://siscorn-checkapp.herokuapp.com/papers/all
-  axios.get("https://siscorn-checkapp.herokuapp.com/papers/all").then(res => {
-    const papers = res.data.papers as Paper[];
+
+  // const sourceUrl = "https://siscorn-checkapp.herokuapp.com/papers/all";
+  const sourceUrl = "http://localhost:3000/papers/all";
+  axios.get(sourceUrl).then(res => {
+    const papers = res.data as Paper[];
     appendPapers(papers);
   });
 

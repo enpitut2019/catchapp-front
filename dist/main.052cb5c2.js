@@ -18350,23 +18350,27 @@ var appendPapers = function appendPapers(papers) {
     var titleElement = document.createElement("div");
     var urlElement = document.createElement("div");
     var dateElement = document.createElement("div");
-    var linkElement = document.createElement("a"); // Elementにクラスを適用
+    var linkElement = document.createElement("a");
+    var abstractElement = document.createElement("section"); // Elementにクラスを適用
 
     paperElement.classList.add("paper");
     titleElement.classList.add("paper--title");
     urlElement.classList.add("paper--url");
-    dateElement.classList.add("paper--date"); // Elementにテキストを挿入
+    dateElement.classList.add("paper--date");
+    abstractElement.classList.add("paper--abstract"); // Elementにテキストを挿入
 
     titleElement.textContent = paper.title;
     linkElement.setAttribute("href", paper.url);
     linkElement.setAttribute("target", "_blank");
     linkElement.textContent = paper.url;
     urlElement.appendChild(linkElement);
-    dateElement.textContent = date_fns_1.format(new Date(paper.created_at), "yyyy年MM月dd日"); // 子Elementをpaper Elementに挿入
+    dateElement.textContent = date_fns_1.format(new Date(paper.created_at), "yyyy年MM月dd日");
+    abstractElement.textContent = paper.abstract; // 子Elementをpaper Elementに挿入
 
     paperElement.appendChild(titleElement);
+    paperElement.appendChild(dateElement);
     paperElement.appendChild(urlElement);
-    paperElement.appendChild(dateElement); // bodyにpaper elementを挿入
+    paperElement.appendChild(abstractElement); // bodyにpaper elementを挿入
 
     if (mainElement === null) return;
     mainElement.appendChild(paperElement);
@@ -18375,8 +18379,10 @@ var appendPapers = function appendPapers(papers) {
 
 window.addEventListener("DOMContentLoaded", function () {
   // Production: https://siscorn-checkapp.herokuapp.com/papers/all
-  axios_1.default.get("https://siscorn-checkapp.herokuapp.com/papers/all").then(function (res) {
-    var papers = res.data.papers;
+  // const sourceUrl = "https://siscorn-checkapp.herokuapp.com/papers/all";
+  var sourceUrl = "http://localhost:3000/papers/all";
+  axios_1.default.get(sourceUrl).then(function (res) {
+    var papers = res.data;
     appendPapers(papers);
   }); // Development
   // const papers = mockPapers as Paper[];
@@ -18410,7 +18416,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59895" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63074" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
