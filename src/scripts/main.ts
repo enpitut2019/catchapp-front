@@ -50,8 +50,8 @@ const appendPapers = (papers: Paper[]): void => {
 window.addEventListener("DOMContentLoaded", () => {
   // Production: https://siscorn-checkapp.herokuapp.com/papers/all
 
-  // const sourceUrl = "https://siscorn-checkapp.herokuapp.com/papers/all";
-  const sourceUrl = "http://localhost:3000/papers/all";
+  const sourceUrl = "https://siscorn-checkapp.herokuapp.com/papers/all";
+  // const sourceUrl = "http://localhost:3000/papers/all";
   axios.get(sourceUrl).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);

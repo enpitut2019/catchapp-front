@@ -18379,8 +18379,8 @@ var appendPapers = function appendPapers(papers) {
 
 window.addEventListener("DOMContentLoaded", function () {
   // Production: https://siscorn-checkapp.herokuapp.com/papers/all
-  // const sourceUrl = "https://siscorn-checkapp.herokuapp.com/papers/all";
-  var sourceUrl = "http://localhost:3000/papers/all";
+  var sourceUrl = "https://siscorn-checkapp.herokuapp.com/papers/all"; // const sourceUrl = "http://localhost:3000/papers/all";
+
   axios_1.default.get(sourceUrl).then(function (res) {
     var papers = res.data;
     appendPapers(papers);
@@ -18416,7 +18416,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63074" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49851" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
