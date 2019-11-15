@@ -18344,20 +18344,24 @@ console.log("hogeeeeee");
 
 var appendPapers = function appendPapers(papers) {
   var mainElement = document.getElementById("main");
-  papers.forEach(function (paper) {
+  papers.forEach(function (paper, idx) {
     // Element Elementを生成
     var paperElement = document.createElement("div");
     var titleElement = document.createElement("div");
     var urlElement = document.createElement("div");
     var dateElement = document.createElement("div");
     var linkElement = document.createElement("a");
-    var abstractElement = document.createElement("section"); // Elementにクラスを適用
+    var abstractElement = document.createElement("section");
+    var figureElement = document.createElement("div");
+    var figureImgElement = document.createElement("img");
+    var figureDisElement = document.createElement("section"); // Elementにクラスを適用
 
     paperElement.classList.add("paper");
     titleElement.classList.add("paper--title");
     urlElement.classList.add("paper--url");
     dateElement.classList.add("paper--date");
-    abstractElement.classList.add("paper--abstract"); // Elementにテキストを挿入
+    abstractElement.classList.add("paper--abstract");
+    figureElement.classList.add("paper--figures"); // Elementにテキストを挿入
 
     titleElement.textContent = paper.title;
     linkElement.setAttribute("href", paper.url);
@@ -18365,11 +18369,18 @@ var appendPapers = function appendPapers(papers) {
     linkElement.textContent = paper.url;
     urlElement.appendChild(linkElement);
     dateElement.textContent = date_fns_1.format(new Date(paper.created_at), "yyyy年MM月dd日");
-    abstractElement.textContent = paper.abstract; // 子Elementをpaper Elementに挿入
+    abstractElement.textContent = paper.abstract; //figureDisElement.textContent = paper.figures[idx].explanation;
+    //figureImgElement.setAttribute("src", paper.figures[idx].figure);
+
+    figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
+    figureDisElement.textContent = "EXPLANATION";
+    figureElement.appendChild(figureImgElement);
+    figureElement.appendChild(figureDisElement); // 子Elementをpaper Elementに挿入
 
     paperElement.appendChild(titleElement);
     paperElement.appendChild(dateElement);
     paperElement.appendChild(urlElement);
+    paperElement.appendChild(figureElement);
     paperElement.appendChild(abstractElement); // bodyにpaper elementを挿入
 
     if (mainElement === null) return;
@@ -18416,7 +18427,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49851" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58983" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
