@@ -1,80 +1,84 @@
 @import "variables";
 
 .paper-block {
-  margin: 1rem auto;
-  padding: 1rem;
-  border-bottom: 1px solid black;
+  &_top {
+    background-color: $base-blue;
+    padding: $base-space-2;
+    color: $base-white;
 
-
-  &:first-child {
-    border-top: 1px solid black;
-  }
-
-  &_title {
-    font-size: $font-size-l;
-    font-weight: bolder;
-    margin-bottom: $base-space;
-  }
-
-  &_author {
-    margin-bottom: $base-space-2;
-  }
-
-  &_keyword {
-    margin-bottom: $base-space-2;
-  }
-
-  &_journal {
-    margin-bottom: $base-space-2;
-  }
-
-  &_cite-number {
-    display: flex;
-    margin-left: 50%;
-    .cite-block {
+    .titleelement-block {
+      font-size: $font-size-l;
       font-weight: bolder;
       margin-bottom: $base-space;
-      border: 1px solid;
-      padding: 4px;
-      width: 90%;
-      text-align: center;
+    }
+
+    .cite-number-block {
+      display: flex;
+      margin-left: 50%;
+      &_cite {
+        font-weight: bolder;
+        margin-bottom: $base-space;
+        border: 1px solid;
+        padding: 4px;
+        width: 90%;
+        text-align: center;
+      }
+    }
+
+    .date-block {
+      margin-bottom: $base-space;
+      text-align: right;
     }
   }
 
-  &_date {
-    margin-bottom: $base-space;
-    text-align: right;
-  }
+  &_bottom {
+    padding: $base-space-2;
 
-  &_abstract {
-    margin-bottom: $base-space-2;
-  }
-
-  &_url {
-    margin-bottom: $base-space
-  }
-
-  &_figures {
-    display: flex;
-    .figure-img-block {
-      width: 30%;
-      height: 100px;
-      object-fit: cover;
+    .author-block {
       margin-bottom: $base-space-2;
-      margin-right: $base-space;
     }
-    &:nth-child(3n) {
-      margin-right: 0px;
+
+    .keyword-block {
+      margin-bottom: $base-space-2;
+    }
+
+    .journal-block {
+      margin-bottom: $base-space-2;
+    }
+
+    .abstract-block {
+      margin-bottom: $base-space-2;
+    }
+
+    .url-block {
+      margin-bottom: $base-space
+    }
+
+    .figures-block {
+      display: flex;
+      border: 1px solid;
+      padding: $base-space $base-space 0;
+      margin-bottom: $base-space-2;
+      &_img {
+        width: 32%;
+        height: 100px;
+        object-fit: cover;
+        margin-right: $base-space;
+        margin-bottom: $base-space;
+
+        &:nth-child(3n) {
+          margin-right: 0px;
+        }
+      }
+    }
+
+    .title-block {
+      font-size: $font-size-m;
+      color: $base-color;
+      font-weight: bolder;
+      margin-bottom: $base-space;
     }
   }
-
-  .title-block {
-    font-size: $font-size-m;
-    color: $base-color;
-    font-weight: bolder;
-    margin-bottom: $base-space;
-  }
-
 }
 
 .button-block {

@@ -5,42 +5,32 @@
   font-size: 1rem;
 }
 
+.header-block {
+  background-color: #203377;
+  height: 40px;
+  box-shadow: 0 8px 4px 0 rgba(0, 0, 0, 0.09);
+}
+
 html, body {
   padding: 0;
   margin: 0;
 }
 
-main {
-  padding: 16px 0;
+.paper-block_top {
+  background-color: #2a6fb6;
+  padding: 16px;
+  color: #FFF;
 }
-
-.paper-block {
-  margin: 1rem auto;
-  padding: 1rem;
-  border-bottom: 1px solid black;
-}
-.paper-block:first-child {
-  border-top: 1px solid black;
-}
-.paper-block_title {
+.paper-block_top .titleelement-block {
   font-size: 1.6rem;
   font-weight: bolder;
   margin-bottom: 8px;
 }
-.paper-block_author {
-  margin-bottom: 16px;
-}
-.paper-block_keyword {
-  margin-bottom: 16px;
-}
-.paper-block_journal {
-  margin-bottom: 16px;
-}
-.paper-block_cite-number {
+.paper-block_top .cite-number-block {
   display: flex;
   margin-left: 50%;
 }
-.paper-block_cite-number .cite-block {
+.paper-block_top .cite-number-block_cite {
   font-weight: bolder;
   margin-bottom: 8px;
   border: 1px solid;
@@ -48,30 +38,45 @@ main {
   width: 90%;
   text-align: center;
 }
-.paper-block_date {
+.paper-block_top .date-block {
   margin-bottom: 8px;
   text-align: right;
 }
-.paper-block_abstract {
+.paper-block_bottom {
+  padding: 16px;
+}
+.paper-block_bottom .author-block {
   margin-bottom: 16px;
 }
-.paper-block_url {
+.paper-block_bottom .keyword-block {
+  margin-bottom: 16px;
+}
+.paper-block_bottom .journal-block {
+  margin-bottom: 16px;
+}
+.paper-block_bottom .abstract-block {
+  margin-bottom: 16px;
+}
+.paper-block_bottom .url-block {
   margin-bottom: 8px;
 }
-.paper-block_figures {
+.paper-block_bottom .figures-block {
   display: flex;
+  border: 1px solid;
+  padding: 8px 8px 0;
+  margin-bottom: 16px;
 }
-.paper-block_figures .figure-img-block {
-  width: 30%;
+.paper-block_bottom .figures-block_img {
+  width: 32%;
   height: 100px;
   object-fit: cover;
-  margin-bottom: 16px;
   margin-right: 8px;
+  margin-bottom: 8px;
 }
-.paper-block_figures:nth-child(3n) {
+.paper-block_bottom .figures-block_img:nth-child(3n) {
   margin-right: 0px;
 }
-.paper-block .title-block {
+.paper-block_bottom .title-block {
   font-size: 1.4rem;
   color: #979292;
   font-weight: bolder;

@@ -18342,10 +18342,12 @@ var date_fns_1 = require("date-fns");
 
 var appendPapers = function appendPapers(papers) {
   var mainElement = document.getElementById("main");
-  var linkElement = document.getElementById("link");
+  var toPDFElement = document.getElementById("link");
   console.log(papers[0].title); // Element Elementを生成
 
   var paperElement = document.createElement("div");
+  var topElement = document.createElement("div");
+  var bottomElement = document.createElement("div");
   var titleElement = document.createElement("div");
   var authorElement = document.createElement("div");
   var keywordElement = document.createElement("div");
@@ -18368,20 +18370,22 @@ var appendPapers = function appendPapers(papers) {
   var keywordTitleElement = document.createElement("div"); // Elementにクラスを適用
 
   paperElement.classList.add("paper-block");
-  titleElement.classList.add("paper-block_title");
-  authorElement.classList.add("paper-block_author");
-  keywordElement.classList.add("paper-block_keyword");
-  journalElement.classList.add("paper-block_journal");
-  citeNumberElement.classList.add("paper-block_cite-number");
-  citeElement.classList.add("cite-block");
-  citedElement.classList.add("cite-block");
-  urlElement.classList.add("paper-block_url");
-  dateElement.classList.add("paper-block_date");
-  abstractElement.classList.add("paper-block_abstract");
-  figureElement.classList.add("paper-block_figures");
-  figureImgElement.classList.add("figure-img-block");
-  figureImg2Element.classList.add("figure-img-block");
-  figureImg3Element.classList.add("figure-img-block");
+  topElement.classList.add("paper-block_top");
+  titleElement.classList.add("titleelement-block");
+  dateElement.classList.add("date-block");
+  citeNumberElement.classList.add("cite-number-block");
+  citeElement.classList.add("cite-number-block_cite");
+  citedElement.classList.add("cite-number-block_cite");
+  bottomElement.classList.add("paper-block_bottom");
+  authorElement.classList.add("author-block");
+  keywordElement.classList.add("keyword-block");
+  journalElement.classList.add("journal-block");
+  urlElement.classList.add("url-block");
+  abstractElement.classList.add("abstract-block");
+  figureElement.classList.add("figures-block");
+  figureImgElement.classList.add("figures-block_img");
+  figureImg2Element.classList.add("figures-block_img");
+  figureImg3Element.classList.add("figures-block_img");
   abstractTitleElement.classList.add("title-block");
   authorTitleElement.classList.add("title-block");
   keywordTitleElement.classList.add("title-block");
@@ -18398,7 +18402,7 @@ var appendPapers = function appendPapers(papers) {
   linkElement.setAttribute("target", "_blank");
   linkElement.textContent = papers[0].url;
   urlElement.appendChild(linkElement);
-  dateElement.textContent = date_fns_1.format(new Date(papers[0].created_at), "yyyy年MM月dd日");
+  dateElement.textContent = date_fns_1.format(new Date(papers[0].created_at), "yyyy-MM-dd");
   abstractElement.textContent = papers[0].abstract; //figureDisElement.textContent = paper.figures[idx].explanation;
   //figureImgElement.setAttribute("src", paper.figures[idx].figure);
 
@@ -18410,31 +18414,35 @@ var appendPapers = function appendPapers(papers) {
   imageTitleElement.textContent = "Images";
   journalTitleElement.textContent = "Journal";
   keywordTitleElement.textContent = "Keyword"; // 子Elementをpaper Elementに挿入
+  //top
 
-  paperElement.appendChild(titleElement);
-  paperElement.appendChild(dateElement);
-  paperElement.appendChild(citeNumberElement);
+  paperElement.appendChild(topElement);
+  topElement.appendChild(titleElement);
+  topElement.appendChild(dateElement);
+  topElement.appendChild(citeNumberElement);
   citeNumberElement.appendChild(citeElement);
-  citeNumberElement.appendChild(citedElement);
-  paperElement.appendChild(authorTitleElement);
-  paperElement.appendChild(authorElement);
-  paperElement.appendChild(keywordTitleElement);
-  paperElement.appendChild(keywordElement);
-  paperElement.appendChild(journalTitleElement);
-  paperElement.appendChild(journalElement);
-  paperElement.appendChild(imageTitleElement);
-  paperElement.appendChild(figureElement);
+  citeNumberElement.appendChild(citedElement); //bottom
+
+  paperElement.appendChild(bottomElement);
+  bottomElement.appendChild(authorTitleElement);
+  bottomElement.appendChild(authorElement);
+  bottomElement.appendChild(keywordTitleElement);
+  bottomElement.appendChild(keywordElement);
+  bottomElement.appendChild(journalTitleElement);
+  bottomElement.appendChild(journalElement);
+  bottomElement.appendChild(imageTitleElement);
+  bottomElement.appendChild(figureElement);
   figureElement.appendChild(figureImgElement);
   figureElement.appendChild(figureImg2Element);
   figureElement.appendChild(figureImg3Element);
-  paperElement.appendChild(abstractTitleElement);
-  paperElement.appendChild(abstractElement);
-  paperElement.appendChild(urlElement); // bodyにpaper elementを挿入
+  bottomElement.appendChild(abstractTitleElement);
+  bottomElement.appendChild(abstractElement);
+  bottomElement.appendChild(urlElement); // bodyにpaper elementを挿入
 
   if (mainElement === null) return;
   mainElement.appendChild(paperElement);
-  if (linkElement === null) return;
-  linkElement.appendChild(urlElement);
+  if (toPDFElement === null) return;
+  toPDFElement.appendChild(urlElement);
 };
 
 window.addEventListener("DOMContentLoaded", function () {
