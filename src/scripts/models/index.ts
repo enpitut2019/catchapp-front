@@ -16,4 +16,11 @@ export interface Paper {
   keywords: Keyword[];
   url: string;
   created_at: string;
+  figures: Figure[];
+}
+
+export interface Figure{
+figure: string;
+explanation: string;
+
 }
