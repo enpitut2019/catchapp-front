@@ -11,7 +11,7 @@ export interface Keyword {
 export interface Paper {
   abstract: string;
   title: string;
-  authors: Authhor[];
+  authors: Author[];
   publishedAt: string;
   keywords: Keyword[];
   url: string;
