@@ -1,22 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900&display=swap&subset=japanese');
+@import "variables";
 
-* {
-  font-family: 'Noto Sans JP', sans-serif;
-  box-sizing: content-box;
-}
-
-html, body {
-  padding: 0;
-  margin: 0;
-}
-
-main {
-  padding: 2rem;
-  max-width: 798px;
-  margin: auto;
-}
-
-.paper {
+.paper-block {
   margin: 1rem auto;
   padding: 1rem;
   border-bottom: 1px solid black;
@@ -26,8 +10,103 @@ main {
     border-top: 1px solid black;
   }
 
-  &--title {
-    font-size: 1.5rem;
+  &_title {
+    font-size: $font-size-l;
     font-weight: bolder;
+    margin-bottom: $base-space;
+  }
+
+  &_author {
+    margin-bottom: $base-space-2;
+  }
+
+  &_keyword {
+    margin-bottom: $base-space-2;
+  }
+
+  &_journal {
+    margin-bottom: $base-space-2;
+  }
+
+  &_cite-number {
+    display: flex;
+    margin-left: 50%;
+    .cite-block {
+      font-weight: bolder;
+      margin-bottom: $base-space;
+      border: 1px solid;
+      padding: 4px;
+      width: 90%;
+      text-align: center;
+    }
+  }
+
+  &_date {
+    margin-bottom: $base-space;
+    text-align: right;
+  }
+
+  &_abstract {
+    margin-bottom: $base-space-2;
+  }
+
+  &_url {
+    margin-bottom: $base-space
+  }
+
+  &_figures {
+    display: flex;
+    .figure-img-block {
+      width: 30%;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: $base-space-2;
+      margin-right: $base-space;
+    }
+    &:nth-child(3n) {
+      margin-right: 0px;
+    }
+  }
+
+  .title-block {
+    font-size: $font-size-m;
+    color: $base-color;
+    font-weight: bolder;
+    margin-bottom: $base-space;
+  }
+
+}
+
+.button-block {
+  display: block;
+  position: fixed;
+  box-shadow: 0 -2px 4px 0 rgba(0,0,0,0.09);
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  background-color: #fff;
+  z-index: 3;
+
+  &_content {
+    border-radius: 5px;
+    width: 90%;
+    height: 45px;
+    margin: 8px auto calc(8px * 2);
+    background-color: $base-color;
+    box-shadow: 0 4px 0 0 $base-color-2;
+    box-sizing: border-box;
+
+    .link-block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      margin: $base-space 0;
+      cursor: pointer;
+      width: 100%;
+      font-size: $font-size-m;
+      color: #fff;
+      height: inherit;
+    }
   }
 }

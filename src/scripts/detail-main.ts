@@ -3,81 +3,112 @@ import { Paper } from "./models";
 import mockPapers from "../mocks/mock";
 import { format } from "date-fns";
 
-console.log("hogeeeeee");
-
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
-  papers.forEach((paper, idx,) => {
-    // Element Elementを生成
-    const paperElement = document.createElement("div");
-    const titleElement = document.createElement("div");
-    const authorElement = document.createElement("div");
-    const keywordElement = document.createElement("div");
-    const journalElement = document.createElement("div");
-    const citeElement = document.createElement("div");
-    const citedElement = document.createElement("div");
-    const urlElement = document.createElement("div");
-    const dateElement = document.createElement("div");
-    const linkElement = document.createElement("a");
-    const abstractElement = document.createElement("section");
-    const figureElement = document.createElement("div");
-    const figureImgElement = document.createElement("img");
-    const figureDisElement = document.createElement("section");
+  const linkElement = document.getElementById("link");
+  console.log(papers[0].title);
 
-    // Elementにクラスを適用
-    paperElement.classList.add("paper");
-    titleElement.classList.add("paper--title");
-    authorElement.classList.add("paper--author");
-    keywordElement.classList.add("paper--keyword");
-    journalElement.classList.add("paper--journal");
-    citeElement.classList.add("paper--cite");
-    citedElement.classList.add("paper--cited");
-    urlElement.classList.add("paper--url");
-    dateElement.classList.add("paper--date");
-    abstractElement.classList.add("paper--abstract");
-    figureElement.classList.add("paper--figures");
+  // Element Elementを生成
+  const paperElement = document.createElement("div");
+  const titleElement = document.createElement("div");
+  const authorElement = document.createElement("div");
+  const keywordElement = document.createElement("div");
+  const journalElement = document.createElement("div");
+  const citeNumberElement = document.createElement("div");
+  const citeElement = document.createElement("div");
+  const citedElement = document.createElement("div");
+  const urlElement = document.createElement("div");
+  const dateElement = document.createElement("div");
+  const linkElement = document.createElement("a");
+  const abstractElement = document.createElement("section");
+  const figureElement = document.createElement("div");
+  const figureImgElement = document.createElement("img");
+  const figureImg2Element = document.createElement("img");
+  const figureImg3Element = document.createElement("img");
+  const abstractTitleElement = document.createElement("div");
+  const authorTitleElement = document.createElement("div");
+  const imageTitleElement = document.createElement("div");
+  const journalTitleElement = document.createElement("div");
+  const keywordTitleElement = document.createElement("div");
 
-    // Elementにテキストを挿入
-    titleElement.textContent = paper.title;
-    authorElement.textContent = "author1";
-    keywordElement.textContent = "keyword,keyword2";
-    journalElement.textContent = "求人ジャーナル";
-    citeElement.textContent = "引用数：3";
-    citedElement.textContent = "被引用数：5";
-    linkElement.setAttribute("href", paper.url);
-    linkElement.setAttribute("target", "_blank");
-    linkElement.textContent = paper.url;
-    urlElement.appendChild(linkElement);
-    dateElement.textContent = format(
-      new Date(paper.created_at),
-      "yyyy年MM月dd日"
-    );
-    abstractElement.textContent = paper.abstract;
+  // Elementにクラスを適用
+  paperElement.classList.add("paper-block");
+  titleElement.classList.add("paper-block_title");
+  authorElement.classList.add("paper-block_author");
+  keywordElement.classList.add("paper-block_keyword");
+  journalElement.classList.add("paper-block_journal");
+  citeNumberElement.classList.add("paper-block_cite-number");
+  citeElement.classList.add("cite-block");
+  citedElement.classList.add("cite-block");
+  urlElement.classList.add("paper-block_url");
+  dateElement.classList.add("paper-block_date");
+  abstractElement.classList.add("paper-block_abstract");
+  figureElement.classList.add("paper-block_figures");
+  figureImgElement.classList.add("figure-img-block");
+  figureImg2Element.classList.add("figure-img-block");
+  figureImg3Element.classList.add("figure-img-block");
 
-    //figureDisElement.textContent = paper.figures[idx].explanation;
-    //figureImgElement.setAttribute("src", paper.figures[idx].figure);
-    figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
-    figureDisElement.textContent = "EXPLANATION";
-    figureElement.appendChild(figureImgElement);
-    figureElement.appendChild(figureDisElement);
+  abstractTitleElement.classList.add("title-block");
+  authorTitleElement.classList.add("title-block");
+  keywordTitleElement.classList.add("title-block");
+  imageTitleElement.classList.add("title-block");
+  journalTitleElement.classList.add("title-block");
 
-    // 子Elementをpaper Elementに挿入
-    paperElement.appendChild(titleElement);
-    paperElement.appendChild(authorElement);
-    paperElement.appendChild(keywordElement);
-    paperElement.appendChild(journalElement);
-    paperElement.appendChild(citeElement);
-    paperElement.appendChild(citedElement);
-    paperElement.appendChild(dateElement);
-    paperElement.appendChild(urlElement);
-    paperElement.appendChild(figureElement);
-    paperElement.appendChild(abstractElement);
+  // Elementにテキストを挿入
+  titleElement.textContent = papers[0].title;
+  authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
+  keywordElement.textContent = "macine learning,computer science";
+  journalElement.textContent = "Carnegie Mellon University magazine 2019-10, p.115-132";
+  citeElement.textContent = "cite：3";
+  citedElement.textContent = "cited：5";
+  linkElement.setAttribute("href", papers[0].url);
+  linkElement.setAttribute("target", "_blank");
+  linkElement.textContent = papers[0].url;
+  urlElement.appendChild(linkElement);
+  dateElement.textContent = format(
+    new Date(papers[0].created_at),
+    "yyyy年MM月dd日"
+  );
+  abstractElement.textContent = papers[0].abstract;
 
+  //figureDisElement.textContent = paper.figures[idx].explanation;
+  //figureImgElement.setAttribute("src", paper.figures[idx].figure);
+  figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
+  figureImg2Element.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
+  figureImg3Element.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
+  abstractTitleElement.textContent = "Abstract";
+  authorTitleElement.textContent = "Author";
+  imageTitleElement.textContent = "Images";
+  journalTitleElement.textContent = "Journal";
+  keywordTitleElement.textContent = "Keyword";
 
-    // bodyにpaper elementを挿入
-    if (mainElement === null) return;
-    mainElement.appendChild(paperElement);
-  });
+  // 子Elementをpaper Elementに挿入
+  paperElement.appendChild(titleElement);
+  paperElement.appendChild(dateElement);
+  paperElement.appendChild(citeNumberElement);
+  citeNumberElement.appendChild(citeElement);
+  citeNumberElement.appendChild(citedElement);
+  paperElement.appendChild(authorTitleElement);
+  paperElement.appendChild(authorElement);
+  paperElement.appendChild(keywordTitleElement);
+  paperElement.appendChild(keywordElement);
+  paperElement.appendChild(journalTitleElement);
+  paperElement.appendChild(journalElement);
+  paperElement.appendChild(imageTitleElement);
+  paperElement.appendChild(figureElement);
+  figureElement.appendChild(figureImgElement);
+  figureElement.appendChild(figureImg2Element);
+  figureElement.appendChild(figureImg3Element);
+  paperElement.appendChild(abstractTitleElement);
+  paperElement.appendChild(abstractElement);
+  paperElement.appendChild(urlElement);
+
+  // bodyにpaper elementを挿入
+  if (mainElement === null) return;
+  mainElement.appendChild(paperElement);
+
+  if (linkElement === null) return;
+  linkElement.appendChild(urlElement);
 };
 
 window.addEventListener("DOMContentLoaded", () => {

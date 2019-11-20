@@ -2,6 +2,7 @@
 * {
   font-family: "Noto Sans JP", sans-serif;
   box-sizing: content-box;
+  font-size: 1rem;
 }
 
 html, body {
@@ -10,22 +11,103 @@ html, body {
 }
 
 main {
-  padding: 2rem;
-  max-width: 798px;
-  margin: auto;
+  padding: 16px 0;
 }
 
-.paper {
+.paper-block {
   margin: 1rem auto;
   padding: 1rem;
   border-bottom: 1px solid black;
 }
-.paper:first-child {
+.paper-block:first-child {
   border-top: 1px solid black;
 }
-.paper--title {
-  font-size: 1.5rem;
+.paper-block_title {
+  font-size: 1.6rem;
   font-weight: bolder;
+  margin-bottom: 8px;
+}
+.paper-block_author {
+  margin-bottom: 16px;
+}
+.paper-block_keyword {
+  margin-bottom: 16px;
+}
+.paper-block_journal {
+  margin-bottom: 16px;
+}
+.paper-block_cite-number {
+  display: flex;
+  margin-left: 50%;
+}
+.paper-block_cite-number .cite-block {
+  font-weight: bolder;
+  margin-bottom: 8px;
+  border: 1px solid;
+  padding: 4px;
+  width: 90%;
+  text-align: center;
+}
+.paper-block_date {
+  margin-bottom: 8px;
+  text-align: right;
+}
+.paper-block_abstract {
+  margin-bottom: 16px;
+}
+.paper-block_url {
+  margin-bottom: 8px;
+}
+.paper-block_figures {
+  display: flex;
+}
+.paper-block_figures .figure-img-block {
+  width: 30%;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 16px;
+  margin-right: 8px;
+}
+.paper-block_figures:nth-child(3n) {
+  margin-right: 0px;
+}
+.paper-block .title-block {
+  font-size: 1.4rem;
+  color: #979292;
+  font-weight: bolder;
+  margin-bottom: 8px;
+}
+
+.button-block {
+  display: block;
+  position: fixed;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.09);
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  background-color: #fff;
+  z-index: 3;
+}
+.button-block_content {
+  border-radius: 5px;
+  width: 90%;
+  height: 45px;
+  margin: 8px auto calc(8px * 2);
+  background-color: #979292;
+  box-shadow: 0 4px 0 0 #4d5254;
+  box-sizing: border-box;
+}
+.button-block_content .link-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin: 8px 0;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.4rem;
+  color: #fff;
+  height: inherit;
 }
 
 /*# sourceMappingURL=/detail-main.01389e55.css.map */
