@@ -18348,40 +18348,57 @@ var appendPapers = function appendPapers(papers) {
     // Element Elementを生成
     var paperElement = document.createElement("div");
     var titleElement = document.createElement("div");
-    var urlElement = document.createElement("div");
+    var authorsElement = document.createElement("div");
+    var keywordsElement = document.createElement("div");
+    var citeElement = document.createElement("div");
+    var citedElement = document.createElement("div"); //const urlElement = document.createElement("div");
+
     var dateElement = document.createElement("div");
-    var linkElement = document.createElement("a");
-    var abstractElement = document.createElement("section");
+    var linkElement = document.createElement("a"); //const abstractElement = document.createElement("section");
+
     var figureElement = document.createElement("div");
     var figureImgElement = document.createElement("img");
     var figureDisElement = document.createElement("section"); // Elementにクラスを適用
 
     paperElement.classList.add("paper");
     titleElement.classList.add("paper--title");
-    urlElement.classList.add("paper--url");
-    dateElement.classList.add("paper--date");
-    abstractElement.classList.add("paper--abstract");
+    authorsElement.classList.add("paper--authors");
+    keywordsElement.classList.add("paper--keywords");
+    citeElement.classList.add("paper--cite");
+    citeElement.classList.add("paper--cited"); //urlElement.classList.add("paper--url");
+
+    dateElement.classList.add("paper--date"); //abstractElement.classList.add("paper--abstract");
+
     figureElement.classList.add("paper--figures"); // Elementにテキストを挿入
 
-    titleElement.textContent = paper.title;
+    titleElement.textContent = paper.title; //authorElement.textContent = paper.authors[0].name;
+
+    authorsElement.textContent = "author1";
+    keywordsElement.textContent = "keyword1";
+    citeElement.textContent = "引用";
+    citedElement.textContent = "非引用";
     linkElement.setAttribute("href", paper.url);
     linkElement.setAttribute("target", "_blank");
-    linkElement.textContent = paper.url;
-    urlElement.appendChild(linkElement);
-    dateElement.textContent = date_fns_1.format(new Date(paper.created_at), "yyyy年MM月dd日");
-    abstractElement.textContent = paper.abstract; //figureDisElement.textContent = paper.figures[idx].explanation;
+    linkElement.textContent = paper.url; //urlElement.appendChild(linkElement);
+
+    dateElement.textContent = date_fns_1.format(new Date(paper.created_at), "yyyy年MM月dd日"); //abstractElement.textContent = paper.abstract;
+    //figureDisElement.textContent = paper.figures[idx].explanation;
     //figureImgElement.setAttribute("src", paper.figures[idx].figure);
 
-    figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
-    figureDisElement.textContent = "EXPLANATION";
-    figureElement.appendChild(figureImgElement);
-    figureElement.appendChild(figureDisElement); // 子Elementをpaper Elementに挿入
+    figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png"); //figureDisElement.textContent = "This figure is...";
+
+    figureElement.appendChild(figureImgElement); //figureElement.appendChild(figureDisElement);
+    // 子Elementをpaper Elementに挿入
 
     paperElement.appendChild(titleElement);
-    paperElement.appendChild(dateElement);
-    paperElement.appendChild(urlElement);
-    paperElement.appendChild(figureElement);
-    paperElement.appendChild(abstractElement); // bodyにpaper elementを挿入
+    paperElement.appendChild(authorsElement);
+    paperElement.appendChild(keywordsElement);
+    paperElement.appendChild(citeElement);
+    paperElement.appendChild(citedElement);
+    paperElement.appendChild(dateElement); //paperElement.appendChild(urlElement);
+
+    paperElement.appendChild(figureElement); //paperElement.appendChild(abstractElement);
+    // bodyにpaper elementを挿入
 
     if (mainElement === null) return;
     mainElement.appendChild(paperElement);
@@ -18427,7 +18444,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58983" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34241" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
