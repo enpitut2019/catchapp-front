@@ -8,7 +8,17 @@
 .header-block {
   background-color: #203377;
   height: 40px;
-  box-shadow: 0 8px 4px 0 rgba(0, 0, 0, 0.09);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.09);
+  position: fixed;
+  width: 100%;
+}
+
+.footer-block {
+  background-color: #979292;
+  height: 64px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.09);
+  bottom: 0px;
+  width: 100%;
 }
 
 html, body {
@@ -16,6 +26,9 @@ html, body {
   margin: 0;
 }
 
+.paper-block {
+  padding-top: 32px;
+}
 .paper-block_top {
   background-color: #2a6fb6;
   padding: 16px;
@@ -41,6 +54,7 @@ html, body {
 .paper-block_top .date-block {
   margin-bottom: 8px;
   text-align: right;
+  font-weight: bolder;
 }
 .paper-block_bottom {
   padding: 16px;
@@ -65,6 +79,7 @@ html, body {
   border: 1px solid;
   padding: 8px 8px 0;
   margin-bottom: 16px;
+  margin-top: 8px;
 }
 .paper-block_bottom .figures-block_img {
   width: 32%;
@@ -80,7 +95,6 @@ html, body {
   font-size: 1.4rem;
   color: #979292;
   font-weight: bolder;
-  margin-bottom: 8px;
 }
 
 .button-block {

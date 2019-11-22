@@ -18342,6 +18342,7 @@ var date_fns_1 = require("date-fns");
 
 var appendPapers = function appendPapers(papers) {
   var mainElement = document.getElementById("main");
+  var mainContentsElement = document.getElementById("maincontents");
   var toPDFElement = document.getElementById("link");
   console.log(papers[0].title); // Element Elementを生成
 
@@ -18358,16 +18359,19 @@ var appendPapers = function appendPapers(papers) {
   var urlElement = document.createElement("div");
   var dateElement = document.createElement("div");
   var linkElement = document.createElement("a");
-  var abstractElement = document.createElement("section");
+  var abstractElement = document.createElement("section"); //image
+
   var figureElement = document.createElement("div");
   var figureImgElement = document.createElement("img");
   var figureImg2Element = document.createElement("img");
-  var figureImg3Element = document.createElement("img");
+  var figureImg3Element = document.createElement("img"); //title
+
   var abstractTitleElement = document.createElement("div");
   var authorTitleElement = document.createElement("div");
   var imageTitleElement = document.createElement("div");
   var journalTitleElement = document.createElement("div");
-  var keywordTitleElement = document.createElement("div"); // Elementにクラスを適用
+  var keywordTitleElement = document.createElement("div");
+  var showFooterElement = document.createElement("div"); // Elementにクラスを適用
 
   paperElement.classList.add("paper-block");
   topElement.classList.add("paper-block_top");
@@ -18390,7 +18394,8 @@ var appendPapers = function appendPapers(papers) {
   authorTitleElement.classList.add("title-block");
   keywordTitleElement.classList.add("title-block");
   imageTitleElement.classList.add("title-block");
-  journalTitleElement.classList.add("title-block"); // Elementにテキストを挿入
+  journalTitleElement.classList.add("title-block");
+  showFooterElement.classList.add("show-footer-float-marker"); // Elementにテキストを挿入
 
   titleElement.textContent = papers[0].title;
   authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
@@ -18422,14 +18427,15 @@ var appendPapers = function appendPapers(papers) {
   topElement.appendChild(citeNumberElement);
   citeNumberElement.appendChild(citeElement);
   citeNumberElement.appendChild(citedElement); //bottom
+  //paperElement.appendChild(bottomElement);
 
-  paperElement.appendChild(bottomElement);
   bottomElement.appendChild(authorTitleElement);
   bottomElement.appendChild(authorElement);
   bottomElement.appendChild(keywordTitleElement);
   bottomElement.appendChild(keywordElement);
   bottomElement.appendChild(journalTitleElement);
   bottomElement.appendChild(journalElement);
+  bottomElement.appendChild(showFooterElement);
   bottomElement.appendChild(imageTitleElement);
   bottomElement.appendChild(figureElement);
   figureElement.appendChild(figureImgElement);
@@ -18440,7 +18446,10 @@ var appendPapers = function appendPapers(papers) {
   bottomElement.appendChild(urlElement); // bodyにpaper elementを挿入
 
   if (mainElement === null) return;
-  mainElement.appendChild(paperElement);
+  mainElement.appendChild(paperElement); // bodyにpaper elementを挿入
+
+  if (mainContentsElement === null) return;
+  mainContentsElement.appendChild(bottomElement);
   if (toPDFElement === null) return;
   toPDFElement.appendChild(urlElement);
 };
@@ -18455,6 +18464,19 @@ window.addEventListener("DOMContentLoaded", function () {
   }); // Development
   // const papers = mockPapers as Paper[];
   // appendPapers(papers);
+}); //フロートボタン
+
+window.on('scroll', function () {
+  var showFooterFloatOffset = $('[data-element-id="show-footer-float-marker"]').offset().top;
+  var hideFooterFloatOffset = $('[data-element-id="hide-footer-float-marker"]').offset().top;
+
+  if ($(this).scrollTop() > hideFooterFloatOffset) {
+    $('[data-element-id="footer-float"]').fadeOut(50);
+  } else if ($(this).scrollTop() > showFooterFloatOffset) {
+    $('[data-element-id="footer-float"]').fadeIn(50);
+  } else if ($(this).scrollTop() < showFooterFloatOffset) {
+    $('[data-element-id="footer-float"]').fadeOut(50);
+  }
 });
 },{"axios":"../node_modules/axios/index.js","date-fns":"../node_modules/date-fns/esm/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -18484,7 +18506,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56900" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60337" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -5,6 +5,7 @@ import { format } from "date-fns";
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
+  const mainContentsElement = document.getElementById("maincontents");
   const toPDFElement = document.getElementById("link");
   console.log(papers[0].title);
 
@@ -23,15 +24,21 @@ const appendPapers = (papers: Paper[]): void => {
   const dateElement = document.createElement("div");
   const linkElement = document.createElement("a");
   const abstractElement = document.createElement("section");
+
+  //image
   const figureElement = document.createElement("div");
   const figureImgElement = document.createElement("img");
   const figureImg2Element = document.createElement("img");
   const figureImg3Element = document.createElement("img");
+
+  //title
   const abstractTitleElement = document.createElement("div");
   const authorTitleElement = document.createElement("div");
   const imageTitleElement = document.createElement("div");
   const journalTitleElement = document.createElement("div");
   const keywordTitleElement = document.createElement("div");
+
+  const showFooterElement = document.createElement("div");
 
   // Elementにクラスを適用
   paperElement.classList.add("paper-block");
@@ -59,6 +66,8 @@ const appendPapers = (papers: Paper[]): void => {
   keywordTitleElement.classList.add("title-block");
   imageTitleElement.classList.add("title-block");
   journalTitleElement.classList.add("title-block");
+
+  showFooterElement.classList.add("show-footer-float-marker");
 
   // Elementにテキストを挿入
   titleElement.textContent = papers[0].title;
@@ -98,13 +107,14 @@ const appendPapers = (papers: Paper[]): void => {
   citeNumberElement.appendChild(citedElement);
 
   //bottom
-  paperElement.appendChild(bottomElement);
+  //paperElement.appendChild(bottomElement);
   bottomElement.appendChild(authorTitleElement);
   bottomElement.appendChild(authorElement);
   bottomElement.appendChild(keywordTitleElement);
   bottomElement.appendChild(keywordElement);
   bottomElement.appendChild(journalTitleElement);
   bottomElement.appendChild(journalElement);
+  bottomElement.appendChild(showFooterElement);
   bottomElement.appendChild(imageTitleElement);
   bottomElement.appendChild(figureElement);
   figureElement.appendChild(figureImgElement);
@@ -117,6 +127,10 @@ const appendPapers = (papers: Paper[]): void => {
   // bodyにpaper elementを挿入
   if (mainElement === null) return;
   mainElement.appendChild(paperElement);
+
+  // bodyにpaper elementを挿入
+  if (mainContentsElement === null) return;
+  mainContentsElement.appendChild(bottomElement);
 
   if (toPDFElement === null) return;
   toPDFElement.appendChild(urlElement);
@@ -135,4 +149,17 @@ window.addEventListener("DOMContentLoaded", () => {
   // Development
   // const papers = mockPapers as Paper[];
   // appendPapers(papers);
+});
+
+//フロートボタン
+window.on('scroll', function(){
+    var showFooterFloatOffset = $('[data-element-id="show-footer-float-marker"]').offset().top;
+    var hideFooterFloatOffset = $('[data-element-id="hide-footer-float-marker"]').offset().top;
+    if ($(this).scrollTop() > hideFooterFloatOffset) {
+        $('[data-element-id="footer-float"]').fadeOut(50);
+    } else if ($(this).scrollTop() > showFooterFloatOffset) {
+        $('[data-element-id="footer-float"]').fadeIn(50);
+    } else if ($(this).scrollTop() < showFooterFloatOffset) {
+        $('[data-element-id="footer-float"]').fadeOut(50);
+    }
 });
