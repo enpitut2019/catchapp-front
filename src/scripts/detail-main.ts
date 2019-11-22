@@ -7,13 +7,14 @@ const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
   const mainContentsElement = document.getElementById("maincontents");
   const toPDFElement = document.getElementById("link");
-  console.log(papers[0].title);
+  console.log(papers[2].title);
 
   // Element Elementを生成
   const paperElement = document.createElement("div");
   const topElement = document.createElement("div");
   const bottomElement = document.createElement("div");
   const titleElement = document.createElement("div");
+  const jaTitleElement = document.createElement("div");
   const authorElement = document.createElement("div");
   const keywordElement = document.createElement("div");
   const journalElement = document.createElement("div");
@@ -45,6 +46,7 @@ const appendPapers = (papers: Paper[]): void => {
 
   topElement.classList.add("paper-block_top");
   titleElement.classList.add("titleelement-block");
+  jaTitleElement.classList.add("ja-titleelement-block");
   dateElement.classList.add("date-block");
   citeNumberElement.classList.add("cite-number-block");
   citeElement.classList.add("cite-number-block_cite");
@@ -70,21 +72,22 @@ const appendPapers = (papers: Paper[]): void => {
   showFooterElement.classList.add("show-footer-float-marker");
 
   // Elementにテキストを挿入
-  titleElement.textContent = papers[0].title;
+  titleElement.textContent = papers[2].title;
+  jaTitleElement.textContent = "(" + papers[2].title_ja + ")";
   authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
   keywordElement.textContent = "macine learning,computer science";
-  journalElement.textContent = "Carnegie Mellon University magazine 2019-10, p.115-132";
-  citeElement.textContent = "cite：3";
-  citedElement.textContent = "cited：5";
-  linkElement.setAttribute("href", papers[0].url);
+  journalElement.textContent = papers[2].journal;
+  citeElement.textContent = "cite：" + papers[2].cite_count;
+  citedElement.textContent = "cited：" + papers[2].cited_count;
+  linkElement.setAttribute("href", papers[2].url);
   linkElement.setAttribute("target", "_blank");
-  linkElement.textContent = papers[0].url;
+  linkElement.textContent = papers[2].url;
   urlElement.appendChild(linkElement);
-  dateElement.textContent = format(
-    new Date(papers[0].created_at),
+  dateElement.textContent = "published: " + format(
+    new Date(papers[2].published_at),
     "yyyy-MM-dd"
   );
-  abstractElement.textContent = papers[0].abstract;
+  abstractElement.textContent = papers[2].abstract;
 
   //figureDisElement.textContent = paper.figures[idx].explanation;
   //figureImgElement.setAttribute("src", paper.figures[idx].figure);
@@ -101,6 +104,7 @@ const appendPapers = (papers: Paper[]): void => {
   //top
   paperElement.appendChild(topElement);
   topElement.appendChild(titleElement);
+  topElement.appendChild(jaTitleElement);
   topElement.appendChild(dateElement);
   topElement.appendChild(citeNumberElement);
   citeNumberElement.appendChild(citeElement);
@@ -144,22 +148,15 @@ window.addEventListener("DOMContentLoaded", () => {
   axios.get(sourceUrl).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);
+
+    const authors = res.data as Author[];
+    appendAuthors(authors);
+
+    const keywords = res.data as Keyword[];
+    appendKeywords(keywords);
   });
 
   // Development
   // const papers = mockPapers as Paper[];
   // appendPapers(papers);
-});
-
-//フロートボタン
-window.on('scroll', function(){
-    var showFooterFloatOffset = $('[data-element-id="show-footer-float-marker"]').offset().top;
-    var hideFooterFloatOffset = $('[data-element-id="hide-footer-float-marker"]').offset().top;
-    if ($(this).scrollTop() > hideFooterFloatOffset) {
-        $('[data-element-id="footer-float"]').fadeOut(50);
-    } else if ($(this).scrollTop() > showFooterFloatOffset) {
-        $('[data-element-id="footer-float"]').fadeIn(50);
-    } else if ($(this).scrollTop() < showFooterFloatOffset) {
-        $('[data-element-id="footer-float"]').fadeOut(50);
-    }
 });

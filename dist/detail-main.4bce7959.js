@@ -18344,12 +18344,13 @@ var appendPapers = function appendPapers(papers) {
   var mainElement = document.getElementById("main");
   var mainContentsElement = document.getElementById("maincontents");
   var toPDFElement = document.getElementById("link");
-  console.log(papers[0].title); // Element Elementを生成
+  console.log(papers[2].title); // Element Elementを生成
 
   var paperElement = document.createElement("div");
   var topElement = document.createElement("div");
   var bottomElement = document.createElement("div");
   var titleElement = document.createElement("div");
+  var jaTitleElement = document.createElement("div");
   var authorElement = document.createElement("div");
   var keywordElement = document.createElement("div");
   var journalElement = document.createElement("div");
@@ -18376,6 +18377,7 @@ var appendPapers = function appendPapers(papers) {
   paperElement.classList.add("paper-block");
   topElement.classList.add("paper-block_top");
   titleElement.classList.add("titleelement-block");
+  jaTitleElement.classList.add("ja-titleelement-block");
   dateElement.classList.add("date-block");
   citeNumberElement.classList.add("cite-number-block");
   citeElement.classList.add("cite-number-block_cite");
@@ -18397,18 +18399,19 @@ var appendPapers = function appendPapers(papers) {
   journalTitleElement.classList.add("title-block");
   showFooterElement.classList.add("show-footer-float-marker"); // Elementにテキストを挿入
 
-  titleElement.textContent = papers[0].title;
+  titleElement.textContent = papers[2].title;
+  jaTitleElement.textContent = "(" + papers[2].title_ja + ")";
   authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
   keywordElement.textContent = "macine learning,computer science";
-  journalElement.textContent = "Carnegie Mellon University magazine 2019-10, p.115-132";
-  citeElement.textContent = "cite：3";
-  citedElement.textContent = "cited：5";
-  linkElement.setAttribute("href", papers[0].url);
+  journalElement.textContent = papers[2].journal;
+  citeElement.textContent = "cite：" + papers[2].cite_count;
+  citedElement.textContent = "cited：" + papers[2].cited_count;
+  linkElement.setAttribute("href", papers[2].url);
   linkElement.setAttribute("target", "_blank");
-  linkElement.textContent = papers[0].url;
+  linkElement.textContent = papers[2].url;
   urlElement.appendChild(linkElement);
-  dateElement.textContent = date_fns_1.format(new Date(papers[0].created_at), "yyyy-MM-dd");
-  abstractElement.textContent = papers[0].abstract; //figureDisElement.textContent = paper.figures[idx].explanation;
+  dateElement.textContent = "published: " + date_fns_1.format(new Date(papers[2].published_at), "yyyy-MM-dd");
+  abstractElement.textContent = papers[2].abstract; //figureDisElement.textContent = paper.figures[idx].explanation;
   //figureImgElement.setAttribute("src", paper.figures[idx].figure);
 
   figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
@@ -18423,6 +18426,7 @@ var appendPapers = function appendPapers(papers) {
 
   paperElement.appendChild(topElement);
   topElement.appendChild(titleElement);
+  topElement.appendChild(jaTitleElement);
   topElement.appendChild(dateElement);
   topElement.appendChild(citeNumberElement);
   citeNumberElement.appendChild(citeElement);
@@ -18461,22 +18465,13 @@ window.addEventListener("DOMContentLoaded", function () {
   axios_1.default.get(sourceUrl).then(function (res) {
     var papers = res.data;
     appendPapers(papers);
+    var authors = res.data;
+    appendAuthors(authors);
+    var keywords = res.data;
+    appendKeywords(keywords);
   }); // Development
   // const papers = mockPapers as Paper[];
   // appendPapers(papers);
-}); //フロートボタン
-
-window.on('scroll', function () {
-  var showFooterFloatOffset = $('[data-element-id="show-footer-float-marker"]').offset().top;
-  var hideFooterFloatOffset = $('[data-element-id="hide-footer-float-marker"]').offset().top;
-
-  if ($(this).scrollTop() > hideFooterFloatOffset) {
-    $('[data-element-id="footer-float"]').fadeOut(50);
-  } else if ($(this).scrollTop() > showFooterFloatOffset) {
-    $('[data-element-id="footer-float"]').fadeIn(50);
-  } else if ($(this).scrollTop() < showFooterFloatOffset) {
-    $('[data-element-id="footer-float"]').fadeOut(50);
-  }
 });
 },{"axios":"../node_modules/axios/index.js","date-fns":"../node_modules/date-fns/esm/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -18506,7 +18501,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60337" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62340" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -39,6 +39,11 @@ html, body {
   font-weight: bolder;
   margin-bottom: 8px;
 }
+.paper-block_top .ja-titleelement-block {
+  font-size: 1rem;
+  font-weight: bolder;
+  margin-bottom: 24px;
+}
 .paper-block_top .cite-number-block {
   display: flex;
   margin-left: 50%;
