@@ -2,6 +2,33 @@
 * {
   font-family: "Noto Sans JP", sans-serif;
   box-sizing: content-box;
+  font-size: 1rem;
+}
+
+.header-block {
+  background-color: #203377;
+  height: 40px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.09);
+  position: fixed;
+  width: 100%;
+}
+
+.footer-block {
+  background-color: #979292;
+  height: 64px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.09);
+  bottom: 0px;
+  width: 100%;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  font-family: "Noto Sans JP", sans-serif;
+  box-sizing: content-box;
 }
 
 html, body {
@@ -10,7 +37,6 @@ html, body {
 }
 
 main {
-  padding: 2rem;
   max-width: 798px;
   margin: auto;
 }
@@ -24,8 +50,47 @@ main {
   border-top: 1px solid black;
 }
 .paper--title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bolder;
+}
+.paper--content {
+  display: flex;
+}
+.paper--content--left {
+  width: 50%;
+}
+.paper--content--left--figures--img {
+  width: 100%;
+  object-fit: cover;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+.paper--content--left--citeandcited {
+  border: 1px solid black;
+  display: flex;
+}
+.paper--content--left--citeandcited--cite {
+  margin-right: 32px;
+  font-size: 1rem;
+}
+.paper--content--left--citeandcited--cited {
+  margin-right: 32px;
+  font-size: 1rem;
+}
+.paper--content--text {
+  width: 50%;
+  margin-bottom: 16px;
+  margin-top: 8px;
+  margin-left: 16px;
+}
+.paper--content--text--authors {
+  font-size: 1rem;
+}
+.paper--content--text--keywords {
+  font-size: 1rem;
+}
+.paper--content--text--date {
+  font-size: 1rem;
 }
 
 /*# sourceMappingURL=/main.48b3db1d.css.map */
