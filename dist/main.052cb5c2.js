@@ -18347,9 +18347,15 @@ var appendPapers = function appendPapers(papers) {
   papers.forEach(function (paper, idx) {
     // Element Elementを生成
     var paperElement = document.createElement("div");
+    var paperTextElement = document.createElement("div");
+    var contentElement = document.createElement("div");
+    var leftElement = document.createElement("div");
+    var citeandcitedElement = document.createElement("div");
+    var textElement = document.createElement("div");
     var titleElement = document.createElement("div");
     var authorsElement = document.createElement("div");
     var keywordsElement = document.createElement("div");
+    var citeAndCitedElement = document.createElement("div");
     var citeElement = document.createElement("div");
     var citedElement = document.createElement("div"); //const urlElement = document.createElement("div");
 
@@ -18361,15 +18367,20 @@ var appendPapers = function appendPapers(papers) {
     var figureDisElement = document.createElement("section"); // Elementにクラスを適用
 
     paperElement.classList.add("paper");
+    contentElement.classList.add("paper--content");
+    leftElement.classList.add("paper--content--left");
+    citeAndCitedElement.classList.add("paper--content--left--citeandcited");
+    paperTextElement.classList.add("paper--content--text");
     titleElement.classList.add("paper--title");
-    authorsElement.classList.add("paper--authors");
-    keywordsElement.classList.add("paper--keywords");
-    citeElement.classList.add("paper--cite");
-    citeElement.classList.add("paper--cited"); //urlElement.classList.add("paper--url");
+    authorsElement.classList.add("paper--content--text--authors");
+    keywordsElement.classList.add("paper--content--text--keywords");
+    citeElement.classList.add("paper--content--left--citeandcited--cite");
+    citedElement.classList.add("paper--content--left--citeandcited--cited"); //urlElement.classList.add("paper--url");
 
-    dateElement.classList.add("paper--date"); //abstractElement.classList.add("paper--abstract");
+    dateElement.classList.add("paper--content--text--date"); //abstractElement.classList.add("paper--abstract");
 
-    figureElement.classList.add("paper--figures"); // Elementにテキストを挿入
+    figureElement.classList.add("paper--content--left--figures");
+    figureImgElement.classList.add("paper--content--left--figures--img"); // Elementにテキストを挿入
 
     titleElement.textContent = paper.title; //authorElement.textContent = paper.authors[0].name;
 
@@ -18391,13 +18402,17 @@ var appendPapers = function appendPapers(papers) {
     // 子Elementをpaper Elementに挿入
 
     paperElement.appendChild(titleElement);
-    paperElement.appendChild(authorsElement);
-    paperElement.appendChild(keywordsElement);
-    paperElement.appendChild(citeElement);
-    paperElement.appendChild(citedElement);
-    paperElement.appendChild(dateElement); //paperElement.appendChild(urlElement);
-
-    paperElement.appendChild(figureElement); //paperElement.appendChild(abstractElement);
+    paperElement.appendChild(contentElement);
+    contentElement.appendChild(leftElement);
+    contentElement.appendChild(paperTextElement);
+    leftElement.appendChild(figureElement);
+    leftElement.appendChild(citeAndCitedElement);
+    citeAndCitedElement.appendChild(citeElement);
+    citeAndCitedElement.appendChild(citedElement);
+    paperTextElement.appendChild(authorsElement);
+    paperTextElement.appendChild(keywordsElement);
+    paperTextElement.appendChild(dateElement); //paperElement.appendChild(urlElement);
+    //paperElement.appendChild(abstractElement);
     // bodyにpaper elementを挿入
 
     if (mainElement === null) return;
@@ -18444,11 +18459,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34241" + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62340" + '/');
->>>>>>> 2eec3883fc77f8055ca6b2069a088c720fd4ede4
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35431" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

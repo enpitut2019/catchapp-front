@@ -10,9 +10,15 @@ const appendPapers = (papers: Paper[]): void => {
   papers.forEach((paper, idx,) => {
     // Element Elementを生成
     const paperElement = document.createElement("div");
+    const paperTextElement = document.createElement("div");
+    const contentElement = document.createElement("div");
+    const leftElement = document.createElement("div");
+    const citeandcitedElement = document.createElement("div");
+    const textElement = document.createElement("div");
     const titleElement = document.createElement("div");
     const authorsElement = document.createElement("div");
     const keywordsElement = document.createElement("div");
+    const citeAndCitedElement = document.createElement("div");
     const citeElement = document.createElement("div");
     const citedElement = document.createElement("div");
 
@@ -26,17 +32,22 @@ const appendPapers = (papers: Paper[]): void => {
 
     // Elementにクラスを適用
     paperElement.classList.add("paper");
+    contentElement.classList.add("paper--content");
+    leftElement.classList.add("paper--content--left");
+    citeAndCitedElement.classList.add("paper--content--left--citeandcited");
+    paperTextElement.classList.add("paper--content--text");
     titleElement.classList.add("paper--title");
-    authorsElement.classList.add("paper--authors");
-    keywordsElement.classList.add("paper--keywords");
-    citeElement.classList.add("paper--cite");
-    citeElement.classList.add("paper--cited");
+    authorsElement.classList.add("paper--content--text--authors");
+    keywordsElement.classList.add("paper--content--text--keywords");
+    citeElement.classList.add("paper--content--left--citeandcited--cite");
+    citedElement.classList.add("paper--content--left--citeandcited--cited");
 
     //urlElement.classList.add("paper--url");
-    dateElement.classList.add("paper--date");
+    dateElement.classList.add("paper--content--text--date");
     //abstractElement.classList.add("paper--abstract");
-    figureElement.classList.add("paper--figures");
 
+    figureElement.classList.add("paper--content--left--figures");
+    figureImgElement.classList.add("paper--content--left--figures--img");
     // Elementにテキストを挿入
     titleElement.textContent = paper.title;
     //authorElement.textContent = paper.authors[0].name;
@@ -63,13 +74,19 @@ const appendPapers = (papers: Paper[]): void => {
     
     // 子Elementをpaper Elementに挿入
     paperElement.appendChild(titleElement);
-    paperElement.appendChild(authorsElement);
-    paperElement.appendChild(keywordsElement);
-    paperElement.appendChild(citeElement);
-    paperElement.appendChild(citedElement);
-    paperElement.appendChild(dateElement);
+    paperElement.appendChild(contentElement);
+    contentElement.appendChild(leftElement);
+    contentElement.appendChild(paperTextElement);
+    leftElement.appendChild(figureElement);
+    leftElement.appendChild(citeAndCitedElement);
+    citeAndCitedElement.appendChild(citeElement);
+    citeAndCitedElement.appendChild(citedElement);
+    paperTextElement.appendChild(authorsElement);
+    paperTextElement.appendChild(keywordsElement);
+
+    paperTextElement.appendChild(dateElement);
     //paperElement.appendChild(urlElement);
-    paperElement.appendChild(figureElement);
+
     //paperElement.appendChild(abstractElement);
     
 
