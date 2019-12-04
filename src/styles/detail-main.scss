@@ -1,0 +1,125 @@
+@import "variables";
+
+.paper-block {
+  padding-top: $base-space-4;
+
+  &_top {
+    background-color: $base-blue;
+    padding: $base-space-2;
+    color: $base-white;
+
+    .titleelement-block {
+      font-size: $font-size-l;
+      font-weight: bolder;
+      margin-bottom: $base-space;
+    }
+
+    .ja-titleelement-block {
+      font-size: $font-size-s;
+      font-weight: bolder;
+      margin-bottom: $base-space-3;
+    }
+
+    .cite-number-block {
+      display: flex;
+      margin-left: 50%;
+      &_cite {
+        font-weight: bolder;
+        margin-bottom: $base-space;
+        border: 1px solid;
+        padding: 4px;
+        width: 90%;
+        text-align: center;
+      }
+    }
+
+    .date-block {
+      margin-bottom: $base-space;
+      text-align: right;
+      font-weight: bolder;
+    }
+  }
+
+  &_bottom {
+    padding: $base-space-2;
+
+    .author-block {
+      margin-bottom: $base-space-2;
+    }
+
+    .keyword-block {
+      margin-bottom: $base-space-2;
+    }
+
+    .journal-block {
+      margin-bottom: $base-space-2;
+    }
+
+    .abstract-block {
+      margin-bottom: $base-space-2;
+    }
+
+    .url-block {
+      margin-bottom: $base-space
+    }
+
+    .figures-block {
+      display: flex;
+      border: 1px solid;
+      padding: $base-space $base-space 0;
+      margin-bottom: $base-space-2;
+      margin-top: $base-space;
+      &_img {
+        width: 32%;
+        height: 100px;
+        object-fit: cover;
+        margin-right: $base-space;
+        margin-bottom: $base-space;
+
+        &:nth-child(3n) {
+          margin-right: 0px;
+        }
+      }
+    }
+
+    .title-block {
+      font-size: $font-size-m;
+      color: $base-color;
+      font-weight: bolder;
+    }
+  }
+}
+
+.button-block {
+  display: block;
+  position: fixed;
+  box-shadow: 0 -2px 4px 0 rgba(0,0,0,0.09);
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  background-color: #fff;
+  z-index: 3;
+
+  &_content {
+    border-radius: 5px;
+    width: 90%;
+    height: 45px;
+    margin: 8px auto calc(8px * 2);
+    background-color: $base-color;
+    box-shadow: 0 4px 0 0 $base-color-2;
+    box-sizing: border-box;
+
+    .link-block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      margin: $base-space 0;
+      cursor: pointer;
+      width: 100%;
+      font-size: $font-size-m;
+      color: #fff;
+      height: inherit;
+    }
+  }
+}

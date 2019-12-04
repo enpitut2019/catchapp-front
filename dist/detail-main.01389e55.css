@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900&display=swap&subset=japanese");
+* {
+  font-family: "Noto Sans JP", sans-serif;
+  box-sizing: content-box;
+  font-size: 1rem;
+}
+
+.header-block {
+  background-color: #203377;
+  height: 40px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.09);
+  position: fixed;
+  width: 100%;
+}
+
+.footer-block {
+  background-color: #979292;
+  height: 64px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.09);
+  bottom: 0px;
+  width: 100%;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+.paper-block {
+  padding-top: 32px;
+}
+.paper-block_top {
+  background-color: #2a6fb6;
+  padding: 16px;
+  color: #FFF;
+}
+.paper-block_top .titleelement-block {
+  font-size: 1.6rem;
+  font-weight: bolder;
+  margin-bottom: 8px;
+}
+.paper-block_top .ja-titleelement-block {
+  font-size: 1rem;
+  font-weight: bolder;
+  margin-bottom: 24px;
+}
+.paper-block_top .cite-number-block {
+  display: flex;
+  margin-left: 50%;
+}
+.paper-block_top .cite-number-block_cite {
+  font-weight: bolder;
+  margin-bottom: 8px;
+  border: 1px solid;
+  padding: 4px;
+  width: 90%;
+  text-align: center;
+}
+.paper-block_top .date-block {
+  margin-bottom: 8px;
+  text-align: right;
+  font-weight: bolder;
+}
+.paper-block_bottom {
+  padding: 16px;
+}
+.paper-block_bottom .author-block {
+  margin-bottom: 16px;
+}
+.paper-block_bottom .keyword-block {
+  margin-bottom: 16px;
+}
+.paper-block_bottom .journal-block {
+  margin-bottom: 16px;
+}
+.paper-block_bottom .abstract-block {
+  margin-bottom: 16px;
+}
+.paper-block_bottom .url-block {
+  margin-bottom: 8px;
+}
+.paper-block_bottom .figures-block {
+  display: flex;
+  border: 1px solid;
+  padding: 8px 8px 0;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+.paper-block_bottom .figures-block_img {
+  width: 32%;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+.paper-block_bottom .figures-block_img:nth-child(3n) {
+  margin-right: 0px;
+}
+.paper-block_bottom .title-block {
+  font-size: 1.4rem;
+  color: #979292;
+  font-weight: bolder;
+}
+
+.button-block {
+  display: block;
+  position: fixed;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.09);
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  background-color: #fff;
+  z-index: 3;
+}
+.button-block_content {
+  border-radius: 5px;
+  width: 90%;
+  height: 45px;
+  margin: 8px auto calc(8px * 2);
+  background-color: #979292;
+  box-shadow: 0 4px 0 0 #4d5254;
+  box-sizing: border-box;
+}
+.button-block_content .link-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin: 8px 0;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.4rem;
+  color: #fff;
+  height: inherit;
+}
+
+/*# sourceMappingURL=/detail-main.01389e55.css.map */
