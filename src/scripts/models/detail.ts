@@ -8,27 +8,23 @@ export interface Keyword {
   name: string;
 }
 
-export interface Figure{
-figure: string;
-explanation: string;
-}
-
 export interface Paper {
   abstract: string;
   title: string;
   authors: Author[];
-  publishedAt: string;
+  published_at: string;
   keywords: Keyword[];
   url: string;
   created_at: string;
   figures: Figure[];
-  cite: number;
-  cited: number;
+  pdf_url: string;
+  journal: string;
+  title_ja: string;
+  cite_count: int;
+  cited_count: int;
 }
-
 
 export interface Figure{
-figure: string;
-explanation: string;
+  figure: string;
+  explanation: string;
 }
-
