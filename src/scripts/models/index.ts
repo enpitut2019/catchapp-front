@@ -8,9 +8,12 @@ export interface Keyword {
   name: string;
 }
 
-export interface Figure{
-figure: string;
-explanation: string;
+export interface Figure {
+  figure: {
+    url: string;
+    id: string;
+  };
+  explanation: string;
 }
 
 export interface Paper {
@@ -22,13 +25,6 @@ export interface Paper {
   url: string;
   created_at: string;
   figures: Figure[];
-  cite: number;
-  cited: number;
+  cite_count: number;
+  cited_count: number;
 }
-
-
-export interface Figure{
-figure: string;
-explanation: string;
-}
-
