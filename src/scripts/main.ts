@@ -70,7 +70,8 @@ const appendPapers = (papers: Paper[]): void => {
 
     //figureDisElement.textContent = paper.figures[idx].explanation;
     //figureImgElement.setAttribute("src", paper.figures[idx].figure);
-    figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
+    if (papers[idx].figures.length > 0)
+      figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
 
     //figureDisElement.textContent = "This figure is...";
     figureElement.appendChild(figureImgElement);
@@ -106,6 +107,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // const sourceUrl = "http://localhost:3000/papers/all";
   axios.get(sourceUrl).then(res => {
     const papers = res.data as Paper[];
+    console.log(papers);
     appendPapers(papers);
   });
 
