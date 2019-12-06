@@ -1,20 +1,18 @@
 import axios from "axios";
 import { Paper } from "./models";
-import mockPapers from "../mocks/mock";
+// import mockPapers from "../mocks/mock";
 import { format } from "date-fns";
-
-console.log("hogeeeeee");
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
   papers.forEach((paper, idx) => {
     // Element Elementを生成
-    const paperElement = document.createElement("div");
+    const paperElement = document.createElement("a");
     const paperTextElement = document.createElement("div");
     const contentElement = document.createElement("div");
     const leftElement = document.createElement("div");
-    const citeandcitedElement = document.createElement("div");
-    const textElement = document.createElement("div");
+    // const citeandcitedElement = document.createElement("div");
+    // const textElement = document.createElement("div");
     const titleElement = document.createElement("div");
     const authorsElement = document.createElement("div");
     const keywordsElement = document.createElement("div");
@@ -28,10 +26,11 @@ const appendPapers = (papers: Paper[]): void => {
     //const abstractElement = document.createElement("section");
     const figureElement = document.createElement("div");
     const figureImgElement = document.createElement("img");
-    const figureDisElement = document.createElement("section");
+    // const figureDisElement = document.createElement("section");
 
     // Elementにクラスを適用
     paperElement.classList.add("paper");
+    paperElement.setAttribute("href", `/detail.html?id=${idx}`);
     contentElement.classList.add("paper--content");
     leftElement.classList.add("paper--content--left");
     citeAndCitedElement.classList.add("paper--content--left--citeandcited");
@@ -102,12 +101,8 @@ const appendPapers = (papers: Paper[]): void => {
 
 window.addEventListener("DOMContentLoaded", () => {
   // Production: https://siscorn-checkapp.herokuapp.com/papers/all
-
-  const sourceUrl = "https://siscorn-checkapp.herokuapp.com/papers/all";
-  // const sourceUrl = "http://localhost:3000/papers/all";
-  axios.get(sourceUrl).then(res => {
+  axios.get("https://siscorn-checkapp.herokuapp.com/papers/all").then(res => {
     const papers = res.data as Paper[];
-    console.log(papers);
     appendPapers(papers);
   });
 

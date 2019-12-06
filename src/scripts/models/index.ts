@@ -19,11 +19,15 @@ export interface Figure {
 export interface Paper {
   abstract: string;
   title: string;
+  title_ja: string;
+  abstract_ja: string;
+  journal: string;
   authors: Author[];
   publishedAt: string;
   keywords: Keyword[];
   url: string;
   created_at: string;
+  published_at: string;
   figures: Figure[];
   cite_count: number;
   cited_count: number;
