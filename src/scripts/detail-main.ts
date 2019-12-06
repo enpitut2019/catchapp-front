@@ -10,6 +10,7 @@ const appendPapers = (papers: Paper[]): void => {
   //papers.forEach((paper, idx) => {
     console.log(papers[2].title);
     console.log(papers[2].figures[2].figure.url);
+    console.log(papers[2].authors[0].name);
 
     // Element Elementを生成
     const paperElement = document.createElement("div");
@@ -17,7 +18,7 @@ const appendPapers = (papers: Paper[]): void => {
     const bottomElement = document.createElement("div");
     const titleElement = document.createElement("div");
     const jaTitleElement = document.createElement("div");
-    const authorElement = document.createElement("div");
+    //const authorElement = document.createElement("div");
     const keywordElement = document.createElement("div");
     const journalElement = document.createElement("div");
     const citeNumberElement = document.createElement("div");
@@ -55,7 +56,7 @@ const appendPapers = (papers: Paper[]): void => {
     citedElement.classList.add("cite-number-block_cite");
 
     bottomElement.classList.add("paper-block_bottom");
-    authorElement.classList.add("author-block");
+    //authorElement.classList.add("author-block");
     keywordElement.classList.add("keyword-block");
     journalElement.classList.add("journal-block");
     urlElement.classList.add("url-block");
@@ -76,7 +77,7 @@ const appendPapers = (papers: Paper[]): void => {
     // Elementにテキストを挿入
     titleElement.textContent = papers[2].title;
     jaTitleElement.textContent = "(" + papers[2].title_ja + ")";
-    authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
+    //authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
     keywordElement.textContent = "macine learning,computer science";
     journalElement.textContent = papers[2].journal;
     citeElement.textContent = "cite：" + papers[2].cite_count;
@@ -90,6 +91,17 @@ const appendPapers = (papers: Paper[]): void => {
       "yyyy-MM-dd"
     );
     abstractElement.textContent = papers[2].abstract;
+
+    paperElement.appendChild(bottomElement);
+    bottomElement.appendChild(authorTitleElement);
+
+    // 著者
+    for (var t = 0; t < papers[2].authors.length; t++) {
+        const authorElement = document.createElement("div");
+        authorElement.classList.add("author-block");
+        authorElement.textContent = papers[2].authors[t].name;
+        bottomElement.appendChild(authorElement);
+    };
 
     //画像らへん
     for (var i = 0; i < papers[2].figures.length; i++) {
@@ -127,9 +139,7 @@ const appendPapers = (papers: Paper[]): void => {
     citeNumberElement.appendChild(citedElement);
 
     //bottom
-    //paperElement.appendChild(bottomElement);
-    bottomElement.appendChild(authorTitleElement);
-    bottomElement.appendChild(authorElement);
+    //bottomElement.appendChild(authorElement);
     bottomElement.appendChild(keywordTitleElement);
     bottomElement.appendChild(keywordElement);
     bottomElement.appendChild(journalTitleElement);

@@ -80,14 +80,13 @@ html, body {
   margin-bottom: 8px;
 }
 .paper-block_bottom .figures-block {
-  display: flex;
   border: 1px solid;
   padding: 8px 8px 0;
   margin-bottom: 16px;
   margin-top: 8px;
 }
 .paper-block_bottom .figures-block_img {
-  width: 32%;
+  width: 45%;
   height: 100px;
   object-fit: cover;
   margin-right: 8px;

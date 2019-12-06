@@ -18346,14 +18346,15 @@ var appendPapers = function appendPapers(papers) {
   var toPDFElement = document.getElementById("link"); //papers.forEach((paper, idx) => {
 
   console.log(papers[2].title);
-  console.log(papers[2].figures[2].figure.url); // Element Elementを生成
+  console.log(papers[2].figures[2].figure.url);
+  console.log(papers[2].authors[0].name); // Element Elementを生成
 
   var paperElement = document.createElement("div");
   var topElement = document.createElement("div");
   var bottomElement = document.createElement("div");
   var titleElement = document.createElement("div");
-  var jaTitleElement = document.createElement("div");
-  var authorElement = document.createElement("div");
+  var jaTitleElement = document.createElement("div"); //const authorElement = document.createElement("div");
+
   var keywordElement = document.createElement("div");
   var journalElement = document.createElement("div");
   var citeNumberElement = document.createElement("div");
@@ -18384,8 +18385,8 @@ var appendPapers = function appendPapers(papers) {
   citeNumberElement.classList.add("cite-number-block");
   citeElement.classList.add("cite-number-block_cite");
   citedElement.classList.add("cite-number-block_cite");
-  bottomElement.classList.add("paper-block_bottom");
-  authorElement.classList.add("author-block");
+  bottomElement.classList.add("paper-block_bottom"); //authorElement.classList.add("author-block");
+
   keywordElement.classList.add("keyword-block");
   journalElement.classList.add("journal-block");
   urlElement.classList.add("url-block");
@@ -18402,8 +18403,8 @@ var appendPapers = function appendPapers(papers) {
   showFooterElement.classList.add("show-footer-float-marker"); // Elementにテキストを挿入
 
   titleElement.textContent = papers[2].title;
-  jaTitleElement.textContent = "(" + papers[2].title_ja + ")";
-  authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
+  jaTitleElement.textContent = "(" + papers[2].title_ja + ")"; //authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
+
   keywordElement.textContent = "macine learning,computer science";
   journalElement.textContent = papers[2].journal;
   citeElement.textContent = "cite：" + papers[2].cite_count;
@@ -18413,7 +18414,18 @@ var appendPapers = function appendPapers(papers) {
   linkElement.textContent = papers[2].url;
   urlElement.appendChild(linkElement);
   dateElement.textContent = "published: " + date_fns_1.format(new Date(papers[2].published_at), "yyyy-MM-dd");
-  abstractElement.textContent = papers[2].abstract; //画像らへん
+  abstractElement.textContent = papers[2].abstract;
+  paperElement.appendChild(bottomElement);
+  bottomElement.appendChild(authorTitleElement); // 著者
+
+  for (var t = 0; t < papers[2].authors.length; t++) {
+    var authorElement = document.createElement("div");
+    authorElement.classList.add("author-block");
+    authorElement.textContent = papers[2].authors[t].name;
+    bottomElement.appendChild(authorElement);
+  }
+
+  ; //画像らへん
 
   for (var i = 0; i < papers[2].figures.length; i++) {
     var figureImgElement = document.createElement("img");
@@ -18447,10 +18459,8 @@ var appendPapers = function appendPapers(papers) {
   topElement.appendChild(citeNumberElement);
   citeNumberElement.appendChild(citeElement);
   citeNumberElement.appendChild(citedElement); //bottom
-  //paperElement.appendChild(bottomElement);
+  //bottomElement.appendChild(authorElement);
 
-  bottomElement.appendChild(authorTitleElement);
-  bottomElement.appendChild(authorElement);
   bottomElement.appendChild(keywordTitleElement);
   bottomElement.appendChild(keywordElement);
   bottomElement.appendChild(journalTitleElement);
@@ -18519,7 +18529,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51718" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58979" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
