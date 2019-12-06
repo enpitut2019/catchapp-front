@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "dev": "parcel ./src/**/*.html",
-    "build": "parcel build ./src/**/*.html"
+    "dev": "NODE_ENV=development parcel ./src/**/*.html",
+    "build": "NODE_ENV=production parcel build ./src/**/*.html"
   },
   "dependencies": {
+    "@types/node": "^12.12.14",
     "axios": "^0.19.0",
     "date-fns": "^2.6.0",
     "init": "^0.1.2",
