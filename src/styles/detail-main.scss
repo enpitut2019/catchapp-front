@@ -1,7 +1,7 @@
 @import "variables";
 
 .paper-block {
-  padding-top: $base-space-4;
+  //padding-top: $base-space-4;
 
   &_top {
     background-color: $base-blue;
@@ -64,13 +64,12 @@
     }
 
     .figures-block {
-      display: flex;
       border: 1px solid;
       padding: $base-space $base-space 0;
       margin-bottom: $base-space-2;
       margin-top: $base-space;
       &_img {
-        width: 32%;
+        width: 45%;
         height: 100px;
         object-fit: cover;
         margin-right: $base-space;

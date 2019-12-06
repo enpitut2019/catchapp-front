@@ -18347,41 +18347,76 @@ var appendPapers = function appendPapers(papers) {
   papers.forEach(function (paper, idx) {
     // Element Elementを生成
     var paperElement = document.createElement("div");
+    var paperTextElement = document.createElement("div");
+    var contentElement = document.createElement("div");
+    var leftElement = document.createElement("div");
+    var citeandcitedElement = document.createElement("div");
+    var textElement = document.createElement("div");
     var titleElement = document.createElement("div");
-    var urlElement = document.createElement("div");
+    var authorsElement = document.createElement("div");
+    var keywordsElement = document.createElement("div");
+    var citeAndCitedElement = document.createElement("div");
+    var citeElement = document.createElement("div");
+    var citedElement = document.createElement("div"); //const urlElement = document.createElement("div");
+
     var dateElement = document.createElement("div");
-    var linkElement = document.createElement("a");
-    var abstractElement = document.createElement("section");
+    var linkElement = document.createElement("a"); //const abstractElement = document.createElement("section");
+
     var figureElement = document.createElement("div");
     var figureImgElement = document.createElement("img");
     var figureDisElement = document.createElement("section"); // Elementにクラスを適用
 
     paperElement.classList.add("paper");
+    contentElement.classList.add("paper--content");
+    leftElement.classList.add("paper--content--left");
+    citeAndCitedElement.classList.add("paper--content--left--citeandcited");
+    paperTextElement.classList.add("paper--content--text");
     titleElement.classList.add("paper--title");
-    urlElement.classList.add("paper--url");
-    dateElement.classList.add("paper--date");
-    abstractElement.classList.add("paper--abstract");
-    figureElement.classList.add("paper--figures"); // Elementにテキストを挿入
+    authorsElement.classList.add("paper--content--text--authors");
+    keywordsElement.classList.add("paper--content--text--keywords");
+    citeElement.classList.add("paper--content--left--citeandcited--cite");
+    citedElement.classList.add("paper--content--left--citeandcited--cited"); //urlElement.classList.add("paper--url");
 
-    titleElement.textContent = paper.title;
+    dateElement.classList.add("paper--content--text--date"); //abstractElement.classList.add("paper--abstract");
+
+    figureElement.classList.add("paper--content--left--figures");
+    figureImgElement.classList.add("paper--content--left--figures--img"); // Elementにテキストを挿入
+
+    titleElement.textContent = paper.title; //authorElement.textContent = paper.authors[0].name;
+
+    for (var i = 0; i < papers[idx].authors.length; i++) {
+      authorsElement.textContent = "Author：" + papers[idx].authors[i].name;
+    }
+
+    keywordsElement.textContent = "keyword1";
+    citeElement.textContent = "cite：" + papers[idx].cite_count;
+    citedElement.textContent = "cited：" + papers[idx].cited_count;
     linkElement.setAttribute("href", paper.url);
     linkElement.setAttribute("target", "_blank");
-    linkElement.textContent = paper.url;
-    urlElement.appendChild(linkElement);
-    dateElement.textContent = date_fns_1.format(new Date(paper.created_at), "yyyy年MM月dd日");
-    abstractElement.textContent = paper.abstract; //figureDisElement.textContent = paper.figures[idx].explanation;
+    linkElement.textContent = paper.url; //urlElement.appendChild(linkElement);
+
+    dateElement.textContent = date_fns_1.format(new Date(paper.created_at), "yyyy年MM月dd日"); //abstractElement.textContent = paper.abstract;
+    //figureDisElement.textContent = paper.figures[idx].explanation;
     //figureImgElement.setAttribute("src", paper.figures[idx].figure);
 
-    figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
-    figureDisElement.textContent = "EXPLANATION";
-    figureElement.appendChild(figureImgElement);
-    figureElement.appendChild(figureDisElement); // 子Elementをpaper Elementに挿入
+    if (papers[idx].figures.length > 0) figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url); //figureDisElement.textContent = "This figure is...";
+
+    figureElement.appendChild(figureImgElement); //figureElement.appendChild(figureDisElement);
+    // 子Elementをpaper Elementに挿入
 
     paperElement.appendChild(titleElement);
-    paperElement.appendChild(dateElement);
-    paperElement.appendChild(urlElement);
-    paperElement.appendChild(figureElement);
-    paperElement.appendChild(abstractElement); // bodyにpaper elementを挿入
+    paperElement.appendChild(contentElement);
+    contentElement.appendChild(leftElement);
+    contentElement.appendChild(paperTextElement);
+    leftElement.appendChild(figureElement);
+    leftElement.appendChild(citeAndCitedElement);
+    citeAndCitedElement.appendChild(citeElement);
+    citeAndCitedElement.appendChild(citedElement);
+    paperTextElement.appendChild(authorsElement);
+    paperTextElement.appendChild(keywordsElement);
+    paperTextElement.appendChild(dateElement); //paperElement.appendChild(urlElement);
+    //paperElement.appendChild(abstractElement);
+    // bodyにpaper elementを挿入
 
     if (mainElement === null) return;
     mainElement.appendChild(paperElement);
@@ -18394,6 +18429,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
   axios_1.default.get(sourceUrl).then(function (res) {
     var papers = res.data;
+    console.log(papers);
     appendPapers(papers);
   }); // Development
   // const papers = mockPapers as Paper[];
@@ -18427,7 +18463,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50095" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52881" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -18343,15 +18343,18 @@ var date_fns_1 = require("date-fns");
 var appendPapers = function appendPapers(papers) {
   var mainElement = document.getElementById("main");
   var mainContentsElement = document.getElementById("maincontents");
-  var toPDFElement = document.getElementById("link");
-  console.log(papers[2].title); // Element Elementを生成
+  var toPDFElement = document.getElementById("link"); //papers.forEach((paper, idx) => {
+
+  console.log(papers[2].title);
+  console.log(papers[2].figures[2].figure.url);
+  console.log(papers[2].authors[0].name); // Element Elementを生成
 
   var paperElement = document.createElement("div");
   var topElement = document.createElement("div");
   var bottomElement = document.createElement("div");
   var titleElement = document.createElement("div");
-  var jaTitleElement = document.createElement("div");
-  var authorElement = document.createElement("div");
+  var jaTitleElement = document.createElement("div"); //const authorElement = document.createElement("div");
+
   var keywordElement = document.createElement("div");
   var journalElement = document.createElement("div");
   var citeNumberElement = document.createElement("div");
@@ -18362,10 +18365,10 @@ var appendPapers = function appendPapers(papers) {
   var linkElement = document.createElement("a");
   var abstractElement = document.createElement("section"); //image
 
-  var figureElement = document.createElement("div");
-  var figureImgElement = document.createElement("img");
-  var figureImg2Element = document.createElement("img");
-  var figureImg3Element = document.createElement("img"); //title
+  var figureElement = document.createElement("div"); // const figureImgElement = document.createElement("img");
+  // const figureImg2Element = document.createElement("img");
+  // const figureImg3Element = document.createElement("img");
+  //title
 
   var abstractTitleElement = document.createElement("div");
   var authorTitleElement = document.createElement("div");
@@ -18382,16 +18385,16 @@ var appendPapers = function appendPapers(papers) {
   citeNumberElement.classList.add("cite-number-block");
   citeElement.classList.add("cite-number-block_cite");
   citedElement.classList.add("cite-number-block_cite");
-  bottomElement.classList.add("paper-block_bottom");
-  authorElement.classList.add("author-block");
+  bottomElement.classList.add("paper-block_bottom"); //authorElement.classList.add("author-block");
+
   keywordElement.classList.add("keyword-block");
   journalElement.classList.add("journal-block");
   urlElement.classList.add("url-block");
   abstractElement.classList.add("abstract-block");
-  figureElement.classList.add("figures-block");
-  figureImgElement.classList.add("figures-block_img");
-  figureImg2Element.classList.add("figures-block_img");
-  figureImg3Element.classList.add("figures-block_img");
+  figureElement.classList.add("figures-block"); // figureImgElement.classList.add("figures-block_img");
+  // figureImg2Element.classList.add("figures-block_img");
+  // figureImg3Element.classList.add("figures-block_img");
+
   abstractTitleElement.classList.add("title-block");
   authorTitleElement.classList.add("title-block");
   keywordTitleElement.classList.add("title-block");
@@ -18400,8 +18403,8 @@ var appendPapers = function appendPapers(papers) {
   showFooterElement.classList.add("show-footer-float-marker"); // Elementにテキストを挿入
 
   titleElement.textContent = papers[2].title;
-  jaTitleElement.textContent = "(" + papers[2].title_ja + ")";
-  authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
+  jaTitleElement.textContent = "(" + papers[2].title_ja + ")"; //authorElement.textContent = "Henggang Cui, Gregory R. Ganger, Phillip B. Gibbons";
+
   keywordElement.textContent = "macine learning,computer science";
   journalElement.textContent = papers[2].journal;
   citeElement.textContent = "cite：" + papers[2].cite_count;
@@ -18411,12 +18414,37 @@ var appendPapers = function appendPapers(papers) {
   linkElement.textContent = papers[2].url;
   urlElement.appendChild(linkElement);
   dateElement.textContent = "published: " + date_fns_1.format(new Date(papers[2].published_at), "yyyy-MM-dd");
-  abstractElement.textContent = papers[2].abstract; //figureDisElement.textContent = paper.figures[idx].explanation;
-  //figureImgElement.setAttribute("src", paper.figures[idx].figure);
+  abstractElement.textContent = papers[2].abstract;
+  paperElement.appendChild(bottomElement);
+  bottomElement.appendChild(authorTitleElement); // 著者
 
-  figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
-  figureImg2Element.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
-  figureImg3Element.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
+  for (var t = 0; t < papers[2].authors.length; t++) {
+    var authorElement = document.createElement("div");
+    authorElement.classList.add("author-block");
+    authorElement.textContent = papers[2].authors[t].name;
+    bottomElement.appendChild(authorElement);
+  }
+
+  ; //画像らへん
+
+  for (var i = 0; i < papers[2].figures.length; i++) {
+    var figureImgElement = document.createElement("img");
+    figureImgElement.classList.add("figures-block_img");
+    figureImgElement.setAttribute("src", papers[2].figures[i].figure.url);
+    figureElement.appendChild(figureImgElement);
+  }
+
+  ; //figureDisElement.textContent = papers[2].figures[1].explanation;
+  //figureImgElement.setAttribute("src", papers[2].figures[1].figure);
+  // figures.forEach((figure, idx) => {
+  //   const figureImgElement = document.createElement("img");
+  //   figureImgElement.classList.add("figures-block_img");
+  //   figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
+  //   //figureImg2Element.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
+  //   //figureImg3Element.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
+  //   figureElement.appendChild(figureImgElement);
+  // };
+
   abstractTitleElement.textContent = "Abstract";
   authorTitleElement.textContent = "Author";
   imageTitleElement.textContent = "Images";
@@ -18431,20 +18459,18 @@ var appendPapers = function appendPapers(papers) {
   topElement.appendChild(citeNumberElement);
   citeNumberElement.appendChild(citeElement);
   citeNumberElement.appendChild(citedElement); //bottom
-  //paperElement.appendChild(bottomElement);
+  //bottomElement.appendChild(authorElement);
 
-  bottomElement.appendChild(authorTitleElement);
-  bottomElement.appendChild(authorElement);
   bottomElement.appendChild(keywordTitleElement);
   bottomElement.appendChild(keywordElement);
   bottomElement.appendChild(journalTitleElement);
   bottomElement.appendChild(journalElement);
   bottomElement.appendChild(showFooterElement);
   bottomElement.appendChild(imageTitleElement);
-  bottomElement.appendChild(figureElement);
-  figureElement.appendChild(figureImgElement);
-  figureElement.appendChild(figureImg2Element);
-  figureElement.appendChild(figureImg3Element);
+  bottomElement.appendChild(figureElement); // figureElement.appendChild(figureImgElement);
+  // figureElement.appendChild(figureImg2Element);
+  // figureElement.appendChild(figureImg3Element);
+
   bottomElement.appendChild(abstractTitleElement);
   bottomElement.appendChild(abstractElement);
   bottomElement.appendChild(urlElement); // bodyにpaper elementを挿入
@@ -18455,7 +18481,7 @@ var appendPapers = function appendPapers(papers) {
   if (mainContentsElement === null) return;
   mainContentsElement.appendChild(bottomElement);
   if (toPDFElement === null) return;
-  toPDFElement.appendChild(urlElement);
+  toPDFElement.appendChild(urlElement); //};
 };
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -18469,6 +18495,8 @@ window.addEventListener("DOMContentLoaded", function () {
     appendAuthors(authors);
     var keywords = res.data;
     appendKeywords(keywords);
+    var figures = res.data;
+    appendFigures(figures);
   }); // Development
   // const papers = mockPapers as Paper[];
   // appendPapers(papers);
@@ -18501,7 +18529,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50095" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52881" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
