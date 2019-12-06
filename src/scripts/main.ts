@@ -1,34 +1,44 @@
+/**
+ * 【import って付いているのは何？】
+ * 他のファイルからオブジェクトをインポートするために、importというキーワードを使います。
+ * 例えば src/scripts/models/index.ts では Author が export されていますので、
+ *
+ * import { Author } from './models'
+ *
+ * として取得することができます。
+ * 普通は ./hoge/fuga.ts とTypeScriptファイルを指定する必要があるのですが、index.ts ファイルは特別扱いで、index.ts を含むディレクトリ(フォルダ)を指定すればOKです。
+ *
+ * ちなみに、複数のオブジェクトをインポートしたければ
+ *
+ * import { Author, Figure } from './models'
+ *
+ * というふうにカンマ区切りでインポートを指定することができます。
+ */
+
 import axios from "axios";
 import { Paper } from "./models";
-import mockPapers from "../mocks/mock";
 import { format } from "date-fns";
 
-console.log("hogeeeeee");
+const railsHost = process.env.RAILS_HOST;
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
   papers.forEach((paper, idx) => {
-    // Element Elementを生成
+    // Elementを生成
     const paperElement = document.createElement("div");
     const paperTextElement = document.createElement("div");
     const contentElement = document.createElement("div");
     const leftElement = document.createElement("div");
-    const citeandcitedElement = document.createElement("div");
-    const textElement = document.createElement("div");
     const titleElement = document.createElement("div");
     const authorsElement = document.createElement("div");
     const keywordsElement = document.createElement("div");
     const citeAndCitedElement = document.createElement("div");
     const citeElement = document.createElement("div");
     const citedElement = document.createElement("div");
-
-    //const urlElement = document.createElement("div");
     const dateElement = document.createElement("div");
     const linkElement = document.createElement("a");
-    //const abstractElement = document.createElement("section");
     const figureElement = document.createElement("div");
     const figureImgElement = document.createElement("img");
-    const figureDisElement = document.createElement("section");
 
     // Elementにクラスを適用
     paperElement.classList.add("paper");
@@ -42,15 +52,12 @@ const appendPapers = (papers: Paper[]): void => {
     citeElement.classList.add("paper--content--left--citeandcited--cite");
     citedElement.classList.add("paper--content--left--citeandcited--cited");
 
-    //urlElement.classList.add("paper--url");
     dateElement.classList.add("paper--content--text--date");
-    //abstractElement.classList.add("paper--abstract");
 
     figureElement.classList.add("paper--content--left--figures");
     figureImgElement.classList.add("paper--content--left--figures--img");
     // Elementにテキストを挿入
     titleElement.textContent = paper.title;
-    //authorElement.textContent = paper.authors[0].name;
     for (let i = 0; i < papers[idx].authors.length; i++) {
       authorsElement.textContent = "Author：" + papers[idx].authors[i].name;
     }
@@ -61,21 +68,15 @@ const appendPapers = (papers: Paper[]): void => {
     linkElement.setAttribute("href", paper.url);
     linkElement.setAttribute("target", "_blank");
     linkElement.textContent = paper.url;
-    //urlElement.appendChild(linkElement);
     dateElement.textContent = format(
       new Date(paper.created_at),
       "yyyy年MM月dd日"
     );
-    //abstractElement.textContent = paper.abstract;
 
-    //figureDisElement.textContent = paper.figures[idx].explanation;
-    //figureImgElement.setAttribute("src", paper.figures[idx].figure);
     if (papers[idx].figures.length > 0)
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
 
-    //figureDisElement.textContent = "This figure is...";
     figureElement.appendChild(figureImgElement);
-    //figureElement.appendChild(figureDisElement);
 
     // 子Elementをpaper Elementに挿入
     paperElement.appendChild(titleElement);
@@ -90,9 +91,6 @@ const appendPapers = (papers: Paper[]): void => {
     paperTextElement.appendChild(keywordsElement);
 
     paperTextElement.appendChild(dateElement);
-    //paperElement.appendChild(urlElement);
-
-    //paperElement.appendChild(abstractElement);
 
     // bodyにpaper elementを挿入
     if (mainElement === null) return;
@@ -101,17 +99,9 @@ const appendPapers = (papers: Paper[]): void => {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
-  // Production: https://siscorn-checkapp.herokuapp.com/papers/all
-
-  const sourceUrl = "https://siscorn-checkapp.herokuapp.com/papers/all";
-  // const sourceUrl = "http://localhost:3000/papers/all";
+  const sourceUrl = `${railsHost}/papers/all`;
   axios.get(sourceUrl).then(res => {
     const papers = res.data as Paper[];
-    console.log(papers);
     appendPapers(papers);
   });
-
-  // Development
-  // const papers = mockPapers as Paper[];
-  // appendPapers(papers);
 });
