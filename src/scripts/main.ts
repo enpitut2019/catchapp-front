@@ -1,3 +1,20 @@
+/**
+ * 【import って付いているのは何？】
+ * 他のファイルからオブジェクトをインポートするために、importというキーワードを使います。
+ * 例えば src/scripts/models/index.ts では Author が export されていますので、
+ *
+ * import { Author } from './models'
+ *
+ * として取得することができます。
+ * 普通は ./hoge/fuga.ts とTypeScriptファイルを指定する必要があるのですが、index.ts ファイルは特別扱いで、index.ts を含むディレクトリ(フォルダ)を指定すればOKです。
+ *
+ * ちなみに、複数のオブジェクトをインポートしたければ
+ *
+ * import { Author, Figure } from './models'
+ *
+ * というふうにカンマ区切りでインポートを指定することができます。
+ */
+
 import axios from "axios";
 import { Paper } from "./models";
 import { format } from "date-fns";
