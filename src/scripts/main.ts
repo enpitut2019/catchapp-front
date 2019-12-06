@@ -51,7 +51,11 @@ const appendPapers = (papers: Paper[]): void => {
     // Elementにテキストを挿入
     titleElement.textContent = paper.title;
     //authorElement.textContent = paper.authors[0].name;
-    authorsElement.textContent  = "author1";
+    for (var i = 0; i < papers[idx].authors.length; i++) {
+      authorsElement.textContent  = "Author：" + papers[idx].authors[i].name;
+  };
+
+
     keywordsElement.textContent  = "keyword1";
     citeElement.textContent  = "cite：" + papers[idx].cite_count;
     citedElement.textContent  = "cited：" + papers[idx].cited_count;
