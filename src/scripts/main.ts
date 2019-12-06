@@ -53,8 +53,8 @@ const appendPapers = (papers: Paper[]): void => {
     //authorElement.textContent = paper.authors[0].name;
     authorsElement.textContent  = "author1";
     keywordsElement.textContent  = "keyword1";
-    citeElement.textContent  = "引用";
-    citedElement.textContent  = "非引用";
+    citeElement.textContent  = "cite：" + papers[2].cite_count;
+    citedElement.textContent  = "cited：" + papers[2].cited_count;
     linkElement.setAttribute("href", paper.url);
     linkElement.setAttribute("target", "_blank");
     linkElement.textContent = paper.url;

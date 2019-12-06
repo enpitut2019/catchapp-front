@@ -18386,8 +18386,8 @@ var appendPapers = function appendPapers(papers) {
 
     authorsElement.textContent = "author1";
     keywordsElement.textContent = "keyword1";
-    citeElement.textContent = "引用";
-    citedElement.textContent = "非引用";
+    citeElement.textContent = "cite：" + papers[2].cite_count;
+    citedElement.textContent = "cited：" + papers[2].cited_count;
     linkElement.setAttribute("href", paper.url);
     linkElement.setAttribute("target", "_blank");
     linkElement.textContent = paper.url; //urlElement.appendChild(linkElement);
@@ -18459,7 +18459,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35431" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33115" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
