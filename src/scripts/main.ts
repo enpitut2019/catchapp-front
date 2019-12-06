@@ -53,8 +53,8 @@ const appendPapers = (papers: Paper[]): void => {
     //authorElement.textContent = paper.authors[0].name;
     authorsElement.textContent  = "author1";
     keywordsElement.textContent  = "keyword1";
-    citeElement.textContent  = "cite：" + papers[2].cite_count;
-    citedElement.textContent  = "cited：" + papers[2].cited_count;
+    citeElement.textContent  = "cite：" + papers[idx].cite_count;
+    citedElement.textContent  = "cited：" + papers[idx].cited_count;
     linkElement.setAttribute("href", paper.url);
     linkElement.setAttribute("target", "_blank");
     linkElement.textContent = paper.url;
@@ -67,7 +67,8 @@ const appendPapers = (papers: Paper[]): void => {
     
     //figureDisElement.textContent = paper.figures[idx].explanation;
     //figureImgElement.setAttribute("src", paper.figures[idx].figure);
-    figureImgElement.setAttribute("src", "https://www.webtoolnavi.com/www/wp-content/uploads/2016/06/fakeimg-2.png");
+    figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
+
     //figureDisElement.textContent = "This figure is...";
     figureElement.appendChild(figureImgElement);
     //figureElement.appendChild(figureDisElement);
