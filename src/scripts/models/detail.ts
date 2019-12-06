@@ -20,11 +20,11 @@ export interface Paper {
   pdf_url: string;
   journal: string;
   title_ja: string;
-  cite_count: int;
-  cited_count: int;
+  cite_count: number;
+  cited_count: number;
 }
 
-export interface Figure{
+export interface Figure {
   figure: string;
   explanation: string;
 }
