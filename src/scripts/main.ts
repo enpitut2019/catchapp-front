@@ -7,7 +7,7 @@ console.log("hogeeeeee");
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
-  papers.forEach((paper, idx,) => {
+  papers.forEach((paper, idx) => {
     // Element Elementを生成
     const paperElement = document.createElement("div");
     const paperTextElement = document.createElement("div");
@@ -51,10 +51,10 @@ const appendPapers = (papers: Paper[]): void => {
     // Elementにテキストを挿入
     titleElement.textContent = paper.title;
     //authorElement.textContent = paper.authors[0].name;
-    authorsElement.textContent  = "author1";
-    keywordsElement.textContent  = "keyword1";
-    citeElement.textContent  = "cite：" + papers[idx].cite_count;
-    citedElement.textContent  = "cited：" + papers[idx].cited_count;
+    authorsElement.textContent = "author1";
+    keywordsElement.textContent = "keyword1";
+    citeElement.textContent = "cite：" + papers[idx].cite_count;
+    citedElement.textContent = "cited：" + papers[idx].cited_count;
     linkElement.setAttribute("href", paper.url);
     linkElement.setAttribute("target", "_blank");
     linkElement.textContent = paper.url;
@@ -64,7 +64,7 @@ const appendPapers = (papers: Paper[]): void => {
       "yyyy年MM月dd日"
     );
     //abstractElement.textContent = paper.abstract;
-    
+
     //figureDisElement.textContent = paper.figures[idx].explanation;
     //figureImgElement.setAttribute("src", paper.figures[idx].figure);
     figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
@@ -72,7 +72,7 @@ const appendPapers = (papers: Paper[]): void => {
     //figureDisElement.textContent = "This figure is...";
     figureElement.appendChild(figureImgElement);
     //figureElement.appendChild(figureDisElement);
-    
+
     // 子Elementをpaper Elementに挿入
     paperElement.appendChild(titleElement);
     paperElement.appendChild(contentElement);
@@ -89,7 +89,6 @@ const appendPapers = (papers: Paper[]): void => {
     //paperElement.appendChild(urlElement);
 
     //paperElement.appendChild(abstractElement);
-    
 
     // bodyにpaper elementを挿入
     if (mainElement === null) return;
