@@ -16,9 +16,6 @@ const appendPapers = (papers: Paper[]): void => {
   const mainContentsElement = document.getElementById("maincontents");
   const toPDFElement = document.getElementById("link");
   //papers.forEach((paper, idx) => {
-    console.log(papers[2].title);
-    console.log(papers[2].figures[2].figure.url);
-    console.log(papers[2].authors[0].name);
 
   // Element Elementを生成
   const paperElement = document.createElement("div");
@@ -85,19 +82,19 @@ const appendPapers = (papers: Paper[]): void => {
   footerHrefElement.classList.add("link-block");
 
   // Elementにテキストを挿入
-  titleElement.textContent = papers[2].title;
-  jaTitleElement.textContent = "(" + papers[2].title_ja + ")";
+  titleElement.textContent = papers[paperId].title;
+  jaTitleElement.textContent = "(" + papers[paperId].title_ja + ")";
   keywordElement.textContent = "macine learning,computer science";
-  journalElement.textContent = papers[2].journal;
-  citeElement.textContent = "cite：" + papers[2].cite_count;
-  citedElement.textContent = "cited：" + papers[2].cited_count;
-  linkElement.setAttribute("href", papers[2].url);
+  journalElement.textContent = papers[paperId].journal;
+  citeElement.textContent = "cite：" + papers[paperId].cite_count;
+  citedElement.textContent = "cited：" + papers[paperId].cited_count;
+  linkElement.setAttribute("href", papers[paperId].url);
   linkElement.setAttribute("target", "_blank");
-  linkElement.textContent = papers[2].url;
+  linkElement.textContent = papers[paperId].url;
   urlElement.appendChild(linkElement);
   dateElement.textContent =
-    "published: " + format(new Date(papers[2].published_at), "yyyy-MM-dd");
-  abstractElement.textContent = papers[2].abstract;
+    "published: " + format(new Date(papers[paperId].published_at), "yyyy-MM-dd");
+  abstractElement.textContent = papers[paperId].abstract;
 
   paperElement.appendChild(bottomElement);
   bottomElement.appendChild(authorTitleElement);
@@ -111,7 +108,7 @@ const appendPapers = (papers: Paper[]): void => {
   }
 
   //画像&モーダル
-  for (var i = 0; i < papers[2].figures.length; i++) {
+  for (var i = 0; i < papers[paperId].figures.length; i++) {
       const defaultHrefElement = document.createElement("a");
       const defaultImgElement = document.createElement("img");
       const modalElement = document.createElement("div");
@@ -133,10 +130,10 @@ const appendPapers = (papers: Paper[]): void => {
       modalCloseElement.classList.add("modal-close");
 
       defaultHrefElement.setAttribute("href", "#modal-0" + (i+1);
-      defaultImgElement.setAttribute("src", papers[2].figures[i].figure.url);
+      defaultImgElement.setAttribute("src", papers[paperId].figures[i].figure.url);
       modalElement.setAttribute("id", "modal-0" + (i+1);
       modalHrefElement.setAttribute("href", "#!");
-      modalImgElement.setAttribute("src", papers[2].figures[i].figure.url);
+      modalImgElement.setAttribute("src", papers[paperId].figures[i].figure.url);
       modalImgExplanationElement.textContent="Figure" + (i+1) + ":  GSAT's behaviour during one try, N = 500, L = 2150, rst 250 ip";
       modalCloseElement.setAttribute("href", "#!");
       modalCloseElement.textContent="✕";
@@ -155,7 +152,7 @@ const appendPapers = (papers: Paper[]): void => {
   // フッターボタン
   footerButtomElement.setAttribute("id","url");
   footerButtomElement.setAttribute("data-element-id","footer-float");
-  footerHrefElement.setAttribute("href", papers[2].pdf_url);
+  footerHrefElement.setAttribute("href", papers[paperId].pdf_url);
   footerHrefElement.textContent="PDF版を読む";
 
   abstractTitleElement.textContent = "Abstract";
