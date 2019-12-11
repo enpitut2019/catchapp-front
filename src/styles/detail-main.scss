@@ -68,6 +68,7 @@
       padding: $base-space $base-space 0;
       margin-bottom: $base-space-2;
       margin-top: $base-space;
+
       &_img {
         width: 45%;
         height: 100px;
@@ -78,6 +79,16 @@
         &:nth-child(3n) {
           margin-right: 0px;
         }
+      }
+
+      &_modal-img {
+        width: 100%;
+        margin-right: $base-space;
+        margin-bottom: $base-space;
+      }
+
+      &_text {
+        font-size: $font-size-ss;
       }
     }
 
@@ -98,7 +109,7 @@
   width: 100vw;
   background-color: #fff;
   z-index: 3;
-
+  left: 0px;
   &_content {
     border-radius: 5px;
     width: 90%;
@@ -121,4 +132,84 @@
       height: inherit;
     }
   }
+}
+
+// モーダル付近のcss
+.modal-wrapper {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 60px 10px;
+  text-align: center
+}
+
+.modal-wrapper:not(:target) {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s, visibility .3s;
+}
+
+.modal-wrapper:target {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .4s, visibility .4s;
+}
+
+.modal-wrapper::after {
+  display: inline-block;
+  height: 100%;
+  margin-left: -.05em;
+  vertical-align: middle;
+  content: ""
+}
+
+.modal-wrapper .modal-window {
+  box-sizing: border-box;
+  display: inline-block;
+  z-index: 20;
+  position: relative;
+  width: 85%;
+  max-width: 600px;
+  padding: 30px 30px 15px;
+  border-radius: 2px;
+  background: #fff;
+  box-shadow: 0 0 30px rgba(0, 0, 0, .6);
+  vertical-align: middle
+}
+
+.modal-wrapper .modal-window .modal-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-overlay {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, .8)
+}
+
+.modal-wrapper .modal-close {
+  z-index: 20;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  color: #95979c !important;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 35px;
+  text-align: center;
+  text-decoration: none;
+  text-indent: 0
+}
+
+.modal-wrapper .modal-close:hover {
+  color: #2b2e38 !important
 }
