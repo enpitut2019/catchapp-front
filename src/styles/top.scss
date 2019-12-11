@@ -1,0 +1,35 @@
+@import "variables";
+
+.title-block {
+    padding: $base-space;
+    font-size: $font-size-l;
+    font-weight: bold;
+    color: $base-blue;
+    width: 130px;
+    margin: $base-space-4 auto 0;
+}
+
+.form-block {
+    width: 80%;
+    margin: 0 auto 320px;
+    padding-top: $base-space-4;
+    &_form {
+        box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+        border-radius: 20px;
+        background-color: #FFF;
+        width: 90%;
+        margin: 0 auto $base-space-4;
+        padding: 4px;
+    }
+    &_button {
+        margin: 0 auto;
+        width: 160px;
+        .button-block {
+            box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+            border-radius: 10px;
+            width: 140px;
+            margin: 0 auto;
+            padding: 4px;
+        }
+    }
+}
