@@ -128,12 +128,25 @@ const appendPapers = (papers: Paper[]): void => {
       modalImgElement.classList.add("figures-block_modal-img");
       modalImgExplanationElement.classList.add("figures-block_text");
       modalCloseElement.classList.add("modal-close");
-
-      defaultHrefElement.setAttribute("href", "#modal-0" + (i+1);
-      defaultImgElement.setAttribute("src", papers[paperId].figures[i].figure.url);
       modalElement.setAttribute("id", "modal-0" + (i+1);
       modalHrefElement.setAttribute("href", "#!");
-      modalImgElement.setAttribute("src", papers[paperId].figures[i].figure.url);
+      defaultHrefElement.setAttribute("href", "#modal-0" + (i+1);
+      if (papers[paperId].figures.length > 0){
+        defaultImgElement.setAttribute("src", papers[paperId].figures[i].figure.url);
+        modalImgElement.setAttribute("src", papers[paperId].figures[i].figure.url);
+      }
+      else{
+        defaultImgElement.setAttribute(
+          "src",
+          "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
+        );
+        modalImgElement.setAttribute(
+          "src",
+          "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
+        );
+      }
+
+      
       modalImgExplanationElement.textContent="Figure" + (i+1) + ":  GSAT's behaviour during one try, N = 500, L = 2150, rst 250 ip";
       modalCloseElement.setAttribute("href", "#!");
       modalCloseElement.textContent="✕";

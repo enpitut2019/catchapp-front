@@ -76,6 +76,11 @@ const appendPapers = (papers: Paper[]): void => {
 
     if (papers[idx].figures.length > 0)
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
+    else
+      figureImgElement.setAttribute(
+        "src",
+        "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
+      );
 
     figureElement.appendChild(figureImgElement);
 
