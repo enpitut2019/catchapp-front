@@ -55,12 +55,15 @@ export interface Paper {
   abstract: string;
   title: string;
   title_ja: string;
+  abstract_ja: string;
+  journal: string;
   authors: Author[];
   published_at: string;
   keywords: Keyword[];
   url: string;
   pdf_url: string;
   created_at: string;
+  published_at: string;
   figures: Figure[];
   journal: string;
   cite_count: number;
