@@ -61,6 +61,7 @@ export interface Paper {
   published_at: string;
   keywords: Keyword[];
   url: string;
+  pdf_url: string;
   created_at: string;
   published_at: string;
   figures: Figure[];
