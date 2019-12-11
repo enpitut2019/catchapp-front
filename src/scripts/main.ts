@@ -74,8 +74,15 @@ const appendPapers = (papers: Paper[]): void => {
       "yyyy年MM月dd日"
     );
 
-    if (papers[idx].figures.length > 0)
+    if (papers[idx].figures.length > 0) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
+    } else {
+      figureImgElement.classList.add("paper--content--left--figures--no-img");
+      figureImgElement.setAttribute(
+        "src",
+        "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
+      );
+    }
 
     figureElement.appendChild(figureImgElement);
 
