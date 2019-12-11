@@ -34,12 +34,10 @@ const appendPapers = (papers: Paper[]): void => {
   const abstractElement = document.createElement("section");
 
   //image
-  const figureElement = document.createElement("div");
 
   //title
   const abstractTitleElement = document.createElement("div");
   const authorTitleElement = document.createElement("div");
-  const imageTitleElement = document.createElement("div");
   const journalTitleElement = document.createElement("div");
   const keywordTitleElement = document.createElement("div");
   const urlTitleElement = document.createElement("div");
@@ -66,12 +64,10 @@ const appendPapers = (papers: Paper[]): void => {
   journalElement.classList.add("journal-block");
   urlElement.classList.add("url-block");
   abstractElement.classList.add("abstract-block");
-  figureElement.classList.add("figures-block");
 
   abstractTitleElement.classList.add("title-block");
   authorTitleElement.classList.add("title-block");
   keywordTitleElement.classList.add("title-block");
-  imageTitleElement.classList.add("title-block");
   journalTitleElement.classList.add("title-block");
   urlTitleElement.classList.add("title-block");
 
@@ -105,6 +101,19 @@ const appendPapers = (papers: Paper[]): void => {
     authorElement.classList.add("author-block");
     authorElement.textContent = papers[paperId].authors[t].name;
     bottomElement.appendChild(authorElement);
+  }
+
+  if ( 0 < papers[paperId].figures.length) {
+    const imageTitleElement = document.createElement("div");
+    const figureElement = document.createElement("div");
+
+    figureElement.classList.add("figures-block");
+    imageTitleElement.classList.add("title-block");
+
+    imageTitleElement.textContent = "Images";
+
+    bottomElement.appendChild(imageTitleElement);
+    bottomElement.appendChild(figureElement);
   }
 
   //画像&モーダル
@@ -170,7 +179,6 @@ const appendPapers = (papers: Paper[]): void => {
 
   abstractTitleElement.textContent = "Abstract";
   authorTitleElement.textContent = "Author";
-  imageTitleElement.textContent = "Images";
   journalTitleElement.textContent = "Journal";
   keywordTitleElement.textContent = "Keyword";
   urlTitleElement.textContent = "ArchiveURL";
@@ -190,8 +198,6 @@ const appendPapers = (papers: Paper[]): void => {
   bottomElement.appendChild(journalTitleElement);
   bottomElement.appendChild(journalElement);
   bottomElement.appendChild(showFooterElement);
-  bottomElement.appendChild(imageTitleElement);
-  bottomElement.appendChild(figureElement);
   bottomElement.appendChild(abstractTitleElement);
   bottomElement.appendChild(abstractElement);
   bottomElement.appendChild(urlTitleElement);
