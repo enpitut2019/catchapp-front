@@ -33,6 +33,7 @@ const appendPapers = (papers: Paper[]): void => {
     const contentElement = document.createElement("div");
     const leftElement = document.createElement("div");
     const titleElement = document.createElement("div");
+    const jaTitleElement = document.createElement("div");
     const authorsElement = document.createElement("div");
     const keywordsElement = document.createElement("div");
     const citeAndCitedElement = document.createElement("div");
@@ -51,6 +52,7 @@ const appendPapers = (papers: Paper[]): void => {
     citeAndCitedElement.classList.add("paper--content--left--citeandcited");
     paperTextElement.classList.add("paper--content--text");
     titleElement.classList.add("paper--title");
+    jaTitleElement.classList.add("paper--jatitle");
     authorsElement.classList.add("paper--content--text--authors");
     keywordsElement.classList.add("paper--content--text--keywords");
     citeElement.classList.add("paper--content--left--citeandcited--cite");
@@ -62,6 +64,7 @@ const appendPapers = (papers: Paper[]): void => {
     figureImgElement.classList.add("paper--content--left--figures--img");
 
     titleElement.textContent = paper.title;
+    jaTitleElement.textContent = "(" + papers[idx].title_ja + ")";
 
     // Elementにテキストを挿入
     if (papers[idx].authors != null) {
@@ -95,6 +98,7 @@ const appendPapers = (papers: Paper[]): void => {
 
     // 子Elementをpaper Elementに挿入
     paperElement.appendChild(titleElement);
+    paperElement.appendChild(jaTitleElement);
     paperElement.appendChild(contentElement);
     contentElement.appendChild(leftElement);
     contentElement.appendChild(paperTextElement);
