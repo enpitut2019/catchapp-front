@@ -84,9 +84,9 @@ const appendPapers = (papers: Paper[]): void => {
   journalElement.textContent = papers[paperId].journal;
   citeElement.textContent = "cite：" + papers[paperId].cite_count;
   citedElement.textContent = "cited：" + papers[paperId].cited_count;
-  linkElement.setAttribute("href", papers[paperId].url);
+  linkElement.setAttribute("href", papers[paperId].pdf_url);
   linkElement.setAttribute("target", "_blank");
-  linkElement.textContent = papers[paperId].url;
+  linkElement.textContent = papers[paperId].pdf_url;
   urlElement.appendChild(linkElement);
   dateElement.textContent =
     "published: " + format(new Date(papers[paperId].published_at), "yyyy-MM-dd");

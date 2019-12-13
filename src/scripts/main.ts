@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 /**
  * 【import って付いているのは何？】
  * 他のファイルからオブジェクトをインポートするために、importというキーワードを使います。
@@ -59,10 +60,14 @@ const appendPapers = (papers: Paper[]): void => {
 
     figureElement.classList.add("paper--content--left--figures");
     figureImgElement.classList.add("paper--content--left--figures--img");
-    // Elementにテキストを挿入
+
     titleElement.textContent = paper.title;
-    for (let i = 0; i < papers[idx].authors.length; i++) {
-      authorsElement.textContent = "Author：" + papers[idx].authors[i].name;
+
+    // Elementにテキストを挿入
+    if (papers[idx].authors != null) {
+      for (let i = 0; i < papers[idx].authors.length; i++) {
+        authorsElement.textContent = "Author：" + papers[idx].authors[i].name;
+      }
     }
 
     keywordsElement.textContent = "keyword1";
@@ -76,7 +81,7 @@ const appendPapers = (papers: Paper[]): void => {
       "yyyy年MM月dd日"
     );
 
-    if (papers[idx].figures.length > 0) {
+    if (papers[idx].figures != null) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
     } else {
       figureImgElement.classList.add("paper--content--left--figures--no-img");
@@ -110,7 +115,7 @@ const appendPapers = (papers: Paper[]): void => {
 
 window.addEventListener("DOMContentLoaded", () => {
   const sourceUrl = `${railsHost}/search/get_xml`;
-  axios.post(sourceUrl, { name: paperNameRaw }).then(res => {
+  axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);
   });
