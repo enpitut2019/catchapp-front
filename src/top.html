@@ -5,20 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <script src="./scripts/main.ts"></script>
   <link rel="stylesheet" href="./styles/top.scss">
 </head>
 <body>
   <div class="header-block"></div>
-  <!-- <main id="main">
-  </main> -->
   <div class="title-block">
       CatchApp
   </div>
-  <form method="post" action="example.cgi">
+  <form method="GET" action="index.html">
     <div class="form-block">
-        <input type="text" name="name" placeholder="search from CatchApp" class="form-block_form">
-        <div class="form-block_button"><input type="submit" value="Search" class="button-block"></div>
+        <input type="text" name="name" placeholder="search from CatchApp" class="form-block_form" id="field">
+        <div class="form-block_button"><input type="submit" value="Search" class="button-block" id="btn"></div>
     </div>
 　　</form>
   <div class="footer-block"></div>
