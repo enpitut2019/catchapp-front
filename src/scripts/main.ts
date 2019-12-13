@@ -20,6 +20,8 @@ import { Paper } from "./models";
 import { format } from "date-fns";
 
 const railsHost = process.env.RAILS_HOST;
+const parser = new URL(window.location.href);
+const paperNameRaw = parser.searchParams.get("name");
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
@@ -107,8 +109,8 @@ const appendPapers = (papers: Paper[]): void => {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
-  const sourceUrl = `${railsHost}/papers/all`;
-  axios.get(sourceUrl).then(res => {
+  const sourceUrl = `${railsHost}/search/get_xml`;
+  axios.post(sourceUrl, { name: paperNameRaw }).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);
   });
