@@ -89,7 +89,8 @@ const appendPapers = (papers: Paper[]): void => {
   linkElement.textContent = papers[paperId].pdf_url;
   urlElement.appendChild(linkElement);
   dateElement.textContent =
-    "published: " + format(new Date(papers[paperId].published_at), "yyyy-MM-dd");
+    "published: " +
+    format(new Date(papers[paperId].published_at), "yyyy-MM-dd");
   abstractElement.textContent = papers[paperId].abstract;
 
   paperElement.appendChild(bottomElement);
@@ -103,9 +104,10 @@ const appendPapers = (papers: Paper[]): void => {
     bottomElement.appendChild(authorElement);
   }
 
-  if ( 0 < papers[paperId].figures.length) {
+  const figureElement = document.createElement("div");
+
+  if (0 < papers[paperId].figures.length) {
     const imageTitleElement = document.createElement("div");
-    const figureElement = document.createElement("div");
 
     figureElement.classList.add("figures-block");
     imageTitleElement.classList.add("title-block");
@@ -117,65 +119,72 @@ const appendPapers = (papers: Paper[]): void => {
   }
 
   //画像&モーダル
-  for (var i = 0; i < papers[paperId].figures.length; i++) {
-      const defaultHrefElement = document.createElement("a");
-      const defaultImgElement = document.createElement("img");
-      const modalElement = document.createElement("div");
-      const modalHrefElement = document.createElement("a");
-      const modalWindowElement = document.createElement("div");
-      const modalContentElement = document.createElement("div");
-      const modalImgElement = document.createElement("img");
-      const modalImgExplanationElement = document.createElement("p");
-      const modalCloseElement = document.createElement("a");
+  for (let i = 0; i < papers[paperId].figures.length; i++) {
+    const defaultHrefElement = document.createElement("a");
+    const defaultImgElement = document.createElement("img");
+    const modalElement = document.createElement("div");
+    const modalHrefElement = document.createElement("a");
+    const modalWindowElement = document.createElement("div");
+    const modalContentElement = document.createElement("div");
+    const modalImgElement = document.createElement("img");
+    const modalImgExplanationElement = document.createElement("p");
+    const modalCloseElement = document.createElement("a");
 
-      // modalのスタイル
-      modalElement.classList.add("modal-wrapper");
-      defaultImgElement.classList.add("figures-block_img");
-      modalHrefElement.classList.add("modal-overlay");
-      modalWindowElement.classList.add("modal-window");
-      modalContentElement.classList.add("modal-content");
-      modalImgElement.classList.add("figures-block_modal-img");
-      modalImgExplanationElement.classList.add("figures-block_text");
-      modalCloseElement.classList.add("modal-close");
-      modalElement.setAttribute("id", "modal-0" + (i+1);
-      modalHrefElement.setAttribute("href", "#!");
-      defaultHrefElement.setAttribute("href", "#modal-0" + (i+1);
-      if (papers[paperId].figures.length > 0){
-        defaultImgElement.setAttribute("src", papers[paperId].figures[i].figure.url);
-        modalImgElement.setAttribute("src", papers[paperId].figures[i].figure.url);
-      }
-      else{
-        defaultImgElement.setAttribute(
-          "src",
-          "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
-        );
-        modalImgElement.setAttribute(
-          "src",
-          "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
-        );
-      }
+    // modalのスタイル
+    modalElement.classList.add("modal-wrapper");
+    defaultImgElement.classList.add("figures-block_img");
+    modalHrefElement.classList.add("modal-overlay");
+    modalWindowElement.classList.add("modal-window");
+    modalContentElement.classList.add("modal-content");
+    modalImgElement.classList.add("figures-block_modal-img");
+    modalImgExplanationElement.classList.add("figures-block_text");
+    modalCloseElement.classList.add("modal-close");
+    modalElement.setAttribute("id", "modal-0" + (i + 1));
+    modalHrefElement.setAttribute("href", "#!");
+    defaultHrefElement.setAttribute("href", "#modal-0" + (i + 1));
+    if (papers[paperId].figures.length > 0) {
+      defaultImgElement.setAttribute(
+        "src",
+        papers[paperId].figures[i].figure.url
+      );
+      modalImgElement.setAttribute(
+        "src",
+        papers[paperId].figures[i].figure.url
+      );
+    } else {
+      defaultImgElement.setAttribute(
+        "src",
+        "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
+      );
+      modalImgElement.setAttribute(
+        "src",
+        "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
+      );
+    }
 
-      
-      modalImgExplanationElement.textContent="Figure" + (i+1) + ":  GSAT's behaviour during one try, N = 500, L = 2150, rst 250 ip";
-      modalCloseElement.setAttribute("href", "#!");
-      modalCloseElement.textContent="✕";
+    modalImgExplanationElement.textContent =
+      "Figure" +
+      (i + 1) +
+      ":  GSAT's behaviour during one try, N = 500, L = 2150, rst 250 ip";
+    modalCloseElement.setAttribute("href", "#!");
+    modalCloseElement.textContent = "✕";
 
-      figureElement.appendChild(defaultHrefElement);
-      defaultHrefElement.appendChild(defaultImgElement);
-      figureElement.appendChild(modalElement);
-      modalElement.appendChild(modalHrefElement);
-      modalElement.appendChild(modalWindowElement);
-      modalWindowElement.appendChild(modalContentElement);
-      modalContentElement.appendChild(modalImgElement);
-      modalContentElement.appendChild(modalImgExplanationElement);
-      modalWindowElement.appendChild(modalCloseElement);
+    figureElement.appendChild(defaultHrefElement);
+    defaultHrefElement.appendChild(defaultImgElement);
+    figureElement.appendChild(modalElement);
+    modalElement.appendChild(modalHrefElement);
+    modalElement.appendChild(modalWindowElement);
+    modalWindowElement.appendChild(modalContentElement);
+    modalContentElement.appendChild(modalImgElement);
+    modalContentElement.appendChild(modalImgExplanationElement);
+    modalWindowElement.appendChild(modalCloseElement);
   }
 
   // フッターボタン
-  footerButtomElement.setAttribute("id","url");
-  footerButtomElement.setAttribute("data-element-id","footer-float");
+  footerButtomElement.setAttribute("id", "url");
+  footerButtomElement.setAttribute("data-element-id", "footer-float");
   footerHrefElement.setAttribute("href", papers[paperId].pdf_url);
-  footerHrefElement.textContent="PDF版を読む";
+  footerHrefElement.textContent = "PDF版を読む";
 
   abstractTitleElement.textContent = "Abstract";
   authorTitleElement.textContent = "Author";
