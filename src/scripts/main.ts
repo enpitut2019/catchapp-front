@@ -64,7 +64,6 @@ const appendPapers = (papers: Paper[]): void => {
     figureImgElement.classList.add("paper--content--left--figures--img");
 
     titleElement.textContent = paper.title;
-    jaTitleElement.textContent = "(" + papers[idx].title_ja + ")";
 
     // Elementにテキストを挿入
     if (papers[idx].authors != null) {
@@ -76,6 +75,7 @@ const appendPapers = (papers: Paper[]): void => {
     keywordsElement.textContent = "keyword1";
     citeElement.textContent = "cite：" + papers[idx].cite_count;
     citedElement.textContent = "cited：" + papers[idx].cited_count;
+    jaTitleElement.textContent = paper.title_ja || "(和訳しています……)";
     linkElement.setAttribute("href", paper.url);
     linkElement.setAttribute("target", "_blank");
     linkElement.textContent = paper.url;
@@ -114,6 +114,20 @@ const appendPapers = (papers: Paper[]): void => {
     // bodyにpaper elementを挿入
     if (mainElement === null) return;
     mainElement.appendChild(paperElement);
+
+    if (!paper.title_ja)
+      axios
+        .get(`${railsHost}/translate`, {
+          params: {
+            paper: paper.id,
+            type: "title",
+            text: paper.title
+          }
+        })
+        .then(response => {
+          jaTitleElement.textContent = "(" + response.data.text + ")";
+          return response;
+        });
   });
 };
 

@@ -52,6 +52,7 @@ export interface Figure {
 }
 
 export interface Paper {
+  id: string;
   abstract: string;
   title: string;
   title_ja: string;
