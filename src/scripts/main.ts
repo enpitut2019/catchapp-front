@@ -80,7 +80,7 @@ const appendPapers = (papers: Paper[]): void => {
     linkElement.setAttribute("target", "_blank");
     linkElement.textContent = paper.url;
     dateElement.textContent = format(
-      new Date(paper.created_at),
+      new Date(paper.published_at),
       "yyyy年MM月dd日"
     );
 
