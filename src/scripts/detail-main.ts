@@ -10,7 +10,6 @@ const paperId = Number(paperIdRaw);
 
 const appendPapers = (papers: Paper[]): void => {
   if (paperIdRaw === null || isNaN(paperId)) return;
-  console.log(paperId);
 
   const mainElement = document.getElementById("main");
   const mainContentsElement = document.getElementById("maincontents");
@@ -164,10 +163,7 @@ const appendPapers = (papers: Paper[]): void => {
         );
       }
 
-      modalImgExplanationElement.textContent =
-        "Figure" +
-        (i + 1) +
-        ":  " + papers[paperId].figures[i].explanation;
+      modalImgExplanationElement.textContent = papers[paperId].figures[i].explanation;
       modalCloseElement.setAttribute("href", "#!");
       modalCloseElement.textContent = "✕";
 
