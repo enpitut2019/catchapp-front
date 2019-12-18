@@ -28,7 +28,6 @@ const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
   papers.forEach((paper, idx) => {
     // Element Elementを生成
-    console.log(papers[idx].id);
     const paperElement = document.createElement("a");
     const paperTextElement = document.createElement("div");
     const contentElement = document.createElement("div");
