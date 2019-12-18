@@ -28,6 +28,7 @@ const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
   papers.forEach((paper, idx) => {
     // Element Elementを生成
+    console.log(papers[idx].id);
     const paperElement = document.createElement("a");
     const paperTextElement = document.createElement("div");
     const contentElement = document.createElement("div");
@@ -46,7 +47,7 @@ const appendPapers = (papers: Paper[]): void => {
 
     // Elementにクラスを適用
     paperElement.classList.add("paper");
-    paperElement.setAttribute("href", `/detail.html?id=${idx}`);
+    paperElement.setAttribute("href", `/detail.html?name=${paperNameRaw}&id=${idx}`);
     contentElement.classList.add("paper--content");
     leftElement.classList.add("paper--content--left");
     citeAndCitedElement.classList.add("paper--content--left--citeandcited");

@@ -3,14 +3,15 @@ import { Paper } from "./models";
 import { format } from "date-fns";
 
 const railsHost = process.env.RAILS_HOST;
+const parser = new URL(window.location.href);
+const paperNameRaw = parser.searchParams.get("name");
+const paperIdRaw = parser.searchParams.get("id");
+const paperId = Number(paperIdRaw);
+if (paperIdRaw === null || isNaN(paperId)) return;
 
 const appendPapers = (papers: Paper[]): void => {
-  const parser = new URL(window.location.href);
-  const paperIdRaw = parser.searchParams.get("id");
-  const paperId = Number(paperIdRaw);
   console.log(paperId);
-
-  if (paperIdRaw === null || isNaN(paperId)) return;
+  //console.log(papers[paperId].id);
 
   const mainElement = document.getElementById("main");
   const mainContentsElement = document.getElementById("maincontents");
@@ -97,87 +98,93 @@ const appendPapers = (papers: Paper[]): void => {
   bottomElement.appendChild(authorTitleElement);
 
   // 著者
-  for (let t = 0; t < papers[paperId].authors.length; t++) {
-    const authorElement = document.createElement("div");
-    authorElement.classList.add("author-block");
-    authorElement.textContent = papers[paperId].authors[t].name;
-    bottomElement.appendChild(authorElement);
+  if (papers[paperId].authors != null) {
+    for (let t = 0; t < papers[paperId].authors.length; t++) {
+      const authorElement = document.createElement("div");
+      authorElement.classList.add("author-block");
+      authorElement.textContent = papers[paperId].authors[t].name;
+      bottomElement.appendChild(authorElement);
+    }
   }
 
   const figureElement = document.createElement("div");
 
-  if (0 < papers[paperId].figures.length) {
-    const imageTitleElement = document.createElement("div");
+  if (papers[paperId].figures != null) {
+    if (0 < papers[paperId].figures.length) {
+      const imageTitleElement = document.createElement("div");
 
-    figureElement.classList.add("figures-block");
-    imageTitleElement.classList.add("title-block");
+      figureElement.classList.add("figures-block");
+      imageTitleElement.classList.add("title-block");
 
-    imageTitleElement.textContent = "Images";
+      imageTitleElement.textContent = "Images";
 
-    bottomElement.appendChild(imageTitleElement);
-    bottomElement.appendChild(figureElement);
+      bottomElement.appendChild(imageTitleElement);
+      bottomElement.appendChild(figureElement);
+    }
   }
 
   //画像&モーダル
-  for (let i = 0; i < papers[paperId].figures.length; i++) {
-    const defaultHrefElement = document.createElement("a");
-    const defaultImgElement = document.createElement("img");
-    const modalElement = document.createElement("div");
-    const modalHrefElement = document.createElement("a");
-    const modalWindowElement = document.createElement("div");
-    const modalContentElement = document.createElement("div");
-    const modalImgElement = document.createElement("img");
-    const modalImgExplanationElement = document.createElement("p");
-    const modalCloseElement = document.createElement("a");
+  if (papers[paperId].figures != null) {
+    for (let i = 0; i < papers[paperId].figures.length; i++) {
+      const defaultHrefElement = document.createElement("a");
+      const defaultImgElement = document.createElement("img");
+      const modalElement = document.createElement("div");
+      const modalHrefElement = document.createElement("a");
+      const modalWindowElement = document.createElement("div");
+      const modalContentElement = document.createElement("div");
+      const modalImgElement = document.createElement("img");
+      const modalImgExplanationElement = document.createElement("p");
+      const modalCloseElement = document.createElement("a");
 
-    // modalのスタイル
-    modalElement.classList.add("modal-wrapper");
-    defaultImgElement.classList.add("figures-block_img");
-    modalHrefElement.classList.add("modal-overlay");
-    modalWindowElement.classList.add("modal-window");
-    modalContentElement.classList.add("modal-content");
-    modalImgElement.classList.add("figures-block_modal-img");
-    modalImgExplanationElement.classList.add("figures-block_text");
-    modalCloseElement.classList.add("modal-close");
-    modalElement.setAttribute("id", "modal-0" + (i + 1));
-    modalHrefElement.setAttribute("href", "#!");
-    defaultHrefElement.setAttribute("href", "#modal-0" + (i + 1));
-    if (papers[paperId].figures.length > 0) {
-      defaultImgElement.setAttribute(
-        "src",
-        papers[paperId].figures[i].figure.url
-      );
-      modalImgElement.setAttribute(
-        "src",
-        papers[paperId].figures[i].figure.url
-      );
-    } else {
-      defaultImgElement.setAttribute(
-        "src",
-        "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
-      );
-      modalImgElement.setAttribute(
-        "src",
-        "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
-      );
+      // modalのスタイル
+      modalElement.classList.add("modal-wrapper");
+      defaultImgElement.classList.add("figures-block_img");
+      modalHrefElement.classList.add("modal-overlay");
+      modalWindowElement.classList.add("modal-window");
+      modalContentElement.classList.add("modal-content");
+      modalImgElement.classList.add("figures-block_modal-img");
+      modalImgExplanationElement.classList.add("figures-block_text");
+      modalCloseElement.classList.add("modal-close");
+      modalElement.setAttribute("id", "modal-0" + (i + 1));
+      modalHrefElement.setAttribute("href", "#!");
+      defaultHrefElement.setAttribute("href", "#modal-0" + (i + 1));
+      if (papers[paperId].figures.length > 0) {
+        defaultImgElement.setAttribute(
+          "src",
+          papers[paperId].figures[i].figure.url
+        );
+        modalImgElement.setAttribute(
+          "src",
+          papers[paperId].figures[i].figure.url
+        );
+      } else {
+        defaultImgElement.setAttribute(
+          "src",
+          "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
+        );
+        modalImgElement.setAttribute(
+          "src",
+          "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
+        );
+      }
+
+      modalImgExplanationElement.textContent =
+        "Figure" +
+        (i + 1) +
+        ":  GSAT's behaviour during one try, N = 500, L = 2150, rst 250 ip";
+      modalCloseElement.setAttribute("href", "#!");
+      modalCloseElement.textContent = "✕";
+
+      figureElement.appendChild(defaultHrefElement);
+      defaultHrefElement.appendChild(defaultImgElement);
+      figureElement.appendChild(modalElement);
+      modalElement.appendChild(modalHrefElement);
+      modalElement.appendChild(modalWindowElement);
+      modalWindowElement.appendChild(modalContentElement);
+      modalContentElement.appendChild(modalImgElement);
+      modalContentElement.appendChild(modalImgExplanationElement);
+      modalWindowElement.appendChild(modalCloseElement);
     }
-
-    modalImgExplanationElement.textContent =
-      "Figure" +
-      (i + 1) +
-      ":  GSAT's behaviour during one try, N = 500, L = 2150, rst 250 ip";
-    modalCloseElement.setAttribute("href", "#!");
-    modalCloseElement.textContent = "✕";
-
-    figureElement.appendChild(defaultHrefElement);
-    defaultHrefElement.appendChild(defaultImgElement);
-    figureElement.appendChild(modalElement);
-    modalElement.appendChild(modalHrefElement);
-    modalElement.appendChild(modalWindowElement);
-    modalWindowElement.appendChild(modalContentElement);
-    modalContentElement.appendChild(modalImgElement);
-    modalContentElement.appendChild(modalImgExplanationElement);
-    modalWindowElement.appendChild(modalCloseElement);
   }
 
   // フッターボタン
@@ -229,19 +236,9 @@ const appendPapers = (papers: Paper[]): void => {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
-  const sourceUrl = `${railsHost}/papers/all`;
-  axios.get(sourceUrl).then(res => {
+  const sourceUrl = `${railsHost}/search/get_xml`;
+  axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);
-
-    // 後から有効化する
-    // const authors = res.data as Author[];
-    // appendAuthors(authors);
-
-    // const keywords = res.data as Keyword[];
-    // appendKeywords(keywords);
-
-    // const figures = res.data as Figure[];
-    // appendFigures(figures);
   });
 });
