@@ -167,7 +167,7 @@ const appendPapers = (papers: Paper[]): void => {
       modalImgExplanationElement.textContent =
         "Figure" +
         (i + 1) +
-        ":  GSAT's behaviour during one try, N = 500, L = 2150, rst 250 ip";
+        ":  " + papers[paperId].figures[i].explanation;
       modalCloseElement.setAttribute("href", "#!");
       modalCloseElement.textContent = "✕";
 
