@@ -11,13 +11,10 @@ const paperId = Number(paperIdRaw);
 const appendPapers = (papers: Paper[]): void => {
   if (paperIdRaw === null || isNaN(paperId)) return;
   console.log(paperId);
-  //console.log(papers[paperId].id);
-
 
   const mainElement = document.getElementById("main");
   const mainContentsElement = document.getElementById("maincontents");
   const toPDFElement = document.getElementById("link");
-  //papers.forEach((paper, idx) => {
 
   // Element Elementを生成
   const paperElement = document.createElement("div");
@@ -34,8 +31,6 @@ const appendPapers = (papers: Paper[]): void => {
   const dateElement = document.createElement("div");
   const linkElement = document.createElement("a");
   const abstractElement = document.createElement("section");
-
-  //image
 
   //title
   const abstractTitleElement = document.createElement("div");
