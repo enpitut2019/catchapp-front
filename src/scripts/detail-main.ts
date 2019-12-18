@@ -7,11 +7,12 @@ const parser = new URL(window.location.href);
 const paperNameRaw = parser.searchParams.get("name");
 const paperIdRaw = parser.searchParams.get("id");
 const paperId = Number(paperIdRaw);
-if (paperIdRaw === null || isNaN(paperId)) return;
 
 const appendPapers = (papers: Paper[]): void => {
+  if (paperIdRaw === null || isNaN(paperId)) return;
   console.log(paperId);
   //console.log(papers[paperId].id);
+
 
   const mainElement = document.getElementById("main");
   const mainContentsElement = document.getElementById("maincontents");
