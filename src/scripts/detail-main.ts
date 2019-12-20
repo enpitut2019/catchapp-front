@@ -213,7 +213,7 @@ const appendPapers = (papers: Paper[]): void => {
   footerButtonContentElement.appendChild(footerHrefElement);
 
   const figureUrl = `${railsHost}/papers/get_figure`;
-  if (paper.analized !== 2) {
+  if (paper.analized !== "Done") {
     // eslint-disable-next-line @typescript-eslint/camelcase
     axios.post(figureUrl, { paper_id: paper.id }).then(res => {
       const paper = res.data as Paper;

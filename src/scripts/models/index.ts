@@ -67,5 +67,5 @@ export interface Paper {
   journal: string;
   cite_count: number;
   cited_count: number;
-  analized: number;
+  analized: string;
 }
