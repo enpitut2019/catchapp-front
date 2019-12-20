@@ -6,14 +6,18 @@ const railsHost = process.env.RAILS_HOST;
 const parser = new URL(window.location.href);
 const paperNameRaw = parser.searchParams.get("name");
 const paperIdRaw = parser.searchParams.get("id");
-const paperId = Number(paperIdRaw);
+const paperId = String(paperIdRaw);
 
 const appendPapers = (papers: Paper[]): void => {
-  if (paperIdRaw === null || isNaN(paperId)) return;
+  if (paperIdRaw === null) return;
+
+  console.log(papers);
+  const paper = papers.find(paper => paper.id == paperId);
+
+  if (paper === undefined) return;
 
   const mainElement = document.getElementById("main");
   const mainContentsElement = document.getElementById("maincontents");
-  const toPDFElement = document.getElementById("link");
 
   // Element Elementを生成
   const paperElement = document.createElement("div");
@@ -74,38 +78,37 @@ const appendPapers = (papers: Paper[]): void => {
   footerHrefElement.classList.add("link-block");
 
   // Elementにテキストを挿入
-  titleElement.textContent = papers[paperId].title;
-  jaTitleElement.textContent = "(" + papers[paperId].title_ja + ")";
+  titleElement.textContent = paper.title;
+  jaTitleElement.textContent = "(" + paper.title_ja + ")";
   keywordElement.textContent = "macine learning,computer science";
-  journalElement.textContent = papers[paperId].journal;
-  citeElement.textContent = "cite：" + papers[paperId].cite_count;
-  citedElement.textContent = "cited：" + papers[paperId].cited_count;
-  linkElement.setAttribute("href", papers[paperId].pdf_url);
+  journalElement.textContent = paper.journal;
+  citeElement.textContent = "cite：" + paper.cite_count;
+  citedElement.textContent = "cited：" + paper.cited_count;
+  linkElement.setAttribute("href", paper.pdf_url);
   linkElement.setAttribute("target", "_blank");
-  linkElement.textContent = papers[paperId].pdf_url;
+  linkElement.textContent = paper.pdf_url;
   urlElement.appendChild(linkElement);
   dateElement.textContent =
-    "published: " +
-    format(new Date(papers[paperId].published_at), "yyyy-MM-dd");
-  abstractElement.textContent = papers[paperId].abstract;
+    "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
+  abstractElement.textContent = paper.abstract;
 
   paperElement.appendChild(bottomElement);
   bottomElement.appendChild(authorTitleElement);
 
   // 著者
-  if (papers[paperId].authors !== undefined) {
-    for (let t = 0; t < papers[paperId].authors.length; t++) {
+  if (paper.authors !== undefined) {
+    for (let t = 0; t < paper.authors.length; t++) {
       const authorElement = document.createElement("div");
       authorElement.classList.add("author-block");
-      authorElement.textContent = papers[paperId].authors[t].name;
+      authorElement.textContent = paper.authors[t].name;
       bottomElement.appendChild(authorElement);
     }
   }
 
   const figureElement = document.createElement("div");
 
-  if (papers[paperId].figures !== undefined) {
-    if (0 < papers[paperId].figures.length) {
+  if (paper.figures !== undefined) {
+    if (0 < paper.figures.length) {
       const imageTitleElement = document.createElement("div");
 
       figureElement.classList.add("figures-block");
@@ -119,8 +122,8 @@ const appendPapers = (papers: Paper[]): void => {
   }
 
   //画像&モーダル
-  if (papers[paperId].figures !== undefined) {
-    for (let i = 0; i < papers[paperId].figures.length; i++) {
+  if (paper.figures !== undefined) {
+    for (let i = 0; i < paper.figures.length; i++) {
       const defaultHrefElement = document.createElement("a");
       const defaultImgElement = document.createElement("img");
       const modalElement = document.createElement("div");
@@ -143,15 +146,9 @@ const appendPapers = (papers: Paper[]): void => {
       modalElement.setAttribute("id", "modal-0" + (i + 1));
       modalHrefElement.setAttribute("href", "#!");
       defaultHrefElement.setAttribute("href", "#modal-0" + (i + 1));
-      if (papers[paperId].figures.length > 0) {
-        defaultImgElement.setAttribute(
-          "src",
-          papers[paperId].figures[i].figure.url
-        );
-        modalImgElement.setAttribute(
-          "src",
-          papers[paperId].figures[i].figure.url
-        );
+      if (paper.figures.length > 0) {
+        defaultImgElement.setAttribute("src", paper.figures[i].figure.url);
+        modalImgElement.setAttribute("src", paper.figures[i].figure.url);
       } else {
         defaultImgElement.setAttribute(
           "src",
@@ -163,8 +160,7 @@ const appendPapers = (papers: Paper[]): void => {
         );
       }
 
-      modalImgExplanationElement.textContent =
-        papers[paperId].figures[i].explanation;
+      modalImgExplanationElement.textContent = paper.figures[i].explanation;
       modalCloseElement.setAttribute("href", "#!");
       modalCloseElement.textContent = "✕";
 
@@ -183,7 +179,7 @@ const appendPapers = (papers: Paper[]): void => {
   // フッターボタン
   footerButtomElement.setAttribute("id", "url");
   footerButtomElement.setAttribute("data-element-id", "footer-float");
-  footerHrefElement.setAttribute("href", papers[paperId].pdf_url);
+  footerHrefElement.setAttribute("href", paper.pdf_url);
   footerHrefElement.textContent = "PDF版を読む";
 
   abstractTitleElement.textContent = "Abstract";
@@ -217,14 +213,16 @@ const appendPapers = (papers: Paper[]): void => {
   footerButtonContentElement.appendChild(footerHrefElement);
 
   const figureUrl = `${railsHost}/papers/get_figure`;
-  // eslint-disable-next-line @typescript-eslint/camelcase
-  axios.post(figureUrl, { paper_id: papers[paperId].id }).then(res => {
-    const paper = res.data as Paper;
-    mainElement!.textContent = null;
-    mainContentsElement!.textContent = null;
-    toPDFElement!.textContent = null;
-    appendPapers([paper]);
-  });
+  if (paper.analized !== 2) {
+    // eslint-disable-next-line @typescript-eslint/camelcase
+    axios.post(figureUrl, { paper_id: paper.id }).then(res => {
+      const paper = res.data as Paper;
+      console.log(paper);
+      mainElement!.textContent = null;
+      mainContentsElement!.textContent = null;
+      appendPapers([paper]);
+    });
+  }
 
   // bodyにpaper elementを挿入
   if (mainElement === null) return;
@@ -233,9 +231,6 @@ const appendPapers = (papers: Paper[]): void => {
   // bodyにpaper elementを挿入
   if (mainContentsElement === null) return;
   mainContentsElement.appendChild(bottomElement);
-
-  if (toPDFElement === null) return;
-  toPDFElement.appendChild(urlElement);
 };
 
 window.addEventListener("DOMContentLoaded", () => {

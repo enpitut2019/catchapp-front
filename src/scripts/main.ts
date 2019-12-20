@@ -48,7 +48,7 @@ const appendPapers = (papers: Paper[]): void => {
     paperElement.classList.add("paper");
     paperElement.setAttribute(
       "href",
-      `/detail.html?name=${paperNameRaw}&id=${idx}`
+      `/detail.html?name=${paperNameRaw}&id=${paper.id}`
     );
     contentElement.classList.add("paper--content");
     leftElement.classList.add("paper--content--left");
