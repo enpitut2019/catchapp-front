@@ -216,6 +216,16 @@ const appendPapers = (papers: Paper[]): void => {
   footerButtomElement.appendChild(footerButtonContentElement);
   footerButtonContentElement.appendChild(footerHrefElement);
 
+  const figureUrl = `${railsHost}/papers/get_figure`;
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  axios.post(figureUrl, { paper_id: papers[paperId].id }).then(res => {
+    const paper = res.data as Paper;
+    mainElement!.textContent = null;
+    mainContentsElement!.textContent = null;
+    toPDFElement!.textContent = null;
+    appendPapers([paper]);
+  });
+
   // bodyにpaper elementを挿入
   if (mainElement === null) return;
   mainElement.appendChild(paperElement);
