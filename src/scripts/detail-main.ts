@@ -93,7 +93,7 @@ const appendPapers = (papers: Paper[]): void => {
   bottomElement.appendChild(authorTitleElement);
 
   // 著者
-  if (papers[paperId].authors != null) {
+  if (papers[paperId].authors !== undefined) {
     for (let t = 0; t < papers[paperId].authors.length; t++) {
       const authorElement = document.createElement("div");
       authorElement.classList.add("author-block");
@@ -104,7 +104,7 @@ const appendPapers = (papers: Paper[]): void => {
 
   const figureElement = document.createElement("div");
 
-  if (papers[paperId].figures != null) {
+  if (papers[paperId].figures !== undefined) {
     if (0 < papers[paperId].figures.length) {
       const imageTitleElement = document.createElement("div");
 
@@ -119,7 +119,7 @@ const appendPapers = (papers: Paper[]): void => {
   }
 
   //画像&モーダル
-  if (papers[paperId].figures != null) {
+  if (papers[paperId].figures !== undefined) {
     for (let i = 0; i < papers[paperId].figures.length; i++) {
       const defaultHrefElement = document.createElement("a");
       const defaultImgElement = document.createElement("img");
@@ -163,7 +163,8 @@ const appendPapers = (papers: Paper[]): void => {
         );
       }
 
-      modalImgExplanationElement.textContent = papers[paperId].figures[i].explanation;
+      modalImgExplanationElement.textContent =
+        papers[paperId].figures[i].explanation;
       modalCloseElement.setAttribute("href", "#!");
       modalCloseElement.textContent = "✕";
 

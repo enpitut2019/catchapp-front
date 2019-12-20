@@ -46,7 +46,10 @@ const appendPapers = (papers: Paper[]): void => {
 
     // Elementにクラスを適用
     paperElement.classList.add("paper");
-    paperElement.setAttribute("href", `/detail.html?name=${paperNameRaw}&id=${idx}`);
+    paperElement.setAttribute(
+      "href",
+      `/detail.html?name=${paperNameRaw}&id=${idx}`
+    );
     contentElement.classList.add("paper--content");
     leftElement.classList.add("paper--content--left");
     citeAndCitedElement.classList.add("paper--content--left--citeandcited");
@@ -66,7 +69,7 @@ const appendPapers = (papers: Paper[]): void => {
     titleElement.textContent = paper.title;
 
     // Elementにテキストを挿入
-    if (papers[idx].authors != null) {
+    if (papers[idx].authors !== undefined) {
       for (let i = 0; i < papers[idx].authors.length; i++) {
         authorsElement.textContent = "Author：" + papers[idx].authors[i].name;
       }
@@ -84,7 +87,7 @@ const appendPapers = (papers: Paper[]): void => {
       "yyyy年MM月dd日"
     );
 
-    if (papers[idx].figures != null) {
+    if (papers[idx].figures !== undefined) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
     } else {
       figureImgElement.classList.add("paper--content--left--figures--no-img");
