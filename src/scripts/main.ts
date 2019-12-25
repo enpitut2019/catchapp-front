@@ -35,7 +35,7 @@ const appendPapers = (papers: Paper[]): void => {
     const titleElement = document.createElement("div");
     const jaTitleElement = document.createElement("div");
     const authorsElement = document.createElement("div");
-    const keywordsElement = document.createElement("div");
+    //const keywordsElement = document.createElement("div");
     const citeAndCitedElement = document.createElement("div");
     const citeElement = document.createElement("div");
     const citedElement = document.createElement("div");
@@ -57,7 +57,7 @@ const appendPapers = (papers: Paper[]): void => {
     titleElement.classList.add("paper--title");
     jaTitleElement.classList.add("paper--jatitle");
     authorsElement.classList.add("paper--content--text--authors");
-    keywordsElement.classList.add("paper--content--text--keywords");
+    //keywordsElement.classList.add("paper--content--text--keywords");
     citeElement.classList.add("paper--content--left--citeandcited--cite");
     citedElement.classList.add("paper--content--left--citeandcited--cited");
 
@@ -75,7 +75,7 @@ const appendPapers = (papers: Paper[]): void => {
       }
     }
 
-    keywordsElement.textContent = "keyword1";
+    //keywordsElement.textContent = "keyword1";
     citeElement.textContent = "cite：" + papers[idx].cite_count;
     citedElement.textContent = "cited：" + papers[idx].cited_count;
     jaTitleElement.textContent = paper.title_ja || "(和訳しています……)";
@@ -110,7 +110,7 @@ const appendPapers = (papers: Paper[]): void => {
     citeAndCitedElement.appendChild(citeElement);
     citeAndCitedElement.appendChild(citedElement);
     paperTextElement.appendChild(authorsElement);
-    paperTextElement.appendChild(keywordsElement);
+    //paperTextElement.appendChild(keywordsElement);
 
     paperTextElement.appendChild(dateElement);
 
