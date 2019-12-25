@@ -124,15 +124,30 @@ const appendPapers = (papers: Paper[]): void => {
   //画像&モーダル
   if (paper.figures !== undefined) {
     for (let i = 0; i < paper.figures.length; i++) {
-      const defaultHrefElement = document.createElement("a");
+      const defaultHrefElement = document.createElement("div");
       const defaultImgElement = document.createElement("img");
       const modalElement = document.createElement("div");
-      const modalHrefElement = document.createElement("a");
+      const modalHrefElement = document.createElement("div");
       const modalWindowElement = document.createElement("div");
       const modalContentElement = document.createElement("div");
       const modalImgElement = document.createElement("img");
       const modalImgExplanationElement = document.createElement("p");
-      const modalCloseElement = document.createElement("a");
+      const modalCloseElement = document.createElement("div");
+
+
+      defaultHrefElement.onclick = function(): void{
+        modalElement.classList.add("active");
+
+      };
+
+      modalCloseElement.onclick = function(): void{
+        modalElement.classList.remove("active");
+      }
+
+      modalHrefElement.onclick = function(): void{
+        modalElement.classList.remove("active");
+      }
+
 
       // modalのスタイル
       modalElement.classList.add("modal-wrapper");
@@ -143,9 +158,7 @@ const appendPapers = (papers: Paper[]): void => {
       modalImgElement.classList.add("figures-block_modal-img");
       modalImgExplanationElement.classList.add("figures-block_text");
       modalCloseElement.classList.add("modal-close");
-      modalElement.setAttribute("id", "modal-0" + (i + 1));
-      modalHrefElement.setAttribute("href", "#!");
-      defaultHrefElement.setAttribute("href", "#modal-0" + (i + 1));
+   
       if (paper.figures.length > 0) {
         defaultImgElement.setAttribute("src", paper.figures[i].figure.url);
         modalImgElement.setAttribute("src", paper.figures[i].figure.url);
