@@ -107,7 +107,9 @@ const appendPapers = (papers: Paper[]): void => {
 
   const figureElement = document.createElement("div");
 
-  if (paper.figures !== undefined) {
+  console.log(paper.analized);
+
+  if (paper.figures !== undefined && paper.analized !== "done" {
     if (0 < paper.figures.length) {
       const imageTitleElement = document.createElement("div");
 
