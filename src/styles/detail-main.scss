@@ -146,13 +146,13 @@
   text-align: center
 }
 
-.modal-wrapper:not(:target) {
+.modal-wrapper:not(.active) {
   opacity: 0;
   visibility: hidden;
   transition: opacity .3s, visibility .3s;
 }
 
-.modal-wrapper:target {
+.modal-wrapper.active {
   opacity: 1;
   visibility: visible;
   transition: opacity .4s, visibility .4s;
@@ -192,7 +192,8 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, .8)
+  background: rgba(0, 0, 0, .8);
+  cursor: pointer;
 }
 
 .modal-wrapper .modal-close {
@@ -207,7 +208,8 @@
   line-height: 35px;
   text-align: center;
   text-decoration: none;
-  text-indent: 0
+  text-indent: 0;
+  cursor: pointer;
 }
 
 .modal-wrapper .modal-close:hover {
