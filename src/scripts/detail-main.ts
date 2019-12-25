@@ -120,6 +120,16 @@ const appendPapers = (papers: Paper[]): void => {
       bottomElement.appendChild(figureElement);
     }
   }
+  if (paper.analized !== "Done") {
+    const imageTitleElement = document.createElement("div");
+    imageTitleElement.classList.add("title-block");
+    imageTitleElement.textContent = "Images";
+    bottomElement.appendChild(imageTitleElement);
+    const imageDoingElement = document.createElement("div");
+    imageDoingElement.classList.add("author-block");
+    imageDoingElement.textContent = "Image is being analyzed ...";
+    bottomElement.appendChild(imageDoingElement);
+  }
 
   //画像&モーダル
   if (paper.figures !== undefined) {

@@ -19,6 +19,7 @@
 import axios from "axios";
 import { Paper } from "./models";
 import { format } from "date-fns";
+const images = require("../image/*.png");
 
 const railsHost = process.env.RAILS_HOST;
 const parser = new URL(window.location.href);
@@ -87,8 +88,11 @@ const appendPapers = (papers: Paper[]): void => {
       "yyyy年MM月dd日"
     );
 
-    if (papers[idx].figures !== undefined) {
+    if (papers[idx].figures.length > 0) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
+    } else if (paper.analized !== "Done") {
+      figureImgElement.classList.add("paper--content--left--figures--no-img");
+      figureImgElement.setAttribute("src", images["Unanalyzed"]);
     } else {
       figureImgElement.classList.add("paper--content--left--figures--no-img");
       figureImgElement.setAttribute(
