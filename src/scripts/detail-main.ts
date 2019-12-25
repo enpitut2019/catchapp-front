@@ -81,9 +81,9 @@ const appendPapers = (papers: Paper[]): void => {
   titleElement.textContent = paper.title;
   jaTitleElement.textContent = "(" + paper.title_ja + ")";
   //keywordElement.textContent = "macine learning,computer science";
-  if(paper.journal){
+  if (paper.journal) {
     journalElement.textContent = paper.journal;
-  }else{
+  } else {
     journalElement.textContent = "journalが取得できませんでした";
   }
   citeElement.textContent = "cite：" + paper.cite_count;
@@ -138,20 +138,17 @@ const appendPapers = (papers: Paper[]): void => {
       const modalImgExplanationElement = document.createElement("p");
       const modalCloseElement = document.createElement("div");
 
-
-      defaultHrefElement.onclick = function(): void{
+      defaultHrefElement.onclick = function(): void {
         modalElement.classList.add("active");
-
       };
 
-      modalCloseElement.onclick = function(): void{
+      modalCloseElement.onclick = function(): void {
         modalElement.classList.remove("active");
-      }
+      };
 
-      modalHrefElement.onclick = function(): void{
+      modalHrefElement.onclick = function(): void {
         modalElement.classList.remove("active");
-      }
-
+      };
 
       // modalのスタイル
       modalElement.classList.add("modal-wrapper");
@@ -162,7 +159,7 @@ const appendPapers = (papers: Paper[]): void => {
       modalImgElement.classList.add("figures-block_modal-img");
       modalImgExplanationElement.classList.add("figures-block_text");
       modalCloseElement.classList.add("modal-close");
-   
+
       if (paper.figures.length > 0) {
         defaultImgElement.setAttribute("src", paper.figures[i].figure.url);
         modalImgElement.setAttribute("src", paper.figures[i].figure.url);
