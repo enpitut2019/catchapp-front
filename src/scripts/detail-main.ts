@@ -81,7 +81,11 @@ const appendPapers = (papers: Paper[]): void => {
   titleElement.textContent = paper.title;
   jaTitleElement.textContent = "(" + paper.title_ja + ")";
   //keywordElement.textContent = "macine learning,computer science";
-  journalElement.textContent = paper.journal;
+  if(paper.journal){
+    journalElement.textContent = paper.journal;
+  }else{
+    journalElement.textContent = "journalが取得できませんでした";
+  }
   citeElement.textContent = "cite：" + paper.cite_count;
   citedElement.textContent = "cited：" + paper.cited_count;
   linkElement.setAttribute("href", paper.pdf_url);
