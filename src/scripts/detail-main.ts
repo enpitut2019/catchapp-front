@@ -215,7 +215,7 @@ const appendPapers = (papers: Paper[]): void => {
   footerButtonContentElement.appendChild(footerHrefElement);
 
   const figureUrl = `${railsHost}/papers/get_figure`;
-  if (paper.analized !== "Done") {
+  if (paper.analized === "ToDo") {
     // eslint-disable-next-line @typescript-eslint/camelcase
     axios.post(figureUrl, { paper_id: paper.id }).then(res => {
       const paper = res.data as Paper;
@@ -237,6 +237,7 @@ const appendPapers = (papers: Paper[]): void => {
 
 window.addEventListener("DOMContentLoaded", () => {
   const sourceUrl = `${railsHost}/search/get_xml`;
+  // eslint-disable-next-line @typescript-eslint/camelcase
   axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);
