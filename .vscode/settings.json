@@ -1,12 +1,9 @@
 {
   "editor.formatOnSave": true,
   "[typescript]": {
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": false
   },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-  ],
+  "eslint.validate": ["javascript", "javascriptreact"],
   "eslint.enable": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
