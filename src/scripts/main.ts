@@ -19,6 +19,8 @@
 import axios from "axios";
 import { Paper } from "./models";
 import { format } from "date-fns";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const images = require("../image/*.png");
 
 const railsHost = process.env.RAILS_HOST;
