@@ -235,6 +235,7 @@ const appendPapers = (papers: Paper[]): void => {
 
 window.addEventListener("DOMContentLoaded", () => {
   const sourceUrl = `${railsHost}/search/get_xml`;
+  // eslint-disable-next-line @typescript-eslint/camelcase
   axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);
