@@ -114,7 +114,7 @@ const appendPapers = (papers: Paper[]): void => {
   abstractElement.setAttribute("id","en");
   abstractJaElement.setAttribute("id","ja");
   abstractElement.classList.add("display-none");
-  //abstractButtonElement.setAttribute("id","ja");
+  abstractJaButtonElement.classList.add("title-block_changed-button");
 
   abstractEnButtonElement.onclick = function(): void {
     abstractJaElement.classList.add("display-none");
