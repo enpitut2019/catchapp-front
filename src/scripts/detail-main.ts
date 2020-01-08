@@ -116,21 +116,21 @@ const appendPapers = (papers: Paper[]): void => {
   abstractElement.classList.add("display-none");
   abstractJaButtonElement.classList.add("title-block_changed-button");
 
-  abstractEnButtonElement.onclick = function(): void {
+  abstractEnButtonElement.addEventListener('click', function(){
     abstractJaElement.classList.add("display-none");
     abstractElement.classList.add("display-block");
     abstractJaElement.classList.remove("display-block");
     abstractEnButtonElement.classList.add("title-block_changed-button");
     abstractJaButtonElement.classList.remove("title-block_changed-button");
-  };
+  })
 
-  abstractJaButtonElement.onclick = function(): void {
+  abstractJaButtonElement.addEventListener('click', function(){
     abstractElement.classList.add("display-none");
     abstractJaElement.classList.add("display-block");
     abstractElement.classList.remove("display-block");
     abstractJaButtonElement.classList.add("title-block_changed-button");
     abstractEnButtonElement.classList.remove("title-block_changed-button");
-  };
+  })
 
   // 著者
   if (paper.authors !== undefined) {
@@ -143,8 +143,6 @@ const appendPapers = (papers: Paper[]): void => {
   }
 
   const figureElement = document.createElement("div");
-
-  console.log(paper.analized);
 
   if (paper.figures !== undefined && paper.analized !== "done" {
     if (0 < paper.figures.length) {

@@ -107,6 +107,7 @@
           border-radius: 5px;
           margin-left: $base-space-2;
           margin-top: $base-space;
+          cursor: pointer;
       }
 
       &_changed-button {
@@ -120,6 +121,7 @@
         background-color: $base-color;
         margin-left: $base-space-2;
         margin-top: $base-space;
+        cursor: pointer;
     }
     }
   }
