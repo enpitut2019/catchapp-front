@@ -34,6 +34,7 @@ const appendPapers = (papers: Paper[]): void => {
   const dateElement = document.createElement("div");
   const linkElement = document.createElement("a");
   const abstractElement = document.createElement("section");
+  const jaAbstractElement = document.createElement("section");
 
   //title
   const abstractTitleElement = document.createElement("div");
@@ -63,7 +64,8 @@ const appendPapers = (papers: Paper[]): void => {
   //keywordElement.classList.add("keyword-block");
   journalElement.classList.add("journal-block");
   urlElement.classList.add("url-block");
-  abstractElement.classList.add("abstract-block");
+  abstractElement.classList.add("abstract-block", "en");
+  jaAbstractElement.classList.add("abstract-block", "ja");
 
   abstractTitleElement.classList.add("title-block");
   authorTitleElement.classList.add("title-block");
@@ -95,6 +97,7 @@ const appendPapers = (papers: Paper[]): void => {
   dateElement.textContent =
     "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
   abstractElement.textContent = paper.abstract;
+  jaAbstractElement.textContent = paper.abstract_ja || "翻訳中";
 
   paperElement.appendChild(bottomElement);
   bottomElement.appendChild(authorTitleElement);
@@ -231,6 +234,7 @@ const appendPapers = (papers: Paper[]): void => {
   bottomElement.appendChild(showFooterElement);
   bottomElement.appendChild(abstractTitleElement);
   bottomElement.appendChild(abstractElement);
+  bottomElement.appendChild(jaAbstractElement);
   bottomElement.appendChild(urlTitleElement);
   bottomElement.appendChild(urlElement);
 
@@ -243,9 +247,10 @@ const appendPapers = (papers: Paper[]): void => {
     // eslint-disable-next-line @typescript-eslint/camelcase
     axios.post(figureUrl, { paper_id: paper.id }).then(res => {
       const paper = res.data as Paper;
-      console.log(paper);
-      mainElement!.textContent = null;
-      mainContentsElement!.textContent = null;
+      if (mainElement && mainContentsElement) {
+        mainElement.textContent = null;
+        mainContentsElement.textContent = null;
+      }
       appendPapers([paper]);
     });
   }
@@ -257,6 +262,21 @@ const appendPapers = (papers: Paper[]): void => {
   // bodyにpaper elementを挿入
   if (mainContentsElement === null) return;
   mainContentsElement.appendChild(bottomElement);
+
+  // railsにabstractの翻訳リクエストを飛ばす
+  if (!paper.abstract_ja)
+    axios
+      .get(`${railsHost}/translate`, {
+        params: {
+          paper: paper.id,
+          type: "abstract",
+          text: paper.abstract
+        }
+      })
+      .then(response => {
+        jaAbstractElement.textContent = response.data.text;
+        return response;
+      });
 };
 
 window.addEventListener("DOMContentLoaded", () => {
