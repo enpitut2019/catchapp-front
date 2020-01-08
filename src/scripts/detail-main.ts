@@ -261,6 +261,7 @@ const appendPapers = (papers: Paper[]): void => {
   if (mainContentsElement === null) return;
   mainContentsElement.appendChild(bottomElement);
 
+  // railsにabstractの翻訳リクエストを飛ばす
   if (!paper.abstract_ja)
     axios
       .get(`${railsHost}/translate`, {
