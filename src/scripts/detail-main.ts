@@ -33,7 +33,8 @@ const appendPapers = (papers: Paper[]): void => {
   const urlElement = document.createElement("div");
   const dateElement = document.createElement("div");
   const linkElement = document.createElement("a");
-  const abstractElement = document.createElement("section");
+  const abstractElement = document.createElement("div");
+  const abstractJaElement = document.createElement("div");
 
   //title
   const abstractTitleElement = document.createElement("div");
@@ -47,6 +48,10 @@ const appendPapers = (papers: Paper[]): void => {
   const footerButtomElement = document.createElement("div");
   const footerButtonContentElement = document.createElement("div");
   const footerHrefElement = document.createElement("a");
+
+  // 翻訳切り替えボタン
+  const abstractEnButtonElement = document.createElement("div");
+  const abstractJaButtonElement = document.createElement("div");
 
   // Elementにクラスを適用
   paperElement.classList.add("paper-block");
@@ -64,6 +69,9 @@ const appendPapers = (papers: Paper[]): void => {
   journalElement.classList.add("journal-block");
   urlElement.classList.add("url-block");
   abstractElement.classList.add("abstract-block");
+  abstractJaElement.classList.add("abstract-block");
+  abstractEnButtonElement.classList.add("title-block_change-button");
+  abstractJaButtonElement.classList.add("title-block_change-button");
 
   abstractTitleElement.classList.add("title-block");
   authorTitleElement.classList.add("title-block");
@@ -94,10 +102,35 @@ const appendPapers = (papers: Paper[]): void => {
   urlElement.appendChild(linkElement);
   dateElement.textContent =
     "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
-  abstractElement.textContent = paper.abstract;
 
   paperElement.appendChild(bottomElement);
   bottomElement.appendChild(authorTitleElement);
+
+  // 翻訳切り替えボタン
+  abstractEnButtonElement.textContent = "英語";
+  abstractJaButtonElement.textContent = "日本語";
+  abstractElement.textContent = paper.abstract;
+  abstractJaElement.textContent = "日本語です";
+  abstractElement.setAttribute("id","en");
+  abstractJaElement.setAttribute("id","ja");
+  abstractElement.classList.add("display-none");
+  //abstractButtonElement.setAttribute("id","ja");
+
+  abstractEnButtonElement.onclick = function(): void {
+    abstractJaElement.classList.add("display-none");
+    abstractElement.classList.add("display-block");
+    abstractJaElement.classList.remove("display-block");
+    abstractEnButtonElement.classList.add("title-block_changed-button");
+    abstractJaButtonElement.classList.remove("title-block_changed-button");
+  };
+
+  abstractJaButtonElement.onclick = function(): void {
+    abstractElement.classList.add("display-none");
+    abstractJaElement.classList.add("display-block");
+    abstractElement.classList.remove("display-block");
+    abstractJaButtonElement.classList.add("title-block_changed-button");
+    abstractEnButtonElement.classList.remove("title-block_changed-button");
+  };
 
   // 著者
   if (paper.authors !== undefined) {
@@ -231,6 +264,9 @@ const appendPapers = (papers: Paper[]): void => {
   bottomElement.appendChild(showFooterElement);
   bottomElement.appendChild(abstractTitleElement);
   bottomElement.appendChild(abstractElement);
+  bottomElement.appendChild(abstractJaElement);
+  abstractTitleElement.appendChild(abstractEnButtonElement);
+  abstractTitleElement.appendChild(abstractJaButtonElement);
   bottomElement.appendChild(urlTitleElement);
   bottomElement.appendChild(urlElement);
 
