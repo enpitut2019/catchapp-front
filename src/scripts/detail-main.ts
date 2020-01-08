@@ -112,8 +112,8 @@ const appendPapers = (papers: Paper[]): void => {
   // 翻訳切り替えボタン
   abstractEnButtonElement.textContent = "英語";
   abstractJaButtonElement.textContent = "日本語";
-  abstractElement.setAttribute("id","en");
-  abstractJaElement.setAttribute("id","ja");
+  abstractElement.setAttribute("class","en");
+  abstractJaElement.setAttribute("class","ja");
   abstractElement.classList.add("display-none");
   abstractJaButtonElement.classList.add("title-block_changed-button");
 
