@@ -103,14 +103,15 @@ const appendPapers = (papers: Paper[]): void => {
   dateElement.textContent =
     "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
 
+  abstractElement.textContent = paper.abstract;
+  abstractJaElement.textContent = paper.abstract_ja || "翻訳中";
+
   paperElement.appendChild(bottomElement);
   bottomElement.appendChild(authorTitleElement);
 
   // 翻訳切り替えボタン
   abstractEnButtonElement.textContent = "英語";
   abstractJaButtonElement.textContent = "日本語";
-  abstractElement.textContent = paper.abstract;
-  abstractJaElement.textContent = "日本語です";
   abstractElement.setAttribute("id","en");
   abstractJaElement.setAttribute("id","ja");
   abstractElement.classList.add("display-none");
@@ -132,13 +133,16 @@ const appendPapers = (papers: Paper[]): void => {
     abstractEnButtonElement.classList.remove("title-block_changed-button");
   })
 
+  const authorElement = document.createElement("div");
+  authorElement.classList.add("author-block");
+
   // 著者
   if (paper.authors !== undefined) {
     for (let t = 0; t < paper.authors.length; t++) {
-      const authorElement = document.createElement("div");
-      authorElement.classList.add("author-block");
-      authorElement.textContent = paper.authors[t].name;
-      bottomElement.appendChild(authorElement);
+      const authorNameElement = document.createElement("div");
+      authorNameElement.classList.add("author-block_name");
+      authorNameElement.textContent = paper.authors[t].name;
+      authorElement.appendChild(authorNameElement);
     }
   }
 
@@ -257,6 +261,7 @@ const appendPapers = (papers: Paper[]): void => {
   //bottom
   //bottomElement.appendChild(keywordTitleElement);
   //bottomElement.appendChild(keywordElement);
+  bottomElement.appendChild(authorElement);
   bottomElement.appendChild(journalTitleElement);
   bottomElement.appendChild(journalElement);
   bottomElement.appendChild(showFooterElement);
@@ -277,9 +282,10 @@ const appendPapers = (papers: Paper[]): void => {
     // eslint-disable-next-line @typescript-eslint/camelcase
     axios.post(figureUrl, { paper_id: paper.id }).then(res => {
       const paper = res.data as Paper;
-      console.log(paper);
-      mainElement!.textContent = null;
-      mainContentsElement!.textContent = null;
+      if (mainElement && mainContentsElement) {
+        mainElement.textContent = null;
+        mainContentsElement.textContent = null;
+      }
       appendPapers([paper]);
     });
   }
@@ -291,6 +297,21 @@ const appendPapers = (papers: Paper[]): void => {
   // bodyにpaper elementを挿入
   if (mainContentsElement === null) return;
   mainContentsElement.appendChild(bottomElement);
+
+  // railsにabstractの翻訳リクエストを飛ばす
+  if (!paper.abstract_ja)
+    axios
+      .get(`${railsHost}/translate`, {
+        params: {
+          paper: paper.id,
+          type: "abstract",
+          text: paper.abstract
+        }
+      })
+      .then(response => {
+        abstractJaElement.textContent = response.data.text;
+        return response;
+      });
 };
 
 window.addEventListener("DOMContentLoaded", () => {

@@ -45,6 +45,10 @@
 
     .author-block {
       margin-bottom: $base-space-2;
+      display: flex;
+      &_name {
+        margin-right: $base-space;
+      }
     }
 
     .keyword-block {
