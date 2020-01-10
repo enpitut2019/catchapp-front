@@ -141,16 +141,13 @@ const appendPapers = (papers: Paper[]): void => {
   });
 
   // ページャー
-  const pagingElement = document.createElement("div");
-  const pagingButtonElement = document.createElement("div");
-  pagingElement.classList.add("paging-block");
-  pagingButtonElement.classList.add("paging-block_button");
+  // const pagingElement = document.createElement("div");
+  // pagingElement.classList.add("paging-block", "next_button");
+  // pagingElement.textContent = "さらに読み込む";
 
-  pagingElement.appendChild(pagingButtonElement);
-
-  // bodyにpaper elementを挿入
-  if (mainElement === null) return;
-  mainElement.appendChild(pagingElement);
+  // // bodyにpaper elementを挿入
+  // if (mainElement === null) return;
+  // mainElement.appendChild(pagingElement);
 };
 
 window.addEventListener("DOMContentLoaded", () => {

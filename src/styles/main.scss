@@ -1,11 +1,12 @@
 @import "variables";
 
 * {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
   box-sizing: content-box;
 }
 
-html, body {
+html,
+body {
   padding: 0;
   margin: 0;
 }
@@ -22,7 +23,6 @@ main {
   display: block;
   color: black;
   text-decoration: none;
-  
 
   &:first-child {
     border-top: 1px solid black;
@@ -41,9 +41,9 @@ main {
     margin-bottom: $base-space-2;
   }
 
-  &--content{
+  &--content {
     display: flex;
-    &--left{
+    &--left {
       width: 50%;
       &--figures {
         //border: 1px solid;
@@ -64,8 +64,8 @@ main {
           margin-right: $base-space;
           margin-bottom: $base-space;
         }
-      } 
-      &--citeandcited{
+      }
+      &--citeandcited {
         border: 1px solid black;
         display: flex;
         &--cite {
@@ -77,7 +77,6 @@ main {
           font-size: $font-size-s;
         }
       }
-      
     }
     &--text {
       width: 50%;
@@ -93,28 +92,22 @@ main {
         font-size: $font-size-s;
       }
 
-
-
       &--date {
         font-size: $font-size-s;
       }
     }
-
-
-    
   }
-
-
 }
 
 .paging-block {
   height: 50px;
-  border: 1px solid black;
-  margin-bottom: $base-space-2;
-  
-  &_button {
-    width: 50px;
-    height: 40px;
-    border: 1px solid black;
-  }
+  width: 300px;
+  margin: 0 auto $base-space-2;
+  background-color: $base-color;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: $font-size-m;
+  justify-content: center;
+  text-align: center;
 }
