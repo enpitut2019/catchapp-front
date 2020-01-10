@@ -1,5 +1,9 @@
 @import "variables";
 
+main {
+  margin-bottom: $base-space-3;
+}
+
 .paper-block {
   //padding-top: $base-space-4;
 
@@ -12,12 +16,14 @@
       font-size: $font-size-l;
       font-weight: bolder;
       margin-bottom: $base-space;
+      margin: auto;
     }
 
     .ja-titleelement-block {
       font-size: $font-size-s;
       font-weight: bolder;
       margin-bottom: $base-space-3;
+      margin: auto;
     }
 
     .cite-number-block {
@@ -37,6 +43,29 @@
       margin-bottom: $base-space;
       text-align: right;
       font-weight: bolder;
+      margin-top: $base-space-2;
+    }
+
+    @media screen and (min-width: 500px) {
+      .titleelement-block {
+        max-width: 798px;
+        margin-left: 20%;
+      }
+
+      .ja-titleelement-block {
+        max-width: 798px;
+        margin-left: 20%;
+      }
+
+      .cite-number-block {
+        max-width: 298px;
+        margin-left: 690px;
+      }
+
+      .date-block {
+        max-width: 798px;
+        margin-left: 20%;
+      }
     }
   }
 
@@ -71,9 +100,10 @@
       padding: $base-space $base-space 0;
       margin-bottom: $base-space-2;
       margin-top: $base-space;
+      display: flex;
 
       &_img {
-        width: 45%;
+        width: 100%;
         height: 100px;
         object-fit: cover;
         margin-right: $base-space;
@@ -128,38 +158,88 @@
       }
     }
   }
+
+  @media screen and (min-width: 500px) {
+    &_bottom {
+      max-width: 650px;
+      margin-left: 20%;
+    }
+  }
 }
 
-.button-block {
-  display: block;
-  position: fixed;
-  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.09);
-  bottom: 0;
-  box-sizing: border-box;
-  width: 100vw;
-  background-color: #fff;
-  z-index: 3;
-  left: 0px;
-  &_content {
-    border-radius: 5px;
-    width: 90%;
-    height: 45px;
-    margin: 8px auto calc(8px * 2);
-    background-color: $base-color;
-    box-shadow: 0 4px 0 0 $base-color-2;
+// SP用
+@media screen and (max-width: 600px) {
+  .button-block {
+    display: block;
+    position: fixed;
+    box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.09);
+    bottom: 0;
     box-sizing: border-box;
+    width: 100vw;
+    background-color: #fff;
+    z-index: 3;
+    left: 0px;
+    &_content {
+      border-radius: 5px;
+      width: 80%;
+      height: 45px;
+      margin: 8px auto calc(8px * 2);
+      background-color: $base-color;
+      box-shadow: 0 4px 0 0 $base-color-2;
+      box-sizing: border-box;
+      width: 90%;
+      background-color: $base-color;
+      z-index: 3;
+      left: 0px;
+      .link-block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        margin: $base-space;
+        cursor: pointer;
+        width: 100%;
+        font-size: $font-size-m;
+        color: #fff;
+        height: inherit;
+        font-weight: bold;
+      }
+    }
+  }
+}
 
-    .link-block {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      margin: $base-space 0;
-      cursor: pointer;
-      width: 100%;
-      font-size: $font-size-m;
-      color: #fff;
-      height: inherit;
+// PC用
+@media screen and (min-width: 500px) {
+  .button-block {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    box-sizing: border-box;
+    z-index: 3;
+    right: 20%;
+    &_content {
+      border-radius: 100px;
+      width: 150px;
+      height: 150px;
+      border: 1px solid $base-color;
+      margin: 8px auto calc(8px * 2);
+      background-color: $base-color;
+      box-shadow: 0 6px $base-color-2;
+      box-sizing: border-box;
+
+      .link-block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        cursor: pointer;
+        width: 150px;
+        font-size: $font-size-sm;
+        font-weight: bold;
+        color: #fff;
+        height: 150px;
+        line-height: 150px;
+      }
     }
   }
 }

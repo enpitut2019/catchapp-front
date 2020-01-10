@@ -252,9 +252,9 @@ const appendPapers = (papers: Paper[]): void => {
   topElement.appendChild(titleElement);
   topElement.appendChild(jaTitleElement);
   topElement.appendChild(dateElement);
-  topElement.appendChild(citeNumberElement);
-  citeNumberElement.appendChild(citeElement);
-  citeNumberElement.appendChild(citedElement);
+  // topElement.appendChild(citeNumberElement);
+  // citeNumberElement.appendChild(citeElement);
+  // citeNumberElement.appendChild(citedElement);
 
   //bottom
   //bottomElement.appendChild(keywordTitleElement);
