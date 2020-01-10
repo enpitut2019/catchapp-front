@@ -44,7 +44,7 @@ const appendPapers = (papers: Paper[]): void => {
   const urlTitleElement = document.createElement("div");
 
   const showFooterElement = document.createElement("div");
-
+ 
   const footerButtomElement = document.createElement("div");
   const footerButtonContentElement = document.createElement("div");
   const footerHrefElement = document.createElement("a");

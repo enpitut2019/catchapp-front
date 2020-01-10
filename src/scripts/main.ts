@@ -29,6 +29,7 @@ const paperNameRaw = parser.searchParams.get("name");
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
+
   papers.forEach((paper, idx) => {
     // Element Elementを生成
     const paperElement = document.createElement("a");
@@ -138,6 +139,18 @@ const appendPapers = (papers: Paper[]): void => {
           return response;
         });
   });
+
+  // ページャー
+  const pagingElement = document.createElement("div");
+  const pagingButtonElement = document.createElement("div");
+  pagingElement.classList.add("paging-block");
+  pagingButtonElement.classList.add("paging-block_button");
+
+  pagingElement.appendChild(pagingButtonElement);
+
+  // bodyにpaper elementを挿入
+  if (mainElement === null) return;
+  mainElement.appendChild(pagingElement);
 };
 
 window.addEventListener("DOMContentLoaded", () => {

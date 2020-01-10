@@ -106,3 +106,15 @@ main {
 
 
 }
+
+.paging-block {
+  height: 50px;
+  border: 1px solid black;
+  margin-bottom: $base-space-2;
+  
+  &_button {
+    width: 50px;
+    height: 40px;
+    border: 1px solid black;
+  }
+}
