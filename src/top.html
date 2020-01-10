@@ -2,26 +2,28 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
-  <link rel="stylesheet" href="./styles/top.scss">
+  <script src="./scripts/main.ts"></script>
+  <link rel="stylesheet" href="./styles/main.scss" />
 </head>
 
 <body>
   <div class="header-block"></div>
-  <div class="title-block">
-    CatchApp
+  <main id="main"></main>
+  <div class="paging-block" id="next-button">
+    <p class="paging-block_text">
+      さらに読み込む
+    </p>
   </div>
-  <form method="GET" action="index.html">
-    <div class="form-block">
-      <input type="text" name="name" placeholder="search from CatchApp" class="form-block_form">
-      <div class="form-block_button"><input type="submit" value="Search" class="button-block"></div>
-    </div>
-    　　
-  </form>
-  <div class="footer-block"></div>
+  <div class="lds-ellipsis" id="loading">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </body>
 
 </html>
