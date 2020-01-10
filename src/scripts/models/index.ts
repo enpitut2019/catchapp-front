@@ -24,7 +24,7 @@
 /**
  * 【exportって付いてるのは何？】
  * export というキーワードを付けることで、他のTypeScriptファイルからオブジェクトを取得することができるようになります。
- * 例えば Author はsource ~/.bashrc export されていますので、他のファイルからは
+ * 例えば Author は export されていますので、他のファイルからは
  *
  * import { Author } from '<このファイル名>'
  *
