@@ -5,7 +5,7 @@ main {
 }
 
 .paper-block {
-  //padding-top: $base-space-4;  
+  //padding-top: $base-space-4;
 
   &_top {
     background-color: $base-blue;
@@ -16,7 +16,6 @@ main {
       font-size: $font-size-l;
       font-weight: bolder;
       margin-bottom: $base-space;
-      max-width: 798px;
       margin: auto;
     }
 
@@ -24,15 +23,12 @@ main {
       font-size: $font-size-s;
       font-weight: bolder;
       margin-bottom: $base-space-3;
-      max-width: 798px;
       margin: auto;
     }
 
     .cite-number-block {
       display: flex;
       margin-left: 50%;
-      max-width: 298px;
-      margin-left: 690px;
       &_cite {
         font-weight: bolder;
         margin-bottom: $base-space;
@@ -47,16 +43,32 @@ main {
       margin-bottom: $base-space;
       text-align: right;
       font-weight: bolder;
-      max-width: 498px;
-      margin-left: 485px;
       margin-top: $base-space-2;
+    }
+
+    @media screen and (min-width: 500px) {
+      .titleelement-block {
+        max-width: 798px;
+      }
+
+      .ja-titleelement-block {
+        max-width: 798px;
+      }
+
+      .cite-number-block {
+        max-width: 298px;
+        margin-left: 690px;
+      }
+
+      .date-block {
+        max-width: 498px;
+        margin-left: 485px;
+      }
     }
   }
 
   &_bottom {
-    max-width: 798px;
-    margin: auto;
-    //padding: $base-space-2;
+    padding: $base-space-2;
 
     .author-block {
       margin-bottom: $base-space-2;
@@ -75,7 +87,7 @@ main {
     }
 
     .url-block {
-      margin-bottom: $base-space
+      margin-bottom: $base-space;
     }
 
     .figures-block {
@@ -83,9 +95,10 @@ main {
       padding: $base-space $base-space 0;
       margin-bottom: $base-space-2;
       margin-top: $base-space;
+      display: flex;
 
       &_img {
-        width: 45%;
+        width: 100%;
         height: 100px;
         object-fit: cover;
         margin-right: $base-space;
@@ -113,14 +126,21 @@ main {
       font-weight: bolder;
     }
   }
+
+  @media screen and (min-width: 500px) {
+    &_bottom {
+      max-width: 600px;
+      margin-left: 100px;
+    }
+  }
 }
 
 // SP用
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
   .button-block {
     display: block;
     position: fixed;
-    box-shadow: 0 -2px 4px 0 rgba(0,0,0,0.09);
+    box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.09);
     bottom: 0;
     box-sizing: border-box;
     width: 100vw;
@@ -135,7 +155,7 @@ main {
       background-color: $base-color;
       box-shadow: 0 4px 0 0 $base-color-2;
       box-sizing: border-box;
-  
+
       .link-block {
         display: flex;
         align-items: center;
@@ -149,11 +169,11 @@ main {
         height: inherit;
       }
     }
-  } 
+  }
 }
 
 // PC用
-@media screen and (min-width: 500px){
+@media screen and (min-width: 500px) {
   .button-block {
     display: block;
     position: fixed;
@@ -169,7 +189,7 @@ main {
       background-color: $base-black;
       box-shadow: 0 6px 0 0 #0e183e;
       box-sizing: border-box;
-  
+
       .link-block {
         display: flex;
         align-items: center;
@@ -184,7 +204,7 @@ main {
         height: inherit;
       }
     }
-  } 
+  }
 }
 
 // モーダル付近のcss
@@ -196,27 +216,27 @@ main {
   bottom: 0;
   left: 0;
   padding: 60px 10px;
-  text-align: center
+  text-align: center;
 }
 
 .modal-wrapper:not(.active) {
   opacity: 0;
   visibility: hidden;
-  transition: opacity .3s, visibility .3s;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
 .modal-wrapper.active {
   opacity: 1;
   visibility: visible;
-  transition: opacity .4s, visibility .4s;
+  transition: opacity 0.4s, visibility 0.4s;
 }
 
 .modal-wrapper::after {
   display: inline-block;
   height: 100%;
-  margin-left: -.05em;
+  margin-left: -0.05em;
   vertical-align: middle;
-  content: ""
+  content: "";
 }
 
 .modal-wrapper .modal-window {
@@ -229,8 +249,8 @@ main {
   padding: 30px 30px 15px;
   border-radius: 2px;
   background: #fff;
-  box-shadow: 0 0 30px rgba(0, 0, 0, .6);
-  vertical-align: middle
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  vertical-align: middle;
 }
 
 .modal-wrapper .modal-window .modal-content {
@@ -245,7 +265,7 @@ main {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, .8);
+  background: rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }
 
@@ -266,5 +286,5 @@ main {
 }
 
 .modal-wrapper .modal-close:hover {
-  color: #2b2e38 !important
+  color: #2b2e38 !important;
 }
