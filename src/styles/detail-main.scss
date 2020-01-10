@@ -72,6 +72,9 @@ main {
 
     .author-block {
       margin-bottom: $base-space-2;
+      &_name {
+        margin-right: $base-space;
+      }
     }
 
     .keyword-block {
@@ -124,13 +127,40 @@ main {
       font-size: $font-size-m;
       color: $base-color;
       font-weight: bolder;
+      display: flex;
+
+      &_change-button {
+        width: 50px;
+        height: 20px;
+        text-align: center;
+        font-size: $font-size-ss;
+        border: 1px solid $base-color;
+        border-radius: 5px;
+        margin-left: $base-space-2;
+        margin-top: $base-space;
+        cursor: pointer;
+      }
+
+      &_changed-button {
+        width: 50px;
+        height: 20px;
+        text-align: center;
+        font-size: $font-size-ss;
+        color: #fff;
+        border: 1px solid $base-color;
+        border-radius: 5px;
+        background-color: $base-color;
+        margin-left: $base-space-2;
+        margin-top: $base-space;
+        cursor: pointer;
+      }
     }
   }
 
   @media screen and (min-width: 500px) {
     &_bottom {
-      max-width: 600px;
-      margin-left: 100px;
+      max-width: 650px;
+      margin-left: 120px;
     }
   }
 }
@@ -149,24 +179,28 @@ main {
     left: 0px;
     &_content {
       border-radius: 5px;
-      width: 90%;
+      width: 80%;
       height: 45px;
       margin: 8px auto calc(8px * 2);
       background-color: $base-color;
       box-shadow: 0 4px 0 0 $base-color-2;
       box-sizing: border-box;
-
+      width: 90%;
+      background-color: $base-color;
+      z-index: 3;
+      left: 0px;
       .link-block {
         display: flex;
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        margin: $base-space 0;
+        margin: $base-space;
         cursor: pointer;
         width: 100%;
         font-size: $font-size-m;
         color: #fff;
         height: inherit;
+        font-weight: bold;
       }
     }
   }
@@ -180,14 +214,15 @@ main {
     bottom: 0;
     box-sizing: border-box;
     z-index: 3;
-    right: 80px;
+    right: 100px;
     &_content {
       border-radius: 100px;
-      height: 150px;
       width: 150px;
+      height: 150px;
+      border: 1px solid $base-color;
       margin: 8px auto calc(8px * 2);
-      background-color: $base-black;
-      box-shadow: 0 6px 0 0 #0e183e;
+      background-color: $base-color;
+      box-shadow: 0 6px $base-color-2;
       box-sizing: border-box;
 
       .link-block {
@@ -195,13 +230,13 @@ main {
         align-items: center;
         justify-content: center;
         text-decoration: none;
-        margin: $base-space 0;
         cursor: pointer;
         width: 150px;
         font-size: $font-size-sm;
         font-weight: bold;
         color: #fff;
-        height: inherit;
+        height: 150px;
+        line-height: 150px;
       }
     }
   }
@@ -287,4 +322,12 @@ main {
 
 .modal-wrapper .modal-close:hover {
   color: #2b2e38 !important;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
 }
