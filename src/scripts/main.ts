@@ -24,8 +24,10 @@ import { format } from "date-fns";
 const images = require("../image/*.png");
 
 const railsHost = process.env.RAILS_HOST;
+const sourceUrl = `${railsHost}/search/get_xml`;
 const parser = new URL(window.location.href);
 const paperNameRaw = parser.searchParams.get("name");
+let currentPage = 0;
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
@@ -140,10 +142,23 @@ const appendPapers = (papers: Paper[]): void => {
   });
 };
 
+const getMorePapers = (): void => {
+  axios
+    .post(sourceUrl, { search_word: paperNameRaw, page: currentPage++ })
+    .then(res => {
+      const papers = res.data as Paper[];
+      appendPapers(papers);
+    });
+};
+
 window.addEventListener("DOMContentLoaded", () => {
-  const sourceUrl = `${railsHost}/search/get_xml`;
   axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);
   });
+
+  const nextButtonElement = document.getElementById("next-button");
+  if (nextButtonElement) {
+    nextButtonElement.addEventListener("click", getMorePapers);
+  }
 });
