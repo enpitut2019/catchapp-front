@@ -105,9 +105,12 @@ main {
   margin: 0 auto $base-space-2;
   background-color: $base-color;
   border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  font-size: $font-size-m;
-  justify-content: center;
-  text-align: center;
+  &_text {
+    font-weight: bold;
+    font-size: $font-size-m;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    display: flex;
+  }
 }
