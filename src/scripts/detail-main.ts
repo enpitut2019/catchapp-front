@@ -133,6 +133,7 @@ const appendPapers = (papers: Paper[]): void => {
 
   const authorElement = document.createElement("div");
   authorElement.classList.add("author-block");
+  bottomElement.appendChild(authorElement);
 
   // 著者
   if (paper.authors !== undefined) {
@@ -259,7 +260,6 @@ const appendPapers = (papers: Paper[]): void => {
   //bottom
   //bottomElement.appendChild(keywordTitleElement);
   //bottomElement.appendChild(keywordElement);
-  bottomElement.appendChild(authorElement);
   bottomElement.appendChild(journalTitleElement);
   bottomElement.appendChild(journalElement);
   bottomElement.appendChild(showFooterElement);

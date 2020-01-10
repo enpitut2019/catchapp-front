@@ -45,7 +45,6 @@
 
     .author-block {
       margin-bottom: $base-space-2;
-      display: flex;
       &_name {
         margin-right: $base-space;
       }
@@ -64,7 +63,7 @@
     }
 
     .url-block {
-      margin-bottom: $base-space
+      margin-bottom: $base-space;
     }
 
     .figures-block {
@@ -103,15 +102,15 @@
       display: flex;
 
       &_change-button {
-          width: 50px;
-          height: 20px;
-          text-align: center;
-          font-size: $font-size-ss;
-          border: 1px solid $base-color;
-          border-radius: 5px;
-          margin-left: $base-space-2;
-          margin-top: $base-space;
-          cursor: pointer;
+        width: 50px;
+        height: 20px;
+        text-align: center;
+        font-size: $font-size-ss;
+        border: 1px solid $base-color;
+        border-radius: 5px;
+        margin-left: $base-space-2;
+        margin-top: $base-space;
+        cursor: pointer;
       }
 
       &_changed-button {
@@ -119,14 +118,14 @@
         height: 20px;
         text-align: center;
         font-size: $font-size-ss;
-        color: #FFF;
+        color: #fff;
         border: 1px solid $base-color;
         border-radius: 5px;
         background-color: $base-color;
         margin-left: $base-space-2;
         margin-top: $base-space;
         cursor: pointer;
-    }
+      }
     }
   }
 }
@@ -134,7 +133,7 @@
 .button-block {
   display: block;
   position: fixed;
-  box-shadow: 0 -2px 4px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.09);
   bottom: 0;
   box-sizing: border-box;
   width: 100vw;
@@ -174,27 +173,27 @@
   bottom: 0;
   left: 0;
   padding: 60px 10px;
-  text-align: center
+  text-align: center;
 }
 
 .modal-wrapper:not(.active) {
   opacity: 0;
   visibility: hidden;
-  transition: opacity .3s, visibility .3s;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
 .modal-wrapper.active {
   opacity: 1;
   visibility: visible;
-  transition: opacity .4s, visibility .4s;
+  transition: opacity 0.4s, visibility 0.4s;
 }
 
 .modal-wrapper::after {
   display: inline-block;
   height: 100%;
-  margin-left: -.05em;
+  margin-left: -0.05em;
   vertical-align: middle;
-  content: ""
+  content: "";
 }
 
 .modal-wrapper .modal-window {
@@ -207,8 +206,8 @@
   padding: 30px 30px 15px;
   border-radius: 2px;
   background: #fff;
-  box-shadow: 0 0 30px rgba(0, 0, 0, .6);
-  vertical-align: middle
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  vertical-align: middle;
 }
 
 .modal-wrapper .modal-window .modal-content {
@@ -223,7 +222,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, .8);
+  background: rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }
 
@@ -244,7 +243,7 @@
 }
 
 .modal-wrapper .modal-close:hover {
-  color: #2b2e38 !important
+  color: #2b2e38 !important;
 }
 
 .display-none {
