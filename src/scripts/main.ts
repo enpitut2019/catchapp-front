@@ -115,9 +115,9 @@ const appendPapers = (papers: Paper[]): void => {
     contentElement.appendChild(leftElement);
     contentElement.appendChild(paperTextElement);
     leftElement.appendChild(figureElement);
-    leftElement.appendChild(citeAndCitedElement);
-    citeAndCitedElement.appendChild(citeElement);
-    citeAndCitedElement.appendChild(citedElement);
+    // leftElement.appendChild(citeAndCitedElement);
+    // citeAndCitedElement.appendChild(citeElement);
+    // citeAndCitedElement.appendChild(citedElement);
     paperTextElement.appendChild(authorsElement);
     //paperTextElement.appendChild(keywordsElement);
 
