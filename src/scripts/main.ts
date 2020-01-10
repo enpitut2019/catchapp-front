@@ -153,11 +153,26 @@ const appendPapers = (papers: Paper[]): void => {
 };
 
 const getMorePapers = (): void => {
+  const nextButtonElement = document.getElementById("next-button");
+  const loadingElement = document.getElementById("loading");
+
+  // ボタンを非表示にし、ローディングアニメーションを表示する
+  if (nextButtonElement && loadingElement) {
+    nextButtonElement.style.display = "none";
+    loadingElement.style.display = "block";
+  }
   axios
     .post(sourceUrl, { search_word: paperNameRaw, page: currentPage++ })
     .then(res => {
       const papers = res.data as Paper[];
       appendPapers(papers);
+    })
+    .then(() => {
+      // ボタンを表示し、ローディングアニメーションを非表示にする
+      if (nextButtonElement && loadingElement) {
+        nextButtonElement.style.display = "block";
+        loadingElement.style.display = "none";
+      }
     });
 };
 
