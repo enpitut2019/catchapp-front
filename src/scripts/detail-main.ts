@@ -68,8 +68,8 @@ const appendPapers = (papers: Paper[]): void => {
   //keywordElement.classList.add("keyword-block");
   journalElement.classList.add("journal-block");
   urlElement.classList.add("url-block");
-  abstractElement.classList.add("abstract-block");
-  abstractJaElement.classList.add("abstract-block");
+  abstractElement.classList.add("abstract-block", "en");
+  abstractJaElement.classList.add("abstract-block", "ja");
   abstractEnButtonElement.classList.add("title-block_change-button");
   abstractJaButtonElement.classList.add("title-block_change-button");
 
@@ -112,26 +112,24 @@ const appendPapers = (papers: Paper[]): void => {
   // 翻訳切り替えボタン
   abstractEnButtonElement.textContent = "英語";
   abstractJaButtonElement.textContent = "日本語";
-  abstractElement.setAttribute("class","en");
-  abstractJaElement.setAttribute("class","ja");
   abstractElement.classList.add("display-none");
   abstractJaButtonElement.classList.add("title-block_changed-button");
 
-  abstractEnButtonElement.addEventListener('click', function(){
+  abstractEnButtonElement.addEventListener("click", function() {
     abstractJaElement.classList.add("display-none");
     abstractElement.classList.add("display-block");
     abstractJaElement.classList.remove("display-block");
     abstractEnButtonElement.classList.add("title-block_changed-button");
     abstractJaButtonElement.classList.remove("title-block_changed-button");
-  })
+  });
 
-  abstractJaButtonElement.addEventListener('click', function(){
+  abstractJaButtonElement.addEventListener("click", function() {
     abstractElement.classList.add("display-none");
     abstractJaElement.classList.add("display-block");
     abstractElement.classList.remove("display-block");
     abstractJaButtonElement.classList.add("title-block_changed-button");
     abstractEnButtonElement.classList.remove("title-block_changed-button");
-  })
+  });
 
   const authorElement = document.createElement("div");
   authorElement.classList.add("author-block");
@@ -148,7 +146,7 @@ const appendPapers = (papers: Paper[]): void => {
 
   const figureElement = document.createElement("div");
 
-  if (paper.figures !== undefined && paper.analized !== "done" {
+  if (paper.figures !== undefined && paper.analized !== "done") {
     if (0 < paper.figures.length) {
       const imageTitleElement = document.createElement("div");
 
@@ -268,8 +266,8 @@ const appendPapers = (papers: Paper[]): void => {
   bottomElement.appendChild(abstractTitleElement);
   bottomElement.appendChild(abstractElement);
   bottomElement.appendChild(abstractJaElement);
-  abstractTitleElement.appendChild(abstractEnButtonElement);
   abstractTitleElement.appendChild(abstractJaButtonElement);
+  abstractTitleElement.appendChild(abstractEnButtonElement);
   bottomElement.appendChild(urlTitleElement);
   bottomElement.appendChild(urlElement);
 
