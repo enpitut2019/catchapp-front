@@ -97,7 +97,7 @@ const appendPapers = (papers: Paper[]): void => {
   citedElement.textContent = "cited：" + paper.cited_count;
   linkElement.setAttribute("href", paper.pdf_url);
   linkElement.setAttribute("target", "_blank");
-  linkElement.textContent = paper.pdf_url;
+  linkElement.textContent = paper.url;
   urlElement.appendChild(linkElement);
   dateElement.textContent =
     "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
@@ -246,7 +246,7 @@ const appendPapers = (papers: Paper[]): void => {
   authorTitleElement.textContent = "Author";
   journalTitleElement.textContent = "Journal";
   //keywordTitleElement.textContent = "Keyword";
-  urlTitleElement.textContent = "ArchiveURL";
+  urlTitleElement.textContent = "arXivURL";
 
   // 子Elementをpaper Elementに挿入
   paperElement.appendChild(topElement);
