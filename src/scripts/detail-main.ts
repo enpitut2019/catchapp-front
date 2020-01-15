@@ -91,7 +91,7 @@ const appendPapers = (papers: Paper[]): void => {
   if (paper.journal) {
     journalElement.textContent = paper.journal;
   } else {
-    journalElement.textContent = "journalが取得できませんでした";
+    journalElement.textContent = "ジャーナルを取得できませんでした";
   }
   citeElement.textContent = "cite：" + paper.cite_count;
   citedElement.textContent = "cited：" + paper.cited_count;
@@ -166,7 +166,8 @@ const appendPapers = (papers: Paper[]): void => {
     bottomElement.appendChild(imageTitleElement);
     const imageDoingElement = document.createElement("div");
     imageDoingElement.classList.add("author-block");
-    imageDoingElement.textContent = "Image is being analyzed ...";
+    imageDoingElement.textContent =
+      "画像を解析中です...(この処理には2, 3分かかることがあります)";
     bottomElement.appendChild(imageDoingElement);
   }
 
