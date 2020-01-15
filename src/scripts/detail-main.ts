@@ -91,13 +91,13 @@ const appendPapers = (papers: Paper[]): void => {
   if (paper.journal) {
     journalElement.textContent = paper.journal;
   } else {
-    journalElement.textContent = "journalが取得できませんでした";
+    journalElement.textContent = "ジャーナルを取得できませんでした";
   }
   citeElement.textContent = "cite：" + paper.cite_count;
   citedElement.textContent = "cited：" + paper.cited_count;
   linkElement.setAttribute("href", paper.pdf_url);
   linkElement.setAttribute("target", "_blank");
-  linkElement.textContent = paper.pdf_url;
+  linkElement.textContent = paper.url;
   urlElement.appendChild(linkElement);
   dateElement.textContent =
     "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
@@ -159,14 +159,15 @@ const appendPapers = (papers: Paper[]): void => {
       bottomElement.appendChild(figureElement);
     }
   }
-  if (paper.analized !== "Done") {
+  if (paper.analized !== "Done" && paper.figures.length <= 0) {
     const imageTitleElement = document.createElement("div");
     imageTitleElement.classList.add("title-block");
     imageTitleElement.textContent = "Images";
     bottomElement.appendChild(imageTitleElement);
     const imageDoingElement = document.createElement("div");
     imageDoingElement.classList.add("author-block");
-    imageDoingElement.textContent = "Image is being analyzed ...";
+    imageDoingElement.textContent =
+      "画像を解析中です...(この処理には2, 3分かかることがあります)";
     bottomElement.appendChild(imageDoingElement);
   }
 
@@ -245,7 +246,7 @@ const appendPapers = (papers: Paper[]): void => {
   authorTitleElement.textContent = "Author";
   journalTitleElement.textContent = "Journal";
   //keywordTitleElement.textContent = "Keyword";
-  urlTitleElement.textContent = "ArchiveURL";
+  urlTitleElement.textContent = "arXivURL";
 
   // 子Elementをpaper Elementに挿入
   paperElement.appendChild(topElement);

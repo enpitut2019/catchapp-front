@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900&display=swap&subset=japanese');
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900&display=swap&subset=japanese");
 
 //フォントサイズ
 $font-size-ss: 0.8rem;
-$font-size-s: 1.0rem;
+$font-size-s: 1rem;
 $font-size-sm: 1.2rem;
 $font-size-m: 1.4rem;
 $font-size-l: 1.6rem;
@@ -16,7 +16,7 @@ $base-space-5: 40px;
 $base-space-6: 48px;
 
 //カラーコード
-$base-white: #FFF;
+$base-white: #fff;
 $base-black: #000000;
 $base-blue: #2a6fb6;
 $base-blue-2: #203377;
@@ -24,17 +24,27 @@ $base-color: #979292; //灰色
 $base-color-2: #4d5254; //濃い灰色
 
 * {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
   box-sizing: content-box;
   font-size: $font-size-s;
 }
 
 .header-block {
+  box-sizing: border-box;
+  display: block;
   background-color: $base-blue-2;
-  height: 40px;
+  height: 48px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.09);
-  //position: fixed;
   width: 100%;
+  line-height: 48px;
+  margin: 0;
+  padding: 0 1rem;
+
+  a {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
 }
 
 .footer-block {
@@ -45,7 +55,8 @@ $base-color-2: #4d5254; //濃い灰色
   width: 100%;
 }
 
-html, body {
+html,
+body {
   padding: 0;
   margin: 0;
 }
