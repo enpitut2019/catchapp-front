@@ -159,7 +159,7 @@ const appendPapers = (papers: Paper[]): void => {
       bottomElement.appendChild(figureElement);
     }
   }
-  if (paper.analized !== "Done") {
+  if (paper.analized !== "Done" && paper.figures.length <= 0) {
     const imageTitleElement = document.createElement("div");
     imageTitleElement.classList.add("title-block");
     imageTitleElement.textContent = "Images";
