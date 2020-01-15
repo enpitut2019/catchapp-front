@@ -48,23 +48,23 @@ main {
 
     @media screen and (min-width: 500px) {
       .titleelement-block {
-        max-width: 798px;
-        margin-left: 20%;
+        max-width: 60%;
+        margin: 0 auto;
       }
 
       .ja-titleelement-block {
-        max-width: 798px;
-        margin-left: 20%;
+        max-width: 60%;
+        margin: 0 auto;
       }
 
       .cite-number-block {
-        max-width: 298px;
-        margin-left: 690px;
+        max-width: 60%;
+        margin: 0 auto;
       }
 
       .date-block {
-        max-width: 798px;
-        margin-left: 20%;
+        max-width: 60%;
+        margin: 0 auto;
       }
     }
   }
@@ -161,8 +161,9 @@ main {
 
   @media screen and (min-width: 500px) {
     &_bottom {
-      max-width: 650px;
-      margin-left: 20%;
+      max-width: 60%;
+      margin: 0 auto;
+      padding-left: $base-space-4;
     }
   }
 }
@@ -216,7 +217,7 @@ main {
     bottom: 0;
     box-sizing: border-box;
     z-index: 3;
-    right: 20%;
+    right: 10%;
     &_content {
       border-radius: 100px;
       width: 150px;
