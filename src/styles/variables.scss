@@ -30,6 +30,7 @@ $base-color-2: #4d5254; //濃い灰色
 }
 
 .header-block {
+  box-sizing: border-box;
   display: block;
   background-color: $base-blue-2;
   height: 48px;
