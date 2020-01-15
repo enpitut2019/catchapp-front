@@ -106,7 +106,6 @@ const appendPapers = (papers: Paper[]): void => {
   abstractJaElement.textContent = paper.abstract_ja || "翻訳中";
 
   paperElement.appendChild(bottomElement);
-  bottomElement.appendChild(authorTitleElement);
 
   // 翻訳切り替えボタン
   abstractEnButtonElement.textContent = "英語";
@@ -129,20 +128,6 @@ const appendPapers = (papers: Paper[]): void => {
     abstractJaButtonElement.classList.add("title-block_changed-button");
     abstractEnButtonElement.classList.remove("title-block_changed-button");
   });
-
-  const authorElement = document.createElement("div");
-  authorElement.classList.add("author-block");
-  bottomElement.appendChild(authorElement);
-
-  // 著者
-  if (paper.authors !== undefined) {
-    for (let t = 0; t < paper.authors.length; t++) {
-      const authorNameElement = document.createElement("div");
-      authorNameElement.classList.add("author-block_name");
-      authorNameElement.textContent = paper.authors[t].name;
-      authorElement.appendChild(authorNameElement);
-    }
-  }
 
   const figureElement = document.createElement("div");
 
@@ -260,14 +245,30 @@ const appendPapers = (papers: Paper[]): void => {
   //bottom
   //bottomElement.appendChild(keywordTitleElement);
   //bottomElement.appendChild(keywordElement);
-  bottomElement.appendChild(journalTitleElement);
-  bottomElement.appendChild(journalElement);
-  bottomElement.appendChild(showFooterElement);
   bottomElement.appendChild(abstractTitleElement);
   bottomElement.appendChild(abstractElement);
   bottomElement.appendChild(abstractJaElement);
   abstractTitleElement.appendChild(abstractJaButtonElement);
   abstractTitleElement.appendChild(abstractEnButtonElement);
+  bottomElement.appendChild(journalTitleElement);
+  bottomElement.appendChild(journalElement);
+  bottomElement.appendChild(showFooterElement);
+  bottomElement.appendChild(authorTitleElement);
+
+  const authorElement = document.createElement("div");
+  authorElement.classList.add("author-block");
+  bottomElement.appendChild(authorElement);
+
+  // 著者
+  if (paper.authors !== undefined) {
+    for (let t = 0; t < paper.authors.length; t++) {
+      const authorNameElement = document.createElement("div");
+      authorNameElement.classList.add("author-block_name");
+      authorNameElement.textContent = paper.authors[t].name;
+      authorElement.appendChild(authorNameElement);
+    }
+  }
+
   bottomElement.appendChild(urlTitleElement);
   bottomElement.appendChild(urlElement);
 
