@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
   <script src="./scripts/main.ts"></script>
+  <script src="../node_modules/@webcomponents/template/template.min.js"></script>
   <link rel="stylesheet" href="./styles/main.scss" />
 </head>
 
@@ -28,6 +29,24 @@
     <div></div>
     <div></div>
   </div>
+
+  <template id="paper-template">
+    <a class="paper">
+      <div class="paper--title"></div>
+      <div class="paper--jatitle"></div>
+      <div class="paper--content">
+        <div class="paper--content--left">
+          <div class="paper--content--left--figures">
+            <img class="paper--content--left--figures--img">
+          </div>
+        </div>
+        <div class="paper--content--text">
+          <div class="paper--content--text--authors"></div>
+          <div class="paper--content--text--date"></div>
+        </div>
+      </div>
+    </a>
+  </template>
 </body>
 
 </html>
