@@ -130,9 +130,9 @@ const appendPapers = (papers: Paper[]): void => {
     });
   }
 
-  // bodyにpaper elementを挿入
-  if (mainElement === null) return;
-  mainElement.appendChild(paperElement);
+  // ローディングアニメーションを無効化
+  const loadingElement = document.getElementById("loading")!;
+  loadingElement.classList.remove("active");
 
   // bodyにpaper elementを挿入
   appElement.appendChild(paperElement);

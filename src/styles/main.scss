@@ -82,12 +82,17 @@ main {
 }
 
 .paging-block {
+  display: none;
   height: 50px;
   width: 300px;
   margin: 0 auto $base-space-2;
   background-color: $base-blue-2;
   border-radius: 5px;
   cursor: pointer;
+
+  &.active {
+    display: block;
+  }
 
   &--text {
     display: flex;
@@ -103,7 +108,23 @@ main {
   }
 }
 
-// ローディング用アニメーション
+// 初回読み込み時ローディング
+.loading-wrapper {
+  display: none;
+
+  &.active {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// 追加読み込み時ローディング用アニメーション
 .lds-ellipsis {
   display: none;
   position: relative;

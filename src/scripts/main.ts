@@ -87,6 +87,14 @@ const appendPapers = (papers: Paper[]): void => {
           return response;
         });
   });
+
+  // ローディングを非アクティブ化
+  const loadingElement = document.getElementById("list-loading")!;
+  loadingElement.classList.remove("active");
+
+  // さらに読むボタンをアクティブ化
+  const getMoreElement = document.getElementById("next-button")!;
+  getMoreElement.classList.add("active");
 };
 
 const getMorePapers = (): void => {
