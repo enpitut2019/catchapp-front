@@ -25,6 +25,7 @@ const appendPapers = (papers: Paper[]): void => {
   const paperElement = document.importNode(paperTemplate.content, true);
   const figuresElement = paperElement.querySelector(".paper--figures")!;
   const figureAnalyzingElement = paperElement.querySelector(".paper--figures__analyzing")!;
+  const figureNoImgElement = paperElement.querySelector(".paper--figures__no-img")!;
   const titleElement = paperElement.querySelector(".paper--title__en")!;
   const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
   const journalElement = paperElement.querySelector(".paper--journal")!;
@@ -71,8 +72,6 @@ const appendPapers = (papers: Paper[]): void => {
     for (const figure of paper.figures.reverse()) {
       const figureElement = document.importNode(figureTemplate.content, true);
 
-      console.log(figureElement);
-
       // 画像を設定
       const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
       imgElement.src = figure.figure.url;
@@ -97,6 +96,9 @@ const appendPapers = (papers: Paper[]): void => {
       // 全体を囲うdivに追加
       figuresElement.appendChild(figureElement);
 
+      // 画像の表示をアクティブ化
+      figuresElement.classList.add("active");
+
       // 解析中の表示を消す
       figureAnalyzingElement.classList.remove("active");
     }
@@ -104,6 +106,9 @@ const appendPapers = (papers: Paper[]): void => {
     // 解析が終了しているが画像が無いパターン
     // 解析中の表示を消す
     figureAnalyzingElement.classList.remove("active");
+
+    // 画像無しの表示をアクティブ化
+    figureNoImgElement.classList.add("active");
   }
 
   // フッターボタン

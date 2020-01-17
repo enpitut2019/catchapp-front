@@ -50,18 +50,23 @@
   }
 
   &--figures {
+    display: none;
     border: 1px solid;
     padding: $base-space $base-space 0;
     margin-bottom: $base-space-2;
     margin-top: $base-space;
-    display: flex;
 
-    &__analyzing {
-      display: none;
+    &.active {
+      display: flex;
     }
 
-    &__analyzing.active {
-      display: block;
+    &__analyzing,
+    &__no-img {
+      display: none;
+
+      &.active {
+        display: block;
+      }
     }
   }
 
