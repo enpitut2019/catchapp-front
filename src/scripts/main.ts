@@ -66,7 +66,7 @@ const appendPapers = (papers: Paper[]): void => {
       figureImgElement.setAttribute("src", images["Unanalyzed"]);
     } else {
       figureImgElement.classList.add("paper--figure__no-img");
-      figureImgElement.setAttribute("src", "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg");
+      figureImgElement.setAttribute("src", images["NoImg"]);
     }
 
     // bodyにpaper elementを挿入
