@@ -25,7 +25,6 @@ const appendPapers = (papers: Paper[]): void => {
   const bottomElement = document.createElement("div");
   const titleElement = document.createElement("div");
   const jaTitleElement = document.createElement("div");
-  //const keywordElement = document.createElement("div");
   const journalElement = document.createElement("div");
   const citeNumberElement = document.createElement("div");
   const citeElement = document.createElement("div");
@@ -40,7 +39,6 @@ const appendPapers = (papers: Paper[]): void => {
   const abstractTitleElement = document.createElement("div");
   const authorTitleElement = document.createElement("div");
   const journalTitleElement = document.createElement("div");
-  //const keywordTitleElement = document.createElement("div");
   const urlTitleElement = document.createElement("div");
 
   const showFooterElement = document.createElement("div");
@@ -64,7 +62,6 @@ const appendPapers = (papers: Paper[]): void => {
   citedElement.classList.add("cite-number-block_cite");
 
   bottomElement.classList.add("paper-block_bottom");
-  //keywordElement.classList.add("keyword-block");
   journalElement.classList.add("journal-block");
   urlElement.classList.add("url-block");
   abstractElement.classList.add("abstract-block", "en");
@@ -74,7 +71,6 @@ const appendPapers = (papers: Paper[]): void => {
 
   abstractTitleElement.classList.add("title-block");
   authorTitleElement.classList.add("title-block");
-  //keywordTitleElement.classList.add("title-block");
   journalTitleElement.classList.add("title-block");
   urlTitleElement.classList.add("title-block");
 
@@ -87,7 +83,6 @@ const appendPapers = (papers: Paper[]): void => {
   // Elementにテキストを挿入
   titleElement.textContent = paper.title;
   jaTitleElement.textContent = "(" + paper.title_ja + ")";
-  //keywordElement.textContent = "macine learning,computer science";
   if (paper.journal) {
     journalElement.textContent = paper.journal;
   } else {
@@ -230,7 +225,6 @@ const appendPapers = (papers: Paper[]): void => {
   abstractTitleElement.textContent = "Abstract";
   authorTitleElement.textContent = "Author";
   journalTitleElement.textContent = "Journal";
-  //keywordTitleElement.textContent = "Keyword";
   urlTitleElement.textContent = "arXivURL";
 
   // 子Elementをpaper Elementに挿入
@@ -238,13 +232,8 @@ const appendPapers = (papers: Paper[]): void => {
   topElement.appendChild(titleElement);
   topElement.appendChild(jaTitleElement);
   topElement.appendChild(dateElement);
-  // topElement.appendChild(citeNumberElement);
-  // citeNumberElement.appendChild(citeElement);
-  // citeNumberElement.appendChild(citedElement);
 
   //bottom
-  //bottomElement.appendChild(keywordTitleElement);
-  //bottomElement.appendChild(keywordElement);
   bottomElement.appendChild(abstractTitleElement);
   bottomElement.appendChild(abstractElement);
   bottomElement.appendChild(abstractJaElement);
