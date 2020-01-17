@@ -1,8 +1,7 @@
 @import "variables";
+@import "global.scss";
 
 .paper-block {
-  //padding-top: $base-space-4;
-
   &_top {
     background-color: $base-blue;
     padding: $base-space-2;
