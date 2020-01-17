@@ -33,7 +33,7 @@ const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
 
   papers.forEach((paper, idx) => {
-    // Element Elementを生成
+    // Elementを生成
     const paperElement = document.createElement("a");
     const paperTextElement = document.createElement("div");
     const contentElement = document.createElement("div");
@@ -41,7 +41,6 @@ const appendPapers = (papers: Paper[]): void => {
     const titleElement = document.createElement("div");
     const jaTitleElement = document.createElement("div");
     const authorsElement = document.createElement("div");
-    //const keywordsElement = document.createElement("div");
     const citeAndCitedElement = document.createElement("div");
     const citeElement = document.createElement("div");
     const citedElement = document.createElement("div");
@@ -63,7 +62,6 @@ const appendPapers = (papers: Paper[]): void => {
     titleElement.classList.add("paper--title");
     jaTitleElement.classList.add("paper--jatitle");
     authorsElement.classList.add("paper--content--text--authors");
-    //keywordsElement.classList.add("paper--content--text--keywords");
     citeElement.classList.add("paper--content--left--citeandcited--cite");
     citedElement.classList.add("paper--content--left--citeandcited--cited");
 
@@ -81,7 +79,6 @@ const appendPapers = (papers: Paper[]): void => {
       }
     }
 
-    //keywordsElement.textContent = "keyword1";
     citeElement.textContent = "cite：" + papers[idx].cite_count;
     citedElement.textContent = "cited：" + papers[idx].cited_count;
     jaTitleElement.textContent = paper.title_ja || "(和訳しています……)";
@@ -115,11 +112,7 @@ const appendPapers = (papers: Paper[]): void => {
     contentElement.appendChild(leftElement);
     contentElement.appendChild(paperTextElement);
     leftElement.appendChild(figureElement);
-    // leftElement.appendChild(citeAndCitedElement);
-    // citeAndCitedElement.appendChild(citeElement);
-    // citeAndCitedElement.appendChild(citedElement);
     paperTextElement.appendChild(authorsElement);
-    //paperTextElement.appendChild(keywordsElement);
 
     paperTextElement.appendChild(dateElement);
 
@@ -141,15 +134,6 @@ const appendPapers = (papers: Paper[]): void => {
           return response;
         });
   });
-
-  // ページャー
-  // const pagingElement = document.createElement("div");
-  // pagingElement.classList.add("paging-block", "next_button");
-  // pagingElement.textContent = "さらに読み込む";
-
-  // // bodyにpaper elementを挿入
-  // if (mainElement === null) return;
-  // mainElement.appendChild(pagingElement);
 };
 
 const getMorePapers = (): void => {
