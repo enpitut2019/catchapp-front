@@ -7,7 +7,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "prettier/@typescript-eslint"
   ],
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "html"],
   parser: "@typescript-eslint/parser",
   env: { browser: true, node: true, es6: true },
   parserOptions: {
@@ -15,6 +15,13 @@ module.exports = {
   },
   rules: {
     // 適当なルール
-    "@typescript-eslint/no-non-null-assertion": 0
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "max-len": ["error", { code: 160 }],
+    "prettier/prettier": [
+      "error",
+      {
+        printWidth: 160
+      }
+    ]
   }
 };

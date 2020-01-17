@@ -45,10 +45,7 @@ const appendPapers = (papers: Paper[]): void => {
     const dateElement = paperElement.querySelector(".paper--date")!;
     const figureImgElement = paperElement.querySelector(".paper--figure")!;
 
-    paperAnchorElement.setAttribute(
-      "href",
-      `/detail.html?name=${paperNameRaw}&id=${paper.id}`
-    );
+    paperAnchorElement.setAttribute("href", `/detail.html?name=${paperNameRaw}&id=${paper.id}`);
 
     titleElement.textContent = paper.title;
 
@@ -60,10 +57,7 @@ const appendPapers = (papers: Paper[]): void => {
     }
 
     jaTitleElement.textContent = paper.title_ja || "(和訳しています……)";
-    dateElement.textContent = format(
-      new Date(paper.published_at),
-      "yyyy年MM月dd日"
-    );
+    dateElement.textContent = format(new Date(paper.published_at), "yyyy年MM月dd日");
 
     if (papers[idx].figures.length > 0) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
@@ -72,10 +66,7 @@ const appendPapers = (papers: Paper[]): void => {
       figureImgElement.setAttribute("src", images["Unanalyzed"]);
     } else {
       figureImgElement.classList.add("paper--figure__no-img");
-      figureImgElement.setAttribute(
-        "src",
-        "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
-      );
+      figureImgElement.setAttribute("src", "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg");
     }
 
     // bodyにpaper elementを挿入
@@ -124,9 +115,7 @@ const getMorePapers = (): void => {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
-  paperTemplate = document.getElementById(
-    "paper-template"
-  ) as HTMLTemplateElement;
+  paperTemplate = document.getElementById("paper-template") as HTMLTemplateElement;
 
   // eslint-disable-next-line @typescript-eslint/camelcase
   axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {

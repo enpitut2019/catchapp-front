@@ -8,272 +8,124 @@ const paperNameRaw = parser.searchParams.get("name");
 const paperIdRaw = parser.searchParams.get("id");
 const paperId = String(paperIdRaw);
 
+let paperTemplate: HTMLTemplateElement | null = null;
+
 const appendPapers = (papers: Paper[]): void => {
   if (paperIdRaw === null) return;
+  if (paperTemplate === null) return;
 
   console.log(papers);
   const paper = papers.find(paper => paper.id == paperId);
 
   if (paper === undefined) return;
 
-  const mainElement = document.getElementById("main");
-  const mainContentsElement = document.getElementById("maincontents");
+  const appElement = document.getElementById("app")!;
 
   // Element Elementを生成
-  const paperElement = document.createElement("div");
-  const topElement = document.createElement("div");
-  const bottomElement = document.createElement("div");
-  const titleElement = document.createElement("div");
-  const jaTitleElement = document.createElement("div");
-  const journalElement = document.createElement("div");
-  const citeNumberElement = document.createElement("div");
-  const citeElement = document.createElement("div");
-  const citedElement = document.createElement("div");
-  const urlElement = document.createElement("div");
-  const dateElement = document.createElement("div");
-  const linkElement = document.createElement("a");
-  const abstractElement = document.createElement("div");
-  const abstractJaElement = document.createElement("div");
-
-  //title
-  const abstractTitleElement = document.createElement("div");
-  const authorTitleElement = document.createElement("div");
-  const journalTitleElement = document.createElement("div");
-  const urlTitleElement = document.createElement("div");
-
-  const showFooterElement = document.createElement("div");
-  const footerButtomElement = document.createElement("div");
-  const footerButtonContentElement = document.createElement("div");
-  const footerHrefElement = document.createElement("a");
+  const paperElement = document.importNode(paperTemplate.content, true);
+  const figuresElement = paperElement.querySelector(".paper--figures")!;
+  const figureAnalyzingElement = paperElement.querySelector(".paper--figures__analyzing")!;
+  const titleElement = paperElement.querySelector(".paper--title__en")!;
+  const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
+  const journalElement = paperElement.querySelector(".paper--journal")!;
+  const arxivLinkElement = paperElement.querySelector(".paper--arxiv-link")! as HTMLAnchorElement;
+  const dateElement = paperElement.querySelector(".paper--date")!;
+  const pdfLinkElement = paperElement.querySelector(".paper--pdf-link")! as HTMLAnchorElement;
+  const abstractEnElement = paperElement.querySelector(".paper--abstract__en")!;
+  const abstractJaElement = paperElement.querySelector(".paper--abstract__ja")!;
+  const authorsElement = paperElement.querySelector(".paper--authors")!;
 
   // 翻訳切り替えボタン
-  const abstractEnButtonElement = document.createElement("div");
-  const abstractJaButtonElement = document.createElement("div");
-
-  // Elementにクラスを適用
-  paperElement.classList.add("paper-block");
-
-  topElement.classList.add("paper-block_top");
-  titleElement.classList.add("titleelement-block");
-  jaTitleElement.classList.add("ja-titleelement-block");
-  dateElement.classList.add("date-block");
-  citeNumberElement.classList.add("cite-number-block");
-  citeElement.classList.add("cite-number-block_cite");
-  citedElement.classList.add("cite-number-block_cite");
-
-  bottomElement.classList.add("paper-block_bottom");
-  journalElement.classList.add("journal-block");
-  urlElement.classList.add("url-block");
-  abstractElement.classList.add("abstract-block", "en");
-  abstractJaElement.classList.add("abstract-block", "ja");
-  abstractEnButtonElement.classList.add("title-block_change-button");
-  abstractJaButtonElement.classList.add("title-block_change-button");
-
-  abstractTitleElement.classList.add("title-block");
-  authorTitleElement.classList.add("title-block");
-  journalTitleElement.classList.add("title-block");
-  urlTitleElement.classList.add("title-block");
-
-  showFooterElement.classList.add("show-footer-float-marker");
-
-  footerButtomElement.classList.add("button-block");
-  footerButtonContentElement.classList.add("button-block_content");
-  footerHrefElement.classList.add("link-block");
+  const abstractToEnSwitchElement = paperElement.querySelector(".abstract-switch__to-en")!;
+  const abstractToJaSwitchElement = paperElement.querySelector(".abstract-switch__to-ja")!;
 
   // Elementにテキストを挿入
   titleElement.textContent = paper.title;
   jaTitleElement.textContent = "(" + paper.title_ja + ")";
-  if (paper.journal) {
-    journalElement.textContent = paper.journal;
-  } else {
-    journalElement.textContent = "ジャーナルを取得できませんでした";
-  }
-  citeElement.textContent = "cite：" + paper.cite_count;
-  citedElement.textContent = "cited：" + paper.cited_count;
-  linkElement.setAttribute("href", paper.pdf_url);
-  linkElement.setAttribute("target", "_blank");
-  linkElement.textContent = paper.url;
-  urlElement.appendChild(linkElement);
-  dateElement.textContent =
-    "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
+  journalElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
+  dateElement.textContent = "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
 
-  abstractElement.textContent = paper.abstract;
-  abstractJaElement.textContent = paper.abstract_ja || "翻訳中";
-
-  paperElement.appendChild(bottomElement);
+  abstractEnElement.textContent = paper.abstract;
+  abstractJaElement.textContent = paper.abstract_ja || "翻訳中……";
 
   // 翻訳切り替えボタン
-  abstractEnButtonElement.textContent = "英語";
-  abstractJaButtonElement.textContent = "日本語";
-  abstractElement.classList.add("display-none");
-  abstractJaButtonElement.classList.add("title-block_changed-button");
 
-  abstractEnButtonElement.addEventListener("click", function() {
-    abstractJaElement.classList.add("display-none");
-    abstractElement.classList.add("display-block");
-    abstractJaElement.classList.remove("display-block");
-    abstractEnButtonElement.classList.add("title-block_changed-button");
-    abstractJaButtonElement.classList.remove("title-block_changed-button");
+  abstractToEnSwitchElement.addEventListener("click", () => {
+    abstractEnElement.classList.add("active");
+    abstractJaElement.classList.remove("active");
+    abstractToEnSwitchElement.classList.remove("active");
+    abstractToJaSwitchElement.classList.add("active");
   });
 
-  abstractJaButtonElement.addEventListener("click", function() {
-    abstractElement.classList.add("display-none");
-    abstractJaElement.classList.add("display-block");
-    abstractElement.classList.remove("display-block");
-    abstractJaButtonElement.classList.add("title-block_changed-button");
-    abstractEnButtonElement.classList.remove("title-block_changed-button");
+  abstractToJaSwitchElement.addEventListener("click", () => {
+    abstractEnElement.classList.remove("active");
+    abstractJaElement.classList.add("active");
+    abstractToEnSwitchElement.classList.add("active");
+    abstractToJaSwitchElement.classList.remove("active");
   });
 
-  const figureElement = document.createElement("div");
+  if (paper.figures.length > 0) {
+    // 画像があるパターン
+    const figureTemplate = document.getElementById("figure-template") as HTMLTemplateElement;
 
-  if (paper.figures !== undefined && paper.analized !== "done") {
-    if (0 < paper.figures.length) {
-      const imageTitleElement = document.createElement("div");
+    for (const figure of paper.figures.reverse()) {
+      const figureElement = document.importNode(figureTemplate.content, true);
 
-      figureElement.classList.add("figures-block");
-      imageTitleElement.classList.add("title-block");
+      console.log(figureElement);
 
-      imageTitleElement.textContent = "Images";
+      // 画像を設定
+      const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
+      imgElement.src = figure.figure.url;
 
-      bottomElement.appendChild(imageTitleElement);
-      bottomElement.appendChild(figureElement);
-    }
-  }
-  if (paper.analized !== "Done" && paper.figures.length <= 0) {
-    const imageTitleElement = document.createElement("div");
-    imageTitleElement.classList.add("title-block");
-    imageTitleElement.textContent = "Images";
-    bottomElement.appendChild(imageTitleElement);
-    const imageDoingElement = document.createElement("div");
-    imageDoingElement.classList.add("author-block");
-    imageDoingElement.textContent =
-      "画像を解析中です...(この処理には2, 3分かかることがあります)";
-    bottomElement.appendChild(imageDoingElement);
-  }
+      // 画像を囲むdivがクリックされたときの処理
+      const imgWrapperElement = figureElement.querySelector(".paper--figure-wrapper")!;
+      imgWrapperElement.addEventListener("click", () => {
+        const modalElement = document.getElementById("figure-modal")!;
 
-  //画像&モーダル
-  if (paper.figures !== undefined) {
-    for (let i = 0; i < paper.figures.length; i++) {
-      const defaultHrefElement = document.createElement("div");
-      const defaultImgElement = document.createElement("img");
-      const modalElement = document.createElement("div");
-      const modalHrefElement = document.createElement("div");
-      const modalWindowElement = document.createElement("div");
-      const modalContentElement = document.createElement("div");
-      const modalImgElement = document.createElement("img");
-      const modalImgExplanationElement = document.createElement("p");
-      const modalCloseElement = document.createElement("div");
+        // 画像を入れ込む
+        const modalImgElement = modalElement.querySelector(".modal--img")! as HTMLImageElement;
+        modalImgElement.src = figure.figure.url;
 
-      defaultHrefElement.onclick = function(): void {
+        // 画像の説明を入れ込む
+        const modalTextElement = modalElement.querySelector(".modal--text") as HTMLParagraphElement;
+        modalTextElement.textContent = figure.explanation;
+
+        // モーダルのアクティブ化
         modalElement.classList.add("active");
-      };
+      });
 
-      modalCloseElement.onclick = function(): void {
-        modalElement.classList.remove("active");
-      };
+      // 全体を囲うdivに追加
+      figuresElement.appendChild(figureElement);
 
-      modalHrefElement.onclick = function(): void {
-        modalElement.classList.remove("active");
-      };
-
-      // modalのスタイル
-      modalElement.classList.add("modal-wrapper");
-      defaultImgElement.classList.add("figures-block_img");
-      modalHrefElement.classList.add("modal-overlay");
-      modalWindowElement.classList.add("modal-window");
-      modalContentElement.classList.add("modal-content");
-      modalImgElement.classList.add("figures-block_modal-img");
-      modalImgExplanationElement.classList.add("figures-block_text");
-      modalCloseElement.classList.add("modal-close");
-
-      if (paper.figures.length > 0) {
-        defaultImgElement.setAttribute("src", paper.figures[i].figure.url);
-        modalImgElement.setAttribute("src", paper.figures[i].figure.url);
-      } else {
-        defaultImgElement.setAttribute(
-          "src",
-          "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
-        );
-        modalImgElement.setAttribute(
-          "src",
-          "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
-        );
-      }
-
-      modalImgExplanationElement.textContent = paper.figures[i].explanation;
-      modalCloseElement.setAttribute("href", "#!");
-      modalCloseElement.textContent = "✕";
-
-      figureElement.appendChild(defaultHrefElement);
-      defaultHrefElement.appendChild(defaultImgElement);
-      figureElement.appendChild(modalElement);
-      modalElement.appendChild(modalHrefElement);
-      modalElement.appendChild(modalWindowElement);
-      modalWindowElement.appendChild(modalContentElement);
-      modalContentElement.appendChild(modalImgElement);
-      modalContentElement.appendChild(modalImgExplanationElement);
-      modalWindowElement.appendChild(modalCloseElement);
+      // 解析中の表示を消す
+      figureAnalyzingElement.classList.remove("active");
     }
+  } else if (paper.analized === "Done") {
+    // 解析が終了しているが画像が無いパターン
+    // 解析中の表示を消す
+    figureAnalyzingElement.classList.remove("active");
   }
 
   // フッターボタン
-  footerButtomElement.setAttribute("id", "url");
-  footerButtomElement.setAttribute("data-element-id", "footer-float");
-  footerHrefElement.setAttribute("href", paper.pdf_url);
-  footerHrefElement.textContent = "PDF版を読む";
-
-  abstractTitleElement.textContent = "Abstract";
-  authorTitleElement.textContent = "Author";
-  journalTitleElement.textContent = "Journal";
-  urlTitleElement.textContent = "arXivURL";
-
-  // 子Elementをpaper Elementに挿入
-  paperElement.appendChild(topElement);
-  topElement.appendChild(titleElement);
-  topElement.appendChild(jaTitleElement);
-  topElement.appendChild(dateElement);
-
-  //bottom
-  bottomElement.appendChild(abstractTitleElement);
-  bottomElement.appendChild(abstractElement);
-  bottomElement.appendChild(abstractJaElement);
-  abstractTitleElement.appendChild(abstractJaButtonElement);
-  abstractTitleElement.appendChild(abstractEnButtonElement);
-  bottomElement.appendChild(journalTitleElement);
-  bottomElement.appendChild(journalElement);
-  bottomElement.appendChild(showFooterElement);
-  bottomElement.appendChild(authorTitleElement);
-
-  const authorElement = document.createElement("div");
-  authorElement.classList.add("author-block");
-  bottomElement.appendChild(authorElement);
+  pdfLinkElement.href = paper.pdf_url;
 
   // 著者
-  if (paper.authors !== undefined) {
-    for (let t = 0; t < paper.authors.length; t++) {
-      const authorNameElement = document.createElement("div");
-      authorNameElement.classList.add("author-block_name");
-      authorNameElement.textContent = paper.authors[t].name;
-      authorElement.appendChild(authorNameElement);
-    }
+  for (const author of paper.authors) {
+    const authorElement = document.createElement("div");
+    authorElement.classList.add("paper--author");
+    authorElement.textContent = author.name;
+    authorsElement.appendChild(authorElement);
   }
 
-  bottomElement.appendChild(urlTitleElement);
-  bottomElement.appendChild(urlElement);
+  arxivLinkElement.href = paper.url;
+  arxivLinkElement.textContent = paper.url;
 
-  bottomElement.appendChild(footerButtomElement);
-  footerButtomElement.appendChild(footerButtonContentElement);
-  footerButtonContentElement.appendChild(footerHrefElement);
-
-  const figureUrl = `${railsHost}/papers/get_figure`;
   if (paper.analized === "ToDo") {
+    const getFigureUrl = `${railsHost}/papers/get_figure`;
     // eslint-disable-next-line @typescript-eslint/camelcase
-    axios.post(figureUrl, { paper_id: paper.id }).then(res => {
+    axios.post(getFigureUrl, { paper_id: paper.id }).then(res => {
       const paper = res.data as Paper;
-      if (mainElement && mainContentsElement) {
-        mainElement.textContent = null;
-        mainContentsElement.textContent = null;
-      }
+      appElement.textContent = null;
       appendPapers([paper]);
     });
   }
@@ -283,8 +135,7 @@ const appendPapers = (papers: Paper[]): void => {
   mainElement.appendChild(paperElement);
 
   // bodyにpaper elementを挿入
-  if (mainContentsElement === null) return;
-  mainContentsElement.appendChild(bottomElement);
+  appElement.appendChild(paperElement);
 
   // railsにabstractの翻訳リクエストを飛ばす
   if (!paper.abstract_ja)
@@ -302,11 +153,24 @@ const appendPapers = (papers: Paper[]): void => {
       });
 };
 
+const closeModal = (): void => {
+  const modal = document.getElementById("figure-modal")!;
+  modal.classList.remove("active");
+};
+
 window.addEventListener("DOMContentLoaded", () => {
+  paperTemplate = document.getElementById("paper-template") as HTMLTemplateElement;
+
   const sourceUrl = `${railsHost}/search/get_xml`;
   // eslint-disable-next-line @typescript-eslint/camelcase
   axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);
   });
+
+  const modalOverlay = document.getElementById("modal-overlay")!;
+  const modalCloseButton = document.getElementById("modal-close")!;
+
+  modalOverlay.addEventListener("click", closeModal);
+  modalCloseButton.addEventListener("click", closeModal);
 });
