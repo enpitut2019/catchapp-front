@@ -19,7 +19,7 @@
   </h1>
   <main id="main"></main>
   <div class="paging-block" id="next-button">
-    <p class="paging-block_text">
+    <p class="paging-block--text">
       さらに読み込む
     </p>
   </div>
@@ -32,17 +32,19 @@
 
   <template id="paper-template">
     <a class="paper">
-      <div class="paper--title"></div>
-      <div class="paper--jatitle"></div>
+      <div class="paper--title">
+        <div class="paper--title__en"></div>
+        <div class="paper--title__ja"></div>
+      </div>
       <div class="paper--content">
-        <div class="paper--content--left">
-          <div class="paper--content--left--figures">
-            <img class="paper--content--left--figures--img">
+        <div class="paper--content__left">
+          <div class="paper--figure-wrapper">
+            <img class="paper--figure">
           </div>
         </div>
-        <div class="paper--content--text">
-          <div class="paper--content--text--authors"></div>
-          <div class="paper--content--text--date"></div>
+        <div class="paper--content__right">
+          <div class="paper--authors"></div>
+          <div class="paper--date"></div>
         </div>
       </div>
     </a>

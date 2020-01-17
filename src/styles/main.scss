@@ -1,11 +1,7 @@
 @import "variables";
 @import "global.scss";
 
-main {
-  max-width: 798px;
-  margin: auto;
-}
-
+// 論文リストのアイテム(1論文)
 .paper {
   margin: 1rem auto;
   padding: 1rem;
@@ -19,87 +15,70 @@ main {
   }
 
   &--title {
-    font-size: $font-size-m;
-    font-weight: bolder;
-    color: $base-blue;
-  }
-
-  &--jatitle {
-    font-size: $font-size-s;
     font-weight: bolder;
     color: $base-blue;
     margin-bottom: $base-space-2;
+
+    &__en {
+      font-size: $font-size-m;
+    }
+
+    &__ja {
+      font-size: $font-size-s;
+    }
   }
 
   &--content {
     display: flex;
-    &--left {
+
+    &__left {
       width: 50%;
-      &--figures {
-        //border: 1px solid;
-        //margin-bottom: $base-space-2;
-        //margin-top: $base-space;
-        //width: 100%;
-        //height: 50%;
-        &--img {
-          width: 100%;
-          object-fit: cover;
-          margin-right: $base-space;
-          margin-bottom: $base-space;
-        }
-
-        @media screen and (max-width: 600px) {
-          &--no-img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            margin-right: $base-space;
-            margin-bottom: $base-space;
-          }
-        }
-
-        @media screen and (min-width: 500px) {
-          &--no-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            margin-right: $base-space;
-            margin-bottom: $base-space;
-          }
-        }
-      }
-      &--citeandcited {
-        border: 1px solid black;
-        display: flex;
-        &--cite {
-          margin-right: $base-space-4;
-          font-size: $font-size-s;
-        }
-        &--cited {
-          margin-right: $base-space-4;
-          font-size: $font-size-s;
-        }
-      }
     }
-    &--text {
+
+    &__right {
       width: 50%;
       margin-bottom: $base-space-2;
       margin-top: $base-space;
       margin-left: $base-space-2;
+    }
+  }
 
-      &--authors {
-        font-size: $font-size-s;
+  &--figure {
+    object-fit: cover;
+    margin-right: $base-space;
+    margin-bottom: $base-space;
+
+    &__no-img {
+      @media screen and (max-width: 600px) {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        margin-right: $base-space;
+        margin-bottom: $base-space;
       }
 
-      &--keywords {
-        font-size: $font-size-s;
-      }
-
-      &--date {
-        font-size: $font-size-s;
+      @media screen and (min-width: 500px) {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        margin-right: $base-space;
+        margin-bottom: $base-space;
       }
     }
   }
+
+  &--authors {
+    font-size: $font-size-s;
+  }
+
+  &--date {
+    font-size: $font-size-s;
+  }
+}
+
+main {
+  max-width: 798px;
+  margin: auto;
 }
 
 .paging-block {
@@ -109,7 +88,8 @@ main {
   background-color: $base-blue-2;
   border-radius: 5px;
   cursor: pointer;
-  &_text {
+
+  &--text {
     display: flex;
     line-height: 50px;
     height: 50px;
@@ -130,32 +110,38 @@ main {
   width: 80px;
   height: 50px;
   margin: 8px auto;
+
+  div {
+    position: absolute;
+    top: 16.5px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: $base-blue-2;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+    &:nth-child(1) {
+      left: 8px;
+      animation: lds-ellipsis1 0.6s infinite;
+    }
+
+    &:nth-child(2) {
+      left: 8px;
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+
+    &:nth-child(3) {
+      left: 32px;
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+
+    &:nth-child(4) {
+      left: 56px;
+      animation: lds-ellipsis3 0.6s infinite;
+    }
+  }
 }
-.lds-ellipsis div {
-  position: absolute;
-  top: 16.5px;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: $base-blue-2;
-  animation-timing-function: cubic-bezier(0, 1, 1, 0);
-}
-.lds-ellipsis div:nth-child(1) {
-  left: 8px;
-  animation: lds-ellipsis1 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(2) {
-  left: 8px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(3) {
-  left: 32px;
-  animation: lds-ellipsis2 0.6s infinite;
-}
-.lds-ellipsis div:nth-child(4) {
-  left: 56px;
-  animation: lds-ellipsis3 0.6s infinite;
-}
+
 @keyframes lds-ellipsis1 {
   0% {
     transform: scale(0);

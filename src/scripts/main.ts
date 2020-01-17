@@ -39,17 +39,11 @@ const appendPapers = (papers: Paper[]): void => {
     const paperElement = document.importNode(paperTemplate.content, true);
 
     const paperAnchorElement = paperElement.querySelector(".paper")!;
-    const titleElement = paperElement.querySelector(".paper--title")!;
-    const jaTitleElement = paperElement.querySelector(".paper--jatitle")!;
-    const authorsElement = paperElement.querySelector(
-      ".paper--content--text--authors"
-    )!;
-    const dateElement = paperElement.querySelector(
-      ".paper--content--text--date"
-    )!;
-    const figureImgElement = paperElement.querySelector(
-      ".paper--content--left--figures--img"
-    )!;
+    const titleElement = paperElement.querySelector(".paper--title__en")!;
+    const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
+    const authorsElement = paperElement.querySelector(".paper--authors")!;
+    const dateElement = paperElement.querySelector(".paper--date")!;
+    const figureImgElement = paperElement.querySelector(".paper--figure")!;
 
     paperAnchorElement.setAttribute(
       "href",
@@ -74,10 +68,10 @@ const appendPapers = (papers: Paper[]): void => {
     if (papers[idx].figures.length > 0) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
     } else if (paper.analized !== "Done") {
-      figureImgElement.classList.add("paper--content--left--figures--no-img");
+      figureImgElement.classList.add("paper--figure__no-img");
       figureImgElement.setAttribute("src", images["Unanalyzed"]);
     } else {
-      figureImgElement.classList.add("paper--content--left--figures--no-img");
+      figureImgElement.classList.add("paper--figure__no-img");
       figureImgElement.setAttribute(
         "src",
         "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
