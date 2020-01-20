@@ -45,7 +45,7 @@ const appendPapers = (papers: Paper[]): void => {
     const dateElement = paperElement.querySelector(".paper--date")!;
     const figureImgElement = paperElement.querySelector(".paper--figure")!;
 
-    paperAnchorElement.setAttribute("href", `/detail.html?name=${paperNameRaw}&id=${paper.id}`);
+    paperAnchorElement.setAttribute("href", `/paper.html?id=${paper.id}`);
 
     titleElement.textContent = paper.title;
 
