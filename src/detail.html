@@ -8,6 +8,7 @@
   <title>Document</title>
   <script src="./scripts/detail-main.ts"></script>
   <link rel="stylesheet" href="./styles/detail-main.scss">
+  <script src="../node_modules/@webcomponents/template/template.min.js"></script>
 </head>
 
 <body>
@@ -16,15 +17,90 @@
       CatchApp
     </a>
   </h1>
-  <main id="main">
-  </main>
-  <div data-element-id="show-footer-float-marker"></div>
-  <main id="maincontents">
-  </main>
-  <div data-element-id="hide-footer-float-marker"></div>
-  <div class="footer-block"></div>
-  <div class="button-block" id="url" data-element-id="footer-float">
+  <div class="container">
+    <div id="app"></div>
   </div>
+
+  <div id="loading" class="loading-wrapper active">
+    <div class="loading">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <!-- モーダル -->
+  <div id="figure-modal" class="modal--wrapper">
+    <div class="modal--overlay" id="modal-overlay"></div>
+    <div class="modal--window">
+      <div class="modal--content">
+        <img class="modal--img">
+        <p class="modal--text"></p>
+      </div>
+      <div class="modal--close" id="modal-close">✕</div>
+    </div>
+  </div>
+
+  <!-- 論文テンプレート -->
+  <template id="paper-template">
+    <div class="paper">
+      <div class="paper--header">
+        <div class="paper--header-contents">
+          <div class="paper--title">
+            <div class="paper--title__en"></div>
+            <div class="paper--title__ja"></div>
+          </div>
+          <div class="paper--date"></div>
+        </div>
+      </div>
+      <main class="paper--contents">
+        <section class="section image-section">
+          <h3 class="section--title">Images</h3>
+          <div class="paper--figures"></div>
+          <div class="paper--figures__analyzing active">
+            画像を解析中です……(処理には2, 3分かかることがあります)
+          </div>
+          <div class="paper--figures__no-img">
+            画像はありません(または取得できませんでした)
+          </div>
+        </section>
+        <section class="section">
+          <h3 class="section--title">Abstract</h3>
+          <div class="abstract-switch__to-ja">日本語</div>
+          <div class="abstract-switch__to-en active">英語</div>
+          <div class="paper--abstract__en"></div>
+          <div class="paper--abstract__ja active"></div>
+        </section>
+        <section class="section">
+          <h3 class="section--title">Journal</h3>
+          <div class="paper--journal"></div>
+        </section>
+        <section class="section">
+          <h3 class="section--title">Authors</h3>
+          <div class="paper--authors"></div>
+        </section>
+        <section class="section">
+          <h3 class="section--title">arXiv URL</h3>
+          <div>
+            <a class="paper--arxiv-link" target="_blank"></a>
+          </div>
+        </section>
+        <div class="paper--pdf-button-wrapper">
+          <div class="paper--pdf-button">
+            <a class="paper--pdf-link" target="_blank">PDF版を読む</a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </template>
+
+  <!-- 論文画像テンプレート -->
+  <template id="figure-template">
+    <div class="paper--figure-wrapper">
+      <img class="paper--figure" src="" alt="論文画像">
+    </div>
+  </template>
 </body>
 
 </html>

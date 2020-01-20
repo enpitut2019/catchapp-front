@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Document</title>
   <script src="./scripts/main.ts"></script>
+  <script src="../node_modules/@webcomponents/template/template.min.js"></script>
   <link rel="stylesheet" href="./styles/main.scss" />
 </head>
 
@@ -17,8 +18,20 @@
     </a>
   </h1>
   <main id="main"></main>
+
+
+  <!-- ローディングアニメーション -->
+  <div class="loading-wrapper active" id="list-loading">
+    <div class="loading">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
   <div class="paging-block" id="next-button">
-    <p class="paging-block_text">
+    <p class="paging-block--text">
       さらに読み込む
     </p>
   </div>
@@ -28,6 +41,26 @@
     <div></div>
     <div></div>
   </div>
+
+  <template id="paper-template">
+    <a class="paper">
+      <div class="paper--title">
+        <div class="paper--title__en"></div>
+        <div class="paper--title__ja"></div>
+      </div>
+      <div class="paper--content">
+        <div class="paper--content__left">
+          <div class="paper--figure-wrapper">
+            <img class="paper--figure">
+          </div>
+        </div>
+        <div class="paper--content__right">
+          <div class="paper--authors"></div>
+          <div class="paper--date"></div>
+        </div>
+      </div>
+    </a>
+  </template>
 </body>
 
 </html>

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 /**
  * 【import って付いているのは何？】
  * 他のファイルからオブジェクトをインポートするために、importというキーワードを使います。
@@ -28,47 +27,25 @@ const sourceUrl = `${railsHost}/search/get_xml`;
 const parser = new URL(window.location.href);
 const paperNameRaw = parser.searchParams.get("name");
 let currentPage = 0;
+let paperTemplate: HTMLTemplateElement | null = null;
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
 
   papers.forEach((paper, idx) => {
+    if (paperTemplate === null) return;
+
     // Elementを生成
-    const paperElement = document.createElement("a");
-    const paperTextElement = document.createElement("div");
-    const contentElement = document.createElement("div");
-    const leftElement = document.createElement("div");
-    const titleElement = document.createElement("div");
-    const jaTitleElement = document.createElement("div");
-    const authorsElement = document.createElement("div");
-    const citeAndCitedElement = document.createElement("div");
-    const citeElement = document.createElement("div");
-    const citedElement = document.createElement("div");
-    const dateElement = document.createElement("div");
-    const linkElement = document.createElement("a");
-    const figureElement = document.createElement("div");
-    const figureImgElement = document.createElement("img");
+    const paperElement = document.importNode(paperTemplate.content, true);
 
-    // Elementにクラスを適用
-    paperElement.classList.add("paper");
-    paperElement.setAttribute(
-      "href",
-      `/detail.html?name=${paperNameRaw}&id=${paper.id}`
-    );
-    contentElement.classList.add("paper--content");
-    leftElement.classList.add("paper--content--left");
-    citeAndCitedElement.classList.add("paper--content--left--citeandcited");
-    paperTextElement.classList.add("paper--content--text");
-    titleElement.classList.add("paper--title");
-    jaTitleElement.classList.add("paper--jatitle");
-    authorsElement.classList.add("paper--content--text--authors");
-    citeElement.classList.add("paper--content--left--citeandcited--cite");
-    citedElement.classList.add("paper--content--left--citeandcited--cited");
+    const paperAnchorElement = paperElement.querySelector(".paper")!;
+    const titleElement = paperElement.querySelector(".paper--title__en")!;
+    const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
+    const authorsElement = paperElement.querySelector(".paper--authors")!;
+    const dateElement = paperElement.querySelector(".paper--date")!;
+    const figureImgElement = paperElement.querySelector(".paper--figure")!;
 
-    dateElement.classList.add("paper--content--text--date");
-
-    figureElement.classList.add("paper--content--left--figures");
-    figureImgElement.classList.add("paper--content--left--figures--img");
+    paperAnchorElement.setAttribute("href", `/detail.html?name=${paperNameRaw}&id=${paper.id}`);
 
     titleElement.textContent = paper.title;
 
@@ -79,42 +56,18 @@ const appendPapers = (papers: Paper[]): void => {
       }
     }
 
-    citeElement.textContent = "cite：" + papers[idx].cite_count;
-    citedElement.textContent = "cited：" + papers[idx].cited_count;
     jaTitleElement.textContent = paper.title_ja || "(和訳しています……)";
-    linkElement.setAttribute("href", paper.url);
-    linkElement.setAttribute("target", "_blank");
-    linkElement.textContent = paper.url;
-    dateElement.textContent = format(
-      new Date(paper.published_at),
-      "yyyy年MM月dd日"
-    );
+    dateElement.textContent = format(new Date(paper.published_at), "yyyy年MM月dd日");
 
     if (papers[idx].figures.length > 0) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
     } else if (paper.analized !== "Done") {
-      figureImgElement.classList.add("paper--content--left--figures--no-img");
+      figureImgElement.classList.add("paper--figure__no-img");
       figureImgElement.setAttribute("src", images["Unanalyzed"]);
     } else {
-      figureImgElement.classList.add("paper--content--left--figures--no-img");
-      figureImgElement.setAttribute(
-        "src",
-        "https://www.music-scene.jp/uploads/junkband/w-noimage_s.jpg"
-      );
+      figureImgElement.classList.add("paper--figure__no-img");
+      figureImgElement.setAttribute("src", images["NoImg"]);
     }
-
-    figureElement.appendChild(figureImgElement);
-
-    // 子Elementをpaper Elementに挿入
-    paperElement.appendChild(titleElement);
-    paperElement.appendChild(jaTitleElement);
-    paperElement.appendChild(contentElement);
-    contentElement.appendChild(leftElement);
-    contentElement.appendChild(paperTextElement);
-    leftElement.appendChild(figureElement);
-    paperTextElement.appendChild(authorsElement);
-
-    paperTextElement.appendChild(dateElement);
 
     // bodyにpaper elementを挿入
     if (mainElement === null) return;
@@ -134,6 +87,14 @@ const appendPapers = (papers: Paper[]): void => {
           return response;
         });
   });
+
+  // ローディングを非アクティブ化
+  const loadingElement = document.getElementById("list-loading")!;
+  loadingElement.classList.remove("active");
+
+  // さらに読むボタンをアクティブ化
+  const getMoreElement = document.getElementById("next-button")!;
+  getMoreElement.classList.add("active");
 };
 
 const getMorePapers = (): void => {
@@ -146,6 +107,7 @@ const getMorePapers = (): void => {
     loadingElement.style.display = "block";
   }
   axios
+    // eslint-disable-next-line @typescript-eslint/camelcase
     .post(sourceUrl, { search_word: paperNameRaw, page: currentPage++ })
     .then(res => {
       const papers = res.data as Paper[];
@@ -161,6 +123,9 @@ const getMorePapers = (): void => {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
+  paperTemplate = document.getElementById("paper-template") as HTMLTemplateElement;
+
+  // eslint-disable-next-line @typescript-eslint/camelcase
   axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);

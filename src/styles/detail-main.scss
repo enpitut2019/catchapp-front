@@ -1,173 +1,141 @@
 @import "variables";
 @import "global.scss";
 
-.paper-block {
-  &_top {
+.paper {
+  &--header {
     background-color: $base-blue;
+  }
+
+  &--header-contents {
     padding: $base-space-2;
     color: $base-white;
-
-    .titleelement-block {
-      font-size: $font-size-l;
-      font-weight: bolder;
-      margin-bottom: $base-space;
-      margin: auto;
-    }
-
-    .ja-titleelement-block {
-      font-size: $font-size-s;
-      font-weight: bolder;
-      margin-bottom: $base-space-3;
-      margin: auto;
-    }
-
-    .cite-number-block {
-      display: flex;
-      margin-left: 50%;
-      &_cite {
-        font-weight: bolder;
-        margin-bottom: $base-space;
-        border: 1px solid;
-        padding: 4px;
-        width: 90%;
-        text-align: center;
-      }
-    }
-
-    .date-block {
-      margin-bottom: $base-space;
-      text-align: right;
-      font-weight: bolder;
-      margin-top: $base-space-2;
-    }
+    font-weight: bolder;
 
     @media screen and (min-width: 500px) {
-      .titleelement-block {
-        max-width: 60%;
-        margin: 0 auto;
-      }
-
-      .ja-titleelement-block {
-        max-width: 60%;
-        margin: 0 auto;
-      }
-
-      .cite-number-block {
-        max-width: 60%;
-        margin: 0 auto;
-      }
-
-      .date-block {
-        max-width: 60%;
-        margin: 0 auto;
-      }
+      width: 80%;
+      max-width: 798px;
+      margin: 0 auto;
+      padding-left: $base-space-4;
     }
   }
 
-  &_bottom {
-    padding: $base-space-2;
-
-    .author-block {
-      margin-bottom: $base-space-2;
-      &_name {
-        margin-right: $base-space;
-      }
-    }
-
-    .keyword-block {
-      margin-bottom: $base-space-2;
-    }
-
-    .journal-block {
-      margin-bottom: $base-space-2;
-    }
-
-    .abstract-block {
-      margin-bottom: $base-space-2;
-    }
-
-    .url-block {
+  &--title {
+    &__en {
+      font-size: $font-size-l;
       margin-bottom: $base-space;
     }
 
-    .figures-block {
-      border: 1px solid;
-      padding: $base-space $base-space 0;
-      margin-bottom: $base-space-2;
-      margin-top: $base-space;
+    &__ja {
+      font-size: $font-size-s;
+      margin-bottom: $base-space-3;
+    }
+  }
+
+  &--date {
+    margin-bottom: $base-space;
+    text-align: right;
+    margin-top: $base-space-2;
+  }
+
+  &--contents {
+    padding: $base-space-2;
+    padding-bottom: 100px;
+
+    @media screen and (min-width: 500px) {
+      width: 80%;
+      max-width: 798px;
+      margin: 0 auto;
+      padding-left: $base-space-4;
+    }
+  }
+
+  &--figures {
+    display: none;
+    border: 1px solid;
+    padding: $base-space $base-space 0;
+    margin-bottom: $base-space-2;
+    margin-top: $base-space;
+
+    &.active {
       display: flex;
-
-      &_img {
-        width: 100%;
-        height: 100px;
-        object-fit: cover;
-        margin-right: $base-space;
-        margin-bottom: $base-space;
-
-        &:nth-child(3n) {
-          margin-right: 0px;
-        }
-      }
-
-      &_modal-img {
-        width: 100%;
-        margin-right: $base-space;
-        margin-bottom: $base-space;
-      }
-
-      &_text {
-        font-size: $font-size-ss;
-      }
     }
 
-    .title-block {
-      font-size: $font-size-m;
-      color: $base-color;
-      font-weight: bolder;
-      display: flex;
+    &__analyzing,
+    &__no-img {
+      display: none;
 
-      &_change-button {
-        width: 50px;
-        height: 20px;
-        text-align: center;
-        font-size: $font-size-ss;
-        border: 1px solid $base-color;
-        border-radius: 5px;
-        margin-left: $base-space-2;
-        margin-top: $base-space;
-        cursor: pointer;
-      }
-
-      &_changed-button {
-        width: 50px;
-        height: 20px;
-        text-align: center;
-        font-size: $font-size-ss;
-        color: #fff;
-        border: 1px solid $base-color;
-        border-radius: 5px;
-        background-color: $base-color;
-        margin-left: $base-space-2;
-        margin-top: $base-space;
-        cursor: pointer;
+      &.active {
+        display: block;
       }
     }
   }
 
-  @media screen and (min-width: 500px) {
-    &_bottom {
-      max-width: 60%;
-      margin: 0 auto;
-      padding-left: $base-space-4;
+  &--figure {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    margin-right: $base-space;
+    margin-bottom: $base-space;
+  }
+
+  &--abstract {
+    &__en,
+    &__ja {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
+  &--authors {
+    margin-bottom: $base-space-2;
+  }
+}
+
+.section {
+  margin-bottom: $base-space-2;
+
+  &--title {
+    font-size: $font-size-m;
+    color: $base-color;
+    font-weight: bolder;
+    margin: 0;
+    display: inline-block;
+  }
+}
+
+.abstract-switch {
+  &__to-ja,
+  &__to-en {
+    width: 50px;
+    height: 20px;
+    text-align: center;
+    font-size: $font-size-ss;
+    background-color: $base-color;
+    color: white;
+    border: 1px solid $base-color;
+    border-radius: 5px;
+    margin-left: $base-space-2;
+    margin-top: $base-space;
+    cursor: pointer;
+    display: inline-block;
+
+    &.active {
+      background-color: white;
+      color: $base-color;
     }
   }
 }
 
 // SP用
-@media screen and (max-width: 600px) {
-  .button-block {
-    display: block;
+@media screen and (max-width: 500px) {
+  .paper--pdf-button-wrapper {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.09);
     bottom: 0;
     box-sizing: border-box;
@@ -175,157 +143,167 @@
     background-color: #fff;
     z-index: 3;
     left: 0px;
-    &_content {
-      border-radius: 5px;
-      width: 80%;
-      height: 45px;
-      margin: 8px auto calc(8px * 2);
-      background-color: $base-color;
-      box-shadow: 0 4px 0 0 $base-color-2;
-      box-sizing: border-box;
-      width: 90%;
-      background-color: $base-color;
-      z-index: 3;
-      left: 0px;
-      .link-block {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        margin: $base-space;
-        cursor: pointer;
-        width: 100%;
-        font-size: $font-size-m;
-        color: #fff;
-        height: inherit;
-        font-weight: bold;
-      }
-    }
+    height: 75px;
+  }
+
+  .paper--pdf-button {
+    border-radius: 5px;
+    width: 80%;
+    height: 45px;
+    margin: 8px auto calc(8px * 2);
+    background-color: $base-color;
+    box-shadow: 0 4px 0 0 $base-color-2;
+    box-sizing: border-box;
+    width: 90%;
+    background-color: $base-color;
+    z-index: 3;
+    left: 0px;
+  }
+
+  .paper--pdf-link {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: $font-size-m;
+    color: #fff;
+    height: inherit;
+    font-weight: bold;
+    line-height: 45px;
   }
 }
 
 // PC用
 @media screen and (min-width: 500px) {
-  .button-block {
+  .paper--pdf-button-wrapper {
     display: block;
     position: fixed;
     bottom: 0;
     box-sizing: border-box;
     z-index: 3;
     right: 10%;
-    &_content {
-      border-radius: 100px;
-      width: 150px;
-      height: 150px;
-      border: 1px solid $base-color;
-      margin: 8px auto calc(8px * 2);
-      background-color: $base-color;
-      box-shadow: 0 6px $base-color-2;
-      box-sizing: border-box;
+  }
 
-      .link-block {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        cursor: pointer;
-        width: 150px;
-        font-size: $font-size-sm;
-        font-weight: bold;
-        color: #fff;
-        height: 150px;
-        line-height: 150px;
-      }
-    }
+  .paper--pdf-button {
+    border-radius: 100px;
+    width: 150px;
+    height: 150px;
+    border: 1px solid $base-color;
+    margin: 8px auto calc(8px * 2);
+    background-color: $base-color;
+    box-shadow: 0 6px $base-color-2;
+    box-sizing: border-box;
+  }
+
+  .paper--pdf-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    width: 150px;
+    font-size: $font-size-sm;
+    font-weight: bold;
+    color: #fff;
+    height: 150px;
+    line-height: 150px;
   }
 }
 
 // モーダル付近のcss
-.modal-wrapper {
-  z-index: 999;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 60px 10px;
-  text-align: center;
+.modal {
+  &--wrapper {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 60px 10px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  &--wrapper.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s, visibility 0.4s;
+  }
+
+  &--wrapper::after {
+    display: inline-block;
+    height: 100%;
+    margin-left: -0.05em;
+    vertical-align: middle;
+    content: "";
+  }
+
+  &--window {
+    box-sizing: border-box;
+    display: inline-block;
+    z-index: 20;
+    position: relative;
+    width: 85%;
+    max-width: 600px;
+    padding: 30px 30px 15px;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+    vertical-align: middle;
+  }
+
+  &--content {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  &--overlay {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+  }
+
+  &--close {
+    z-index: 20;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 35px;
+    color: #95979c !important;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 35px;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    cursor: pointer;
+  }
+
+  &--close:hover {
+    color: #2b2e38 !important;
+  }
 }
 
-.modal-wrapper:not(.active) {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-}
-
-.modal-wrapper.active {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.4s, visibility 0.4s;
-}
-
-.modal-wrapper::after {
-  display: inline-block;
-  height: 100%;
-  margin-left: -0.05em;
-  vertical-align: middle;
-  content: "";
-}
-
-.modal-wrapper .modal-window {
-  box-sizing: border-box;
-  display: inline-block;
-  z-index: 20;
-  position: relative;
-  width: 85%;
-  max-width: 600px;
-  padding: 30px 30px 15px;
-  border-radius: 2px;
-  background: #fff;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
-  vertical-align: middle;
-}
-
-.modal-wrapper .modal-window .modal-content {
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-.modal-overlay {
-  z-index: 10;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
-  cursor: pointer;
-}
-
-.modal-wrapper .modal-close {
-  z-index: 20;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 35px;
-  color: #95979c !important;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 35px;
-  text-align: center;
-  text-decoration: none;
-  text-indent: 0;
-  cursor: pointer;
-}
-
-.modal-wrapper .modal-close:hover {
-  color: #2b2e38 !important;
-}
-
-.display-none {
+// ローディング
+.loading-wrapper {
   display: none;
-}
 
-.display-block {
-  display: block;
+  &.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
