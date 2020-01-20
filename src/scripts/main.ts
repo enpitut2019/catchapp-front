@@ -23,7 +23,7 @@ import { format } from "date-fns";
 const images = require("../image/*.png");
 
 const railsHost = process.env.RAILS_HOST;
-const sourceUrl = `${railsHost}/search/get_xml`;
+const sourceUrl = `${railsHost}/papers/search`;
 const parser = new URL(window.location.href);
 const paperNameRaw = parser.searchParams.get("name");
 let currentPage = 0;
@@ -107,8 +107,10 @@ const getMorePapers = (): void => {
     loadingElement.style.display = "block";
   }
   axios
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    .post(sourceUrl, { search_word: paperNameRaw, page: currentPage++ })
+    .get(sourceUrl, {
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      params: { search_word: paperNameRaw, page: currentPage++ }
+    })
     .then(res => {
       const papers = res.data as Paper[];
       appendPapers(papers);
@@ -126,7 +128,7 @@ window.addEventListener("DOMContentLoaded", () => {
   paperTemplate = document.getElementById("paper-template") as HTMLTemplateElement;
 
   // eslint-disable-next-line @typescript-eslint/camelcase
-  axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {
+  axios.get(sourceUrl, { params: { search_word: paperNameRaw } }).then(res => {
     const papers = res.data as Paper[];
     appendPapers(papers);
   });
