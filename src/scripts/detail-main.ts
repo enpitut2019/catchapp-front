@@ -4,18 +4,16 @@ import { format } from "date-fns";
 
 const railsHost = process.env.RAILS_HOST;
 const parser = new URL(window.location.href);
-const paperNameRaw = parser.searchParams.get("name");
 const paperIdRaw = parser.searchParams.get("id");
 const paperId = String(paperIdRaw);
 
 let paperTemplate: HTMLTemplateElement | null = null;
 
-const appendPapers = (papers: Paper[]): void => {
+const appendPapers = (paper: Paper): void => {
   if (paperIdRaw === null) return;
   if (paperTemplate === null) return;
 
-  console.log(papers);
-  const paper = papers.find(paper => paper.id == paperId);
+  console.log(paper);
 
   if (paper === undefined) return;
 
@@ -131,7 +129,7 @@ const appendPapers = (papers: Paper[]): void => {
     axios.post(getFigureUrl, { paper_id: paper.id }).then(res => {
       const paper = res.data as Paper;
       appElement.textContent = null;
-      appendPapers([paper]);
+      appendPapers(paper);
     });
   }
 
@@ -166,11 +164,11 @@ const closeModal = (): void => {
 window.addEventListener("DOMContentLoaded", () => {
   paperTemplate = document.getElementById("paper-template") as HTMLTemplateElement;
 
-  const sourceUrl = `${railsHost}/search/get_xml`;
   // eslint-disable-next-line @typescript-eslint/camelcase
-  axios.post(sourceUrl, { search_word: paperNameRaw }).then(res => {
-    const papers = res.data as Paper[];
-    appendPapers(papers);
+
+  axios.get(`${railsHost}/paper/${paperId}`).then(res => {
+    const paper = res.data as Paper;
+    appendPapers(paper);
   });
 
   const modalOverlay = document.getElementById("modal-overlay")!;
