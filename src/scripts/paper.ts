@@ -84,6 +84,7 @@ const appendPapers = (paper: Paper): void => {
         const modalWindowElement = modalElement.querySelector(".modal--window") as HTMLDivElement;
         const modalContentElement = document.importNode(modalTemplate.content, true);
         const modalImgElement = modalContentElement.querySelector(".modal--img") as HTMLImageElement;
+        const modalImgLinkElement = modalContentElement.querySelector(".modal--img-link") as HTMLAnchorElement;
         const modalTextElement = modalContentElement.querySelector(".modal--text__en") as HTMLParagraphElement;
         const modalTextJaElement = modalContentElement.querySelector(".modal--text__ja") as HTMLParagraphElement;
         const switchToJaElement = modalContentElement.querySelector(".switch__to-ja") as HTMLDivElement;
@@ -107,6 +108,7 @@ const appendPapers = (paper: Paper): void => {
 
         // 画像を入れ込む
         modalImgElement.src = figure.figure.url;
+        modalImgLinkElement.href = figure.figure.url;
 
         // 画像の説明を入れ込む
         modalTextElement.textContent = figure.caption || figure.explanation || "";
