@@ -37,8 +37,8 @@ const appendPapers = (paper: Paper): void => {
   const authorsElement = paperElement.querySelector(".paper--authors")!;
 
   // 翻訳切り替えボタン
-  const abstractToEnSwitchElement = paperElement.querySelector(".abstract-switch__to-en")!;
-  const abstractToJaSwitchElement = paperElement.querySelector(".abstract-switch__to-ja")!;
+  const abstractToEnSwitchElement = paperElement.querySelector(".switch__to-en")!;
+  const abstractToJaSwitchElement = paperElement.querySelector(".switch__to-ja")!;
 
   // Elementにテキストを挿入
   titleElement.textContent = paper.title;
