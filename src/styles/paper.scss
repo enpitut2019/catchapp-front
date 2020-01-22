@@ -260,6 +260,17 @@
     overflow-y: auto;
   }
 
+  &--text {
+    &__en,
+    &__ja {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
   &--overlay {
     z-index: 10;
     position: absolute;
