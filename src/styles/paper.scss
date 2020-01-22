@@ -259,11 +259,16 @@
     position: relative;
     width: 85%;
     max-width: 600px;
-    padding: 30px 30px 15px;
+    padding: 30px 0 15px;
     border-radius: 2px;
     background: #fff;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
     vertical-align: middle;
+  }
+
+  &--content-wrapper {
+    display: flex;
+    justify-items: center;
   }
 
   &--content {
@@ -303,11 +308,10 @@
     cursor: pointer;
   }
 
-  &--close {
+  &--close,
+  &--control__prev,
+  &--control__next {
     z-index: 20;
-    position: absolute;
-    top: 0;
-    right: 0;
     width: 35px;
     color: #95979c !important;
     font-size: 20px;
@@ -317,6 +321,18 @@
     text-decoration: none;
     text-indent: 0;
     cursor: pointer;
+  }
+
+  &--close {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &--control__prev,
+  &--control__next {
+    font-size: 30px;
+    margin: auto 15px;
   }
 
   &--close:hover {
