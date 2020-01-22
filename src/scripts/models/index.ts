@@ -46,9 +46,11 @@ export interface Keyword {
 export interface Figure {
   figure: {
     url: string;
-    id: string;
   };
-  explanation: string;
+  explanation?: string; // 非推奨
+  caption?: string;
+  caption_ja?: string | null;
+  id: string;
 }
 
 export interface Paper {

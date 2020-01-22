@@ -33,14 +33,24 @@
   <!-- モーダル -->
   <div id="figure-modal" class="modal--wrapper">
     <div class="modal--overlay" id="modal-overlay"></div>
-    <div class="modal--window">
-      <div class="modal--content">
+    <div class="modal--window" id="modal-window">
+      <!-- <div class="modal--content">
         <img class="modal--img">
-        <p class="modal--text"></p>
-      </div>
+        <p class="modal--text__en"></p>
+        <p class="modal--text__ja"></p>
+      </div> -->
       <div class="modal--close" id="modal-close">✕</div>
     </div>
   </div>
+
+  <!-- モーダルテンプレート -->
+  <template id="modal-template">
+    <div class="modal--content">
+      <img class="modal--img">
+      <p class="modal--text__en"></p>
+      <p class="modal--text__ja"></p>
+    </div>
+  </template>
 
   <!-- 論文テンプレート -->
   <template id="paper-template">
