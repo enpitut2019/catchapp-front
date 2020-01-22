@@ -106,7 +106,7 @@
   }
 }
 
-.abstract-switch {
+.switch {
   &__to-ja,
   &__to-en {
     width: 50px;
@@ -258,6 +258,17 @@
   &--content {
     max-height: 80vh;
     overflow-y: auto;
+  }
+
+  &--text {
+    &__en,
+    &__ja {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
   }
 
   &--overlay {

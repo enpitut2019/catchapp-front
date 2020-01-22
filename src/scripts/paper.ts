@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Paper } from "./models";
+import { Paper, Figure } from "./models";
 import { format } from "date-fns";
 
 const railsHost = process.env.RAILS_HOST;
@@ -8,6 +8,8 @@ const paperIdRaw = parser.searchParams.get("id");
 const paperId = String(paperIdRaw);
 
 let paperTemplate: HTMLTemplateElement | null = null;
+
+const figureCaptionTranslate = (figure: Figure): Promise<Figure> => axios.post(`${railsHost}/figure/${figure.id}/translate`).then(res => res.data as Figure);
 
 const appendPapers = (paper: Paper): void => {
   if (paperIdRaw === null) return;
@@ -35,8 +37,8 @@ const appendPapers = (paper: Paper): void => {
   const authorsElement = paperElement.querySelector(".paper--authors")!;
 
   // 翻訳切り替えボタン
-  const abstractToEnSwitchElement = paperElement.querySelector(".abstract-switch__to-en")!;
-  const abstractToJaSwitchElement = paperElement.querySelector(".abstract-switch__to-ja")!;
+  const abstractToEnSwitchElement = paperElement.querySelector(".switch__to-en")!;
+  const abstractToJaSwitchElement = paperElement.querySelector(".switch__to-ja")!;
 
   // Elementにテキストを挿入
   titleElement.textContent = paper.title;
@@ -76,19 +78,53 @@ const appendPapers = (paper: Paper): void => {
 
       // 画像を囲むdivがクリックされたときの処理
       const imgWrapperElement = figureElement.querySelector(".paper--figure-wrapper")!;
-      imgWrapperElement.addEventListener("click", () => {
-        const modalElement = document.getElementById("figure-modal")!;
+      imgWrapperElement.addEventListener("click", async () => {
+        const modalTemplate = document.getElementById("modal-template") as HTMLTemplateElement;
+        const modalElement = document.getElementById("figure-modal") as HTMLDivElement;
+        const modalWindowElement = modalElement.querySelector(".modal--window") as HTMLDivElement;
+        const modalContentElement = document.importNode(modalTemplate.content, true);
+        const modalImgElement = modalContentElement.querySelector(".modal--img") as HTMLImageElement;
+        const modalTextElement = modalContentElement.querySelector(".modal--text__en") as HTMLParagraphElement;
+        const modalTextJaElement = modalContentElement.querySelector(".modal--text__ja") as HTMLParagraphElement;
+        const switchToJaElement = modalContentElement.querySelector(".switch__to-ja") as HTMLDivElement;
+        const switchToEnElement = modalContentElement.querySelector(".switch__to-en") as HTMLDivElement;
+
+        // 言語切替ボタンの挙動
+        switchToEnElement.addEventListener("click", () => {
+          switchToJaElement.classList.add("active");
+          switchToEnElement.classList.remove("active");
+          modalTextElement.classList.add("active");
+          modalTextJaElement.classList.remove("active");
+        });
+        switchToJaElement.addEventListener("click", () => {
+          switchToJaElement.classList.remove("active");
+          switchToEnElement.classList.add("active");
+          modalTextElement.classList.remove("active");
+          modalTextJaElement.classList.add("active");
+        });
+
+        modalWindowElement.textContent = null;
 
         // 画像を入れ込む
-        const modalImgElement = modalElement.querySelector(".modal--img")! as HTMLImageElement;
         modalImgElement.src = figure.figure.url;
 
         // 画像の説明を入れ込む
-        const modalTextElement = modalElement.querySelector(".modal--text") as HTMLParagraphElement;
-        modalTextElement.textContent = figure.explanation;
+        modalTextElement.textContent = figure.caption || figure.explanation || "";
+        if (figure.caption) {
+          modalTextJaElement.textContent = figure.caption_ja || "翻訳中です…";
+        }
+
+        modalWindowElement.appendChild(modalContentElement);
 
         // モーダルのアクティブ化
         modalElement.classList.add("active");
+
+        // 翻訳リクエストの発火と更新
+        // キャプションは存在するが日本語キャプションが存在しない場合に発火させる
+        if (figure.caption !== null && figure.caption_ja === null) {
+          const updatedFigure = await figureCaptionTranslate(figure);
+          modalTextJaElement.textContent = updatedFigure.caption_ja || "";
+        }
       });
 
       // 全体を囲うdivに追加

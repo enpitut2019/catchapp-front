@@ -33,14 +33,28 @@
   <!-- モーダル -->
   <div id="figure-modal" class="modal--wrapper">
     <div class="modal--overlay" id="modal-overlay"></div>
-    <div class="modal--window">
-      <div class="modal--content">
+    <div class="modal--window" id="modal-window">
+      <!-- <div class="modal--content">
         <img class="modal--img">
-        <p class="modal--text"></p>
-      </div>
+        <p class="modal--text__en"></p>
+        <p class="modal--text__ja"></p>
+      </div> -->
       <div class="modal--close" id="modal-close">✕</div>
     </div>
   </div>
+
+  <!-- モーダルテンプレート -->
+  <template id="modal-template">
+    <div class="modal--content">
+      <img class="modal--img">
+      <div class="switches">
+        <div class="switch__to-ja">日本語</div>
+        <div class="switch__to-en active">英語</div>
+      </div>
+      <p class="modal--text__en"></p>
+      <p class="modal--text__ja active"></p>
+    </div>
+  </template>
 
   <!-- 論文テンプレート -->
   <template id="paper-template">
@@ -67,8 +81,8 @@
         </section>
         <section class="section">
           <h3 class="section--title">Abstract</h3>
-          <div class="abstract-switch__to-ja">日本語</div>
-          <div class="abstract-switch__to-en active">英語</div>
+          <div class="switch__to-ja">日本語</div>
+          <div class="switch__to-en active">英語</div>
           <div class="paper--abstract__en"></div>
           <div class="paper--abstract__ja active"></div>
         </section>
