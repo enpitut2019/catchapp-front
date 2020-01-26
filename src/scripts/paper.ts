@@ -81,13 +81,16 @@ const appendPapers = (paper: Paper): void => {
       imgWrapperElement.addEventListener("click", async () => {
         const modalTemplate = document.getElementById("modal-template") as HTMLTemplateElement;
         const modalElement = document.getElementById("figure-modal") as HTMLDivElement;
-        const modalWindowElement = modalElement.querySelector(".modal--window") as HTMLDivElement;
+        const modalContentWrapperElement = modalElement.querySelector(".modal--content-wrapper") as HTMLDivElement;
         const modalContentElement = document.importNode(modalTemplate.content, true);
         const modalImgElement = modalContentElement.querySelector(".modal--img") as HTMLImageElement;
+        const modalImgLinkElement = modalContentElement.querySelector(".modal--img-link") as HTMLAnchorElement;
         const modalTextElement = modalContentElement.querySelector(".modal--text__en") as HTMLParagraphElement;
         const modalTextJaElement = modalContentElement.querySelector(".modal--text__ja") as HTMLParagraphElement;
         const switchToJaElement = modalContentElement.querySelector(".switch__to-ja") as HTMLDivElement;
         const switchToEnElement = modalContentElement.querySelector(".switch__to-en") as HTMLDivElement;
+        const nextButtonElement = modalContentElement.querySelector(".modal--control__next") as HTMLDivElement;
+        const prevButtonElement = modalContentElement.querySelector(".modal--control__prev") as HTMLDivElement;
 
         // 言語切替ボタンの挙動
         switchToEnElement.addEventListener("click", () => {
@@ -103,10 +106,21 @@ const appendPapers = (paper: Paper): void => {
           modalTextJaElement.classList.add("active");
         });
 
-        modalWindowElement.textContent = null;
+        // 前後ボタン
+        if (imgWrapperElement.nextElementSibling === null) nextButtonElement.style.visibility = "hidden";
+        if (imgWrapperElement.previousElementSibling === null) prevButtonElement.style.visibility = "hidden";
+        nextButtonElement.addEventListener("click", () => {
+          (imgWrapperElement.nextElementSibling as HTMLElement).click();
+        });
+        prevButtonElement.addEventListener("click", () => {
+          (imgWrapperElement.previousElementSibling as HTMLElement).click();
+        });
+
+        modalContentWrapperElement.textContent = null;
 
         // 画像を入れ込む
         modalImgElement.src = figure.figure.url;
+        modalImgLinkElement.href = figure.figure.url;
 
         // 画像の説明を入れ込む
         modalTextElement.textContent = figure.caption || figure.explanation || "";
@@ -114,7 +128,7 @@ const appendPapers = (paper: Paper): void => {
           modalTextJaElement.textContent = figure.caption_ja || "翻訳中です…";
         }
 
-        modalWindowElement.appendChild(modalContentElement);
+        modalContentWrapperElement.appendChild(modalContentElement);
 
         // モーダルのアクティブ化
         modalElement.classList.add("active");

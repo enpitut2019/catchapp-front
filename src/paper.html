@@ -34,19 +34,19 @@
   <div id="figure-modal" class="modal--wrapper">
     <div class="modal--overlay" id="modal-overlay"></div>
     <div class="modal--window" id="modal-window">
-      <!-- <div class="modal--content">
-        <img class="modal--img">
-        <p class="modal--text__en"></p>
-        <p class="modal--text__ja"></p>
-      </div> -->
+      <div class="modal--content-wrapper" id="modal-content-wrapper"></div>
       <div class="modal--close" id="modal-close">✕</div>
     </div>
   </div>
 
   <!-- モーダルテンプレート -->
   <template id="modal-template">
+    <div class="modal--control__prev">&lt;</div>
     <div class="modal--content">
-      <img class="modal--img">
+      <a class="modal--img-link" target="_blank">
+        <img class="modal--img">
+      </a>
+      <p class="modal--img-click-caption">画像をクリックすると別タブで開きます</p>
       <div class="switches">
         <div class="switch__to-ja">日本語</div>
         <div class="switch__to-en active">英語</div>
@@ -54,6 +54,7 @@
       <p class="modal--text__en"></p>
       <p class="modal--text__ja active"></p>
     </div>
+    <div class="modal--control__next">&gt;</div>
   </template>
 
   <!-- 論文テンプレート -->
