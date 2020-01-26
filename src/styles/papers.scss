@@ -3,7 +3,6 @@
 
 // 論文リストのアイテム(1論文)
 .paper {
-  margin: 1rem auto;
   padding: 1rem;
   border-bottom: 1px solid black;
   display: block;
@@ -20,7 +19,8 @@
     margin-bottom: $base-space-2;
 
     &__en {
-      font-size: $font-size-m;
+      font-size: $font-size-sm;
+      margin-bottom: $base-space;
     }
 
     &__ja {
