@@ -9,7 +9,7 @@
   margin: 80px auto 0;
   @media screen and (min-width: 500px) {
     margin: 120px auto 0;
-    font-size: $font-size-30;
+    font-size: $font-size-ll;
   }
 }
 
@@ -46,11 +46,14 @@
 
 .text-block {
   text-align: center;
-  font-size: $font-size-ss;
-  @media screen and (min-width: 500px) {
-    font-size: $font-size-s;
+  margin-bottom: $base-space-2;
+  &--plain {
+    font-size: $font-size-ss;
+    @media screen and (min-width: 500px) {
+      font-size: $font-size-s;
+    }
   }
-  &_link {
+  &--link {
     font-size: $font-size-ss;
     @media screen and (min-width: 500px) {
       font-size: $font-size-s;
