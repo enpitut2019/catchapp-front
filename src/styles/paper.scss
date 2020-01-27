@@ -21,7 +21,7 @@
 
   &--title {
     &__en {
-      font-size: $font-size-l;
+      font-size: $font-size-m;
       margin-bottom: $base-space;
     }
 
@@ -51,13 +51,14 @@
 
   &--figures {
     display: none;
-    border: 1px solid;
-    padding: $base-space $base-space 0;
     margin-bottom: $base-space-2;
     margin-top: $base-space;
 
     &.active {
       display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     &__analyzing,
@@ -70,12 +71,18 @@
     }
   }
 
+  &--figure-wrapper {
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    margin: -0.5px;
+    border: 1px solid $base-color-2;
+  }
+
   &--figure {
     width: 100%;
-    height: 100px;
-    object-fit: cover;
-    margin-right: $base-space;
-    margin-bottom: $base-space;
+    height: 100%;
+    object-fit: contain;
   }
 
   &--abstract {
@@ -103,6 +110,7 @@
     font-weight: bolder;
     margin: 0;
     display: inline-block;
+    margin-right: $base-space-2;
   }
 }
 
@@ -117,7 +125,6 @@
     color: white;
     border: 1px solid $base-color;
     border-radius: 5px;
-    margin-left: $base-space-2;
     margin-top: $base-space;
     cursor: pointer;
     display: inline-block;
@@ -126,6 +133,10 @@
       background-color: white;
       color: $base-color;
     }
+  }
+
+  &__to-en {
+    margin-left: $base-space-2;
   }
 }
 
@@ -248,16 +259,26 @@
     position: relative;
     width: 85%;
     max-width: 600px;
-    padding: 30px 30px 15px;
+    padding: 30px 0 15px;
     border-radius: 2px;
     background: #fff;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
     vertical-align: middle;
   }
 
+  &--content-wrapper {
+    display: flex;
+    justify-items: center;
+  }
+
   &--content {
     max-height: 80vh;
     overflow-y: auto;
+  }
+
+  &--img-click-caption {
+    font-size: 0.5rem;
+    margin: 0;
   }
 
   &--text {
@@ -271,6 +292,11 @@
     }
   }
 
+  &--img {
+    max-width: 100%;
+    max-height: 50vh;
+  }
+
   &--overlay {
     z-index: 10;
     position: absolute;
@@ -282,11 +308,10 @@
     cursor: pointer;
   }
 
-  &--close {
+  &--close,
+  &--control__prev,
+  &--control__next {
     z-index: 20;
-    position: absolute;
-    top: 0;
-    right: 0;
     width: 35px;
     color: #95979c !important;
     font-size: 20px;
@@ -296,6 +321,18 @@
     text-decoration: none;
     text-indent: 0;
     cursor: pointer;
+  }
+
+  &--close {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &--control__prev,
+  &--control__next {
+    font-size: 30px;
+    margin: auto 15px;
   }
 
   &--close:hover {
