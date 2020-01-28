@@ -109,7 +109,7 @@ const getMorePapers = (): void => {
   axios
     .get(sourceUrl, {
       // eslint-disable-next-line @typescript-eslint/camelcase
-      params: { search_word: paperNameRaw, page: currentPage++ }
+      params: { search_word: paperNameRaw, page: ++currentPage }
     })
     .then(res => {
       const papers = res.data as Paper[];
