@@ -5,7 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Document</title>
+  <meta name="description" content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。" />
+  <title>CatchApp</title>
   <script src="./scripts/papers.ts"></script>
   <script src="../node_modules/@webcomponents/template/template.min.js"></script>
   <link rel="stylesheet" href="./styles/papers.scss" />
@@ -22,14 +23,13 @@
   <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
 </head>
 
-<body>
+<body class="tex2jax_ignore">
   <h1 class="header-block">
     <a href="/">
       CatchApp
     </a>
   </h1>
   <main id="main"></main>
-
 
   <!-- ローディングアニメーション -->
   <div class="loading-wrapper active" id="list-loading">
@@ -56,13 +56,13 @@
   <template id="paper-template">
     <a class="paper">
       <div class="paper--title">
-        <div class="paper--title__en"></div>
+        <div class="paper--title__en tex2jax_process"></div>
         <div class="paper--title__ja"></div>
       </div>
       <div class="paper--content">
         <div class="paper--content__left">
           <div class="paper--figure-wrapper">
-            <img class="paper--figure">
+            <img class="paper--figure" />
           </div>
         </div>
         <div class="paper--content__right">
