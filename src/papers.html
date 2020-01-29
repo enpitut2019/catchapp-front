@@ -9,6 +9,17 @@
   <script src="./scripts/papers.ts"></script>
   <script src="../node_modules/@webcomponents/template/template.min.js"></script>
   <link rel="stylesheet" href="./styles/papers.scss" />
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } ,
+    "HTML-CSS": {
+      availableFonts: ["TeX"],
+      undefinedFamily: "'Raleway', Helvetica, Arial, sans-serif"
+    }});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+  <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
 </head>
 
 <body>
