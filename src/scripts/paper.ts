@@ -2,6 +2,9 @@ import axios from "axios";
 import { Paper, Figure } from "./models";
 import { format } from "date-fns";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let MathJax: any;
+
 const railsHost = process.env.RAILS_HOST;
 const parser = new URL(window.location.href);
 const paperIdRaw = parser.searchParams.get("id");
@@ -204,6 +207,8 @@ const appendPapers = (paper: Paper): void => {
         abstractJaElement.textContent = response.data.text;
         return response;
       });
+
+  MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 };
 
 const closeModal = (): void => {
