@@ -7,7 +7,7 @@
   }
 
   &--header-contents {
-    padding: $base-space-2;
+    padding: $base-space $base-space-2;
     color: $base-white;
     font-weight: bolder;
 
@@ -15,26 +15,37 @@
       width: 80%;
       max-width: 798px;
       margin: 0 auto;
-      padding-left: $base-space-4;
+      padding: $base-space-2;
     }
   }
 
   &--title {
     &__en {
-      font-size: $font-size-m;
+      font-size: $font-size-ss;
       margin-bottom: $base-space;
+      @media screen and (min-width: 500px) {
+        font-size: $font-size-m;
+      }
     }
 
     &__ja {
-      font-size: $font-size-s;
-      margin-bottom: $base-space-3;
+      font-size: $font-size-ss;
+      margin-bottom: $base-space;
+      @media screen and (min-width: 500px) {
+        font-size: $font-size-s;
+        margin-bottom: $base-space-2;
+      }
     }
   }
 
   &--date {
-    margin-bottom: $base-space;
     text-align: right;
-    margin-top: $base-space-2;
+    margin-top: $base-space;
+    font-size: $font-size-ss;
+    @media screen and (min-width: 500px) {
+      font-size: $font-size-s;
+      margin-top: $base-space-2;
+    }
   }
 
   &--contents {
