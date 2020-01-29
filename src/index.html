@@ -1,32 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。"
+    />
+    <title>CatchApp</title>
+    <link rel="stylesheet" href="./styles/index.scss" />
+    <script src="../node_modules/@webcomponents/template/template.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="./styles/index.scss">
-  <script src="../node_modules/@webcomponents/template/template.min.js"></script>
-</head>
-
-<body>
-  <h1 class="header-block">
-    <a href="/">
+  <body>
+    <h1 class="header-block">
+      <a href="/">
+        CatchApp
+      </a>
+    </h1>
+    <div class="title-block">
       CatchApp
-    </a>
-  </h1>
-  <div class="title-block">
-    CatchApp
-  </div>
-  <form method="GET" action="papers.html">
-    <div class="form-block">
-      <input type="text" name="name" placeholder="search from CatchApp" class="form-block_form">
-      <div class="form-block_button"><input type="submit" value="Search" class="button-block"></div>
     </div>
-    　　
-  </form>
-  <div class="footer-block"></div>
-</body>
-
+    <form method="GET" action="papers.html">
+      <div class="form-block">
+        <input
+          type="text"
+          name="name"
+          placeholder="search from CatchApp"
+          class="form-block_form"
+        />
+        <div class="form-block_button">
+          <input type="submit" value="Search" class="button-block" />
+        </div>
+      </div>
+    </form>
+    <div class="text-block">
+      <span class="text-block--plain">※この論文データベースのソースは</span
+      ><a
+        href="https://arxiv.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-block--link"
+        >arXiv</a
+      ><span class="text-block--plain">です。</span>
+    </div>
+    <div class="footer-block"></div>
+  </body>
 </html>
