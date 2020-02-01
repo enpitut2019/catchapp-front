@@ -1,6 +1,17 @@
 @import "variables";
 @import "global.scss";
 
+//検索クエリの表示
+.search-result {
+  &--query {
+    margin: $base-space-2 $base-space 0;
+    border: 1px solid black;
+    padding: $base-space;
+    font-size: $font-size-s;
+    border-radius: 4px;
+  }
+}
+
 // 論文リストのアイテム(1論文)
 .paper {
   padding: 1rem;

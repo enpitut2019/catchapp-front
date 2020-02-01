@@ -29,13 +29,21 @@ const paperNameRaw = parser.searchParams.get("name");
 let currentPage = 0;
 let paperTemplate: HTMLTemplateElement | null = null;
 
+// 検索クエリの表示
+const searchResultElement = document.createElement("div");
+const queryTextElement = document.createElement("p");
+searchResultElement.classList.add("search-result");
+queryTextElement.classList.add("search-result--query");
+queryTextElement.textContent = paperNameRaw + " の検索結果";
+searchResultElement.appendChild(queryTextElement);
+
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
 
   papers.forEach((paper, idx) => {
     if (paperTemplate === null) return;
 
-    // Elementを生成
+    // Elementを作成
     const paperElement = document.importNode(paperTemplate.content, true);
 
     const paperAnchorElement = paperElement.querySelector(".paper")!;
@@ -71,7 +79,8 @@ const appendPapers = (papers: Paper[]): void => {
 
     // bodyにpaper elementを挿入
     if (mainElement === null) return;
-    mainElement.appendChild(paperElement);
+    mainElement.appendChild(searchResultElement);
+    searchResultElement.appendChild(paperElement);
 
     if (!paper.title_ja)
       axios
