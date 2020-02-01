@@ -12,6 +12,11 @@
   }
 }
 
+.no-result {
+  margin: $base-space-3;
+  font-size: $font-size-s;
+}
+
 // 論文リストのアイテム(1論文)
 .paper {
   padding: 1rem;

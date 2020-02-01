@@ -39,6 +39,22 @@ searchResultElement.appendChild(queryTextElement);
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
+  console.log(papers.length);
+
+  if (papers.length < 30) {
+    // 検索結果30件未満の場合は「さらに読む」ボタンを表示しない
+    const getMoreElement = document.getElementById("next-button")!;
+    getMoreElement.style.display = "none";
+  }
+
+  if (papers.length === 0) {
+    // 検索結果0件の場合はその旨を表示する
+    const noResultElement = document.createElement("p");
+    noResultElement.classList.add("no-result");
+    noResultElement.textContent = "お探しの論文は見つかりませんでした。キーワードが日本語の場合は英語で入力してください。";
+    if (mainElement === null) return;
+    mainElement.appendChild(noResultElement);
+  }
 
   papers.forEach((paper, idx) => {
     if (paperTemplate === null) return;
