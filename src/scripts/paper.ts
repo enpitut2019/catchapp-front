@@ -15,7 +15,9 @@ const appendPapers = (paper: Paper): void => {
   if (paperIdRaw === null) return;
   if (paperTemplate === null) return;
 
-  console.log(paper);
+  // titleとdescriptionの設定
+  document.title = paper.title;
+  document.querySelector("meta[name='description']")!.setAttribute("content", paper.title_ja);
 
   if (paper === undefined) return;
 
