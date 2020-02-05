@@ -19,6 +19,10 @@ const appendPapers = (paper: Paper): void => {
   document.title = paper.title;
   document.querySelector("meta[name='description']")!.setAttribute("content", paper.title_ja);
 
+  // ogpタグの設定
+  document.querySelector("meta[property='og:title']")!.setAttribute("content", paper.title);
+  document.querySelector("meta[property='og:description']")!.setAttribute("content", paper.title_ja);
+
   if (paper === undefined) return;
 
   const appElement = document.getElementById("app")!;
