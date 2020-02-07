@@ -39,7 +39,6 @@ searchResultElement.appendChild(queryTextElement);
 
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
-  console.log(papers.length);
 
   if (papers.length < 30) {
     // 検索結果30件未満の場合は「さらに読む」ボタンを表示しない
@@ -71,17 +70,26 @@ const appendPapers = (papers: Paper[]): void => {
 
     paperAnchorElement.setAttribute("href", `/paper.html?id=${paper.id}`);
 
-    titleElement.textContent = paper.title;
+    titleElement.textContent = "(" + paper.title + ")";
 
     // Elementにテキストを挿入
     if (papers[idx].authors !== undefined) {
-      for (let i = 0; i < papers[idx].authors.length; i++) {
-        authorsElement.textContent = "Author：" + papers[idx].authors[i].name;
+      let authorLength = 1;
+      for (const author of papers[idx].authors) {
+        const authorElement = document.createElement("span");
+        authorElement.classList.add("paper--authors__name");
+        if (authorLength === papers[idx].authors.length) {
+          authorElement.textContent = author.name;
+        } else {
+          authorElement.textContent = author.name + ",";
+        }
+        authorsElement.appendChild(authorElement);
+        authorLength += 1;
       }
     }
 
     jaTitleElement.textContent = paper.title_ja || "(和訳しています……)";
-    dateElement.textContent = format(new Date(paper.published_at), "yyyy年MM月dd日");
+    dateElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
 
     if (papers[idx].figures.length > 0) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
