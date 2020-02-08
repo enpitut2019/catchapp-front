@@ -29,8 +29,31 @@ const paperNameRaw = parser.searchParams.get("name");
 let currentPage = 0;
 let paperTemplate: HTMLTemplateElement | null = null;
 
+// 検索クエリの表示
+const searchResultElement = document.createElement("div");
+const queryTextElement = document.createElement("p");
+searchResultElement.classList.add("search-result");
+queryTextElement.classList.add("search-result--query");
+queryTextElement.textContent = paperNameRaw + " の検索結果";
+searchResultElement.appendChild(queryTextElement);
+
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
+
+  if (papers.length < 30) {
+    // 検索結果30件未満の場合は「さらに読む」ボタンを表示しない
+    const getMoreElement = document.getElementById("next-button")!;
+    getMoreElement.style.display = "none";
+  }
+
+  if (papers.length === 0) {
+    // 検索結果0件の場合はその旨を表示する
+    const noResultElement = document.createElement("p");
+    noResultElement.classList.add("no-result");
+    noResultElement.textContent = "お探しの論文は見つかりませんでした。キーワードが日本語の場合は英語で入力してください。";
+    if (mainElement === null) return;
+    mainElement.appendChild(noResultElement);
+  }
 
   papers.forEach((paper, idx) => {
     if (paperTemplate === null) return;
@@ -59,17 +82,26 @@ const appendPapers = (papers: Paper[]): void => {
 
     paperAnchorElement.setAttribute("href", `/paper.html?id=${paper.id}`);
 
-    titleElement.textContent = paper.title;
+    titleElement.textContent = "(" + paper.title + ")";
 
     // Elementにテキストを挿入
     if (papers[idx].authors !== undefined) {
-      for (let i = 0; i < papers[idx].authors.length; i++) {
-        authorsElement.textContent = "Author：" + papers[idx].authors[i].name;
+      let authorLength = 1;
+      for (const author of papers[idx].authors) {
+        const authorElement = document.createElement("span");
+        authorElement.classList.add("paper--authors__name");
+        if (authorLength === papers[idx].authors.length) {
+          authorElement.textContent = author.name;
+        } else {
+          authorElement.textContent = author.name + ",";
+        }
+        authorsElement.appendChild(authorElement);
+        authorLength += 1;
       }
     }
 
     jaTitleElement.textContent = paper.title_ja || "(和訳しています……)";
-    dateElement.textContent = format(new Date(paper.published_at), "yyyy年MM月dd日");
+    dateElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
 
     if (papers[idx].figures.length > 0) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
@@ -83,7 +115,8 @@ const appendPapers = (papers: Paper[]): void => {
 
     // bodyにpaper elementを挿入
     if (mainElement === null) return;
-    mainElement.appendChild(paperElement);
+    mainElement.appendChild(searchResultElement);
+    searchResultElement.appendChild(paperElement);
 
     if (!paper.title_ja)
       axios
