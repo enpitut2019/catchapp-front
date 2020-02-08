@@ -22,29 +22,32 @@
   &--title {
     &__en {
       font-size: $font-size-ss;
-      margin-bottom: $base-space;
-      @media screen and (min-width: 500px) {
-        font-size: $font-size-m;
-      }
-    }
-
-    &__ja {
-      font-size: $font-size-ss;
-      margin-bottom: $base-space;
+      margin-bottom: $base-space-2;
       @media screen and (min-width: 500px) {
         font-size: $font-size-s;
         margin-bottom: $base-space-2;
       }
     }
+
+    &__ja {
+      font-size: $font-size-s;
+      margin-bottom: $base-space;
+      @media screen and (min-width: 500px) {
+        font-size: $font-size-m;
+      }
+    }
   }
 
-  &--date {
-    text-align: right;
-    margin-top: $base-space;
-    font-size: $font-size-ss;
-    @media screen and (min-width: 500px) {
-      font-size: $font-size-s;
-      margin-top: $base-space-2;
+  &--nontitle {
+    display: flex;
+    margin-bottom: $base-space;
+
+    &__date {
+      font-size: $font-size-ss;
+      width: 90%;
+      @media screen and (min-width: 500px) {
+        font-size: $font-size-s;
+      }
     }
   }
 
@@ -365,4 +368,10 @@
     align-items: center;
     justify-content: center;
   }
+}
+
+// Twitterシェアボタン
+.twitter-share-button {
+  border-radius: 4px;
+  border: 1px solid white;
 }

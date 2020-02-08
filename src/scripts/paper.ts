@@ -36,7 +36,8 @@ const appendPapers = (paper: Paper): void => {
   const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
   const journalElement = paperElement.querySelector(".paper--journal")!;
   const arxivLinkElement = paperElement.querySelector(".paper--arxiv-link")! as HTMLAnchorElement;
-  const dateElement = paperElement.querySelector(".paper--date")!;
+  const dateElement = paperElement.querySelector(".paper--nontitle__date")!;
+  const shareElement = paperElement.querySelector(".twitter-share-button")!;
   const pdfLinkElement = paperElement.querySelector(".paper--pdf-link")! as HTMLAnchorElement;
   const abstractEnElement = paperElement.querySelector(".paper--abstract__en")!;
   const abstractJaElement = paperElement.querySelector(".paper--abstract__ja")!;
@@ -47,10 +48,11 @@ const appendPapers = (paper: Paper): void => {
   const abstractToJaSwitchElement = paperElement.querySelector(".switch__to-ja")!;
 
   // Elementにテキストを挿入
-  titleElement.textContent = paper.title;
-  jaTitleElement.textContent = "(" + paper.title_ja + ")";
+  titleElement.textContent = "(" + paper.title + ")";
+  jaTitleElement.textContent = paper.title_ja;
   journalElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
   dateElement.textContent = "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
+  shareElement.setAttribute("data-text", paper.title + "\n(" + paper.title_ja + ")\n");
 
   abstractEnElement.textContent = paper.abstract;
   abstractJaElement.textContent = paper.abstract_ja || "翻訳中……";
