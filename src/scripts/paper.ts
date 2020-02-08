@@ -15,7 +15,13 @@ const appendPapers = (paper: Paper): void => {
   if (paperIdRaw === null) return;
   if (paperTemplate === null) return;
 
-  console.log(paper);
+  // titleとdescriptionの設定
+  document.title = paper.title + " | CatchApp";
+  document.querySelector("meta[name='description']")!.setAttribute("content", paper.title_ja);
+
+  // ogpタグの設定
+  document.querySelector("meta[property='og:title']")!.setAttribute("content", paper.title + " | CatchApp");
+  document.querySelector("meta[property='og:description']")!.setAttribute("content", paper.title_ja);
 
   if (paper === undefined) return;
 
@@ -46,7 +52,7 @@ const appendPapers = (paper: Paper): void => {
   jaTitleElement.textContent = paper.title_ja;
   journalElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
   dateElement.textContent = "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
-  shareElement.setAttribute("data-text", paper.title + "\n(" + paper.title_ja + ")\n");
+  shareElement.setAttribute("data-text", paper.title_ja + "\n(" + paper.title + ")\n");
 
   abstractEnElement.textContent = paper.abstract;
   abstractJaElement.textContent = paper.abstract_ja || "翻訳中……";
