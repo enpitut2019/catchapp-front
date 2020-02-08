@@ -8,6 +8,11 @@
       name="description"
       content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。"
     />
+    <meta
+      property="og:description"
+      content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。"
+    />
+    <meta property="og:title" content="CatchApp" />
     <title>CatchApp</title>
     <script src="./scripts/paper.ts"></script>
     <link rel="stylesheet" href="./styles/paper.scss" />
@@ -68,10 +73,23 @@
         <div class="paper--header">
           <div class="paper--header-contents">
             <div class="paper--title">
-              <div class="paper--title__en"></div>
               <div class="paper--title__ja"></div>
+              <div class="paper--title__en"></div>
             </div>
-            <div class="paper--date"></div>
+            <div class="paper--nontitle">
+              <div class="paper--nontitle__date"></div>
+              <a
+                href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                class="twitter-share-button"
+                data-show-count="false"
+                >Tweet
+              </a>
+              <script
+                async
+                src="https://platform.twitter.com/widgets.js"
+                charset="utf-8"
+              ></script>
+            </div>
           </div>
         </div>
         <main class="paper--contents">

@@ -58,7 +58,19 @@ const appendPapers = (papers: Paper[]): void => {
   papers.forEach((paper, idx) => {
     if (paperTemplate === null) return;
 
-    // Elementを作成
+    // titleとdescriptionの設定
+    document.title = paperNameRaw + " の検索結果 | CatchApp";
+    document
+      .querySelector("meta[name='description']")!
+      .setAttribute("content", paperNameRaw + " の検索結果 \n CatchAppで「" + paperNameRaw + "」に関する論文をサクサク見つけよう。");
+
+    // ogpタグの設定
+    document.querySelector("meta[property='og:title']")!.setAttribute("content", paperNameRaw + " の検索結果 | CatchApp");
+    document
+      .querySelector("meta[property='og:description']")!
+      .setAttribute("content", paperNameRaw + " の検索結果 \n CatchAppで「" + paperNameRaw + "」に関する論文をサクサク見つけよう。");
+
+    // Elementを生成
     const paperElement = document.importNode(paperTemplate.content, true);
 
     const paperAnchorElement = paperElement.querySelector(".paper")!;
