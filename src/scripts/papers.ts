@@ -17,7 +17,7 @@
 
 import axios from "axios";
 import { Paper } from "./models";
-import { format } from "date-fns";
+import { format, formatDistanceToNow } from "date-fns";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const images = require("../image/*.png");
@@ -77,20 +77,40 @@ const appendPapers = (papers: Paper[]): void => {
     const titleElement = paperElement.querySelector(".paper--title__en")!;
     const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
     const authorsElement = paperElement.querySelector(".paper--authors")!;
-    const dateElement = paperElement.querySelector(".paper--date")!;
+    const dateElement = paperElement.querySelector(".paper--info__date")!;
+    const badgeElement = paperElement.querySelector(".paper--info__badge")!;
     const figureImgElement = paperElement.querySelector(".paper--figure")!;
 
     paperAnchorElement.setAttribute("href", `/paper.html?id=${paper.id}`);
 
     titleElement.textContent = "(" + paper.title + ")";
 
+    // 新着論文にバッジを付ける
+    // 1週間前の日付
+    const beforeAWeek = new Date();
+    beforeAWeek.setDate(beforeAWeek.getDate() - 7);
+    const pubDate = new Date(paper.published_at);
+    // 1週間以内にpublishされた論文にバッジを付ける
+    if (pubDate > beforeAWeek) {
+      badgeElement.textContent = "NEW!";
+      badgeElement.classList.add("paper--info__badge-active");
+    }
+
     // Elementにテキストを挿入
     if (papers[idx].authors !== undefined) {
       let authorLength = 1;
+
+      // 著者を複数人表示する
       for (const author of papers[idx].authors) {
         const authorElement = document.createElement("span");
         authorElement.classList.add("paper--authors__name");
-        if (authorLength === papers[idx].authors.length) {
+
+        // 著者が4人以上の場合は4人目以下を切り捨て
+        if (papers[idx].authors.length >= 4 && authorLength === 3) {
+          authorElement.textContent = author.name + "ほか";
+        } else if (papers[idx].authors.length >= 4 && authorLength === 4) {
+          break;
+        } else if (authorLength === papers[idx].authors.length) {
           authorElement.textContent = author.name;
         } else {
           authorElement.textContent = author.name + ",";
