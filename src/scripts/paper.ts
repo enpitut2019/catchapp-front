@@ -30,13 +30,14 @@ const appendPapers = (paper: Paper): void => {
   // Element Elementを生成
   const paperElement = document.importNode(paperTemplate.content, true);
   const figuresElement = paperElement.querySelector(".paper--figures")!;
+  const firstFigureElement = paperElement.querySelector(".original-figure")!;
   const figureAnalyzingElement = paperElement.querySelector(".paper--figures__analyzing")!;
   const figureNoImgElement = paperElement.querySelector(".paper--figures__no-img")!;
   const titleElement = paperElement.querySelector(".paper--title__en")!;
   const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
-  const journalElement = paperElement.querySelector(".paper--journal")!;
+  const journalElement = paperElement.querySelector(".journal-text")!;
   const arxivLinkElement = paperElement.querySelector(".paper--arxiv-link")! as HTMLAnchorElement;
-  const dateElement = paperElement.querySelector(".paper--nontitle__date")!;
+  const dateElement = paperElement.querySelector(".date-text")!;
   const shareElement = paperElement.querySelector(".twitter-share-button")!;
   const pdfLinkElement = paperElement.querySelector(".paper--pdf-link")! as HTMLAnchorElement;
   const abstractEnElement = paperElement.querySelector(".paper--abstract__en")!;
@@ -51,7 +52,7 @@ const appendPapers = (paper: Paper): void => {
   titleElement.textContent = "(" + paper.title + ")";
   jaTitleElement.textContent = paper.title_ja;
   journalElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
-  dateElement.textContent = "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
+  dateElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
   shareElement.setAttribute("data-text", paper.title_ja + "\n(" + paper.title + ")\n");
 
   abstractEnElement.textContent = paper.abstract;
@@ -74,15 +75,24 @@ const appendPapers = (paper: Paper): void => {
   });
 
   if (paper.figures.length > 0) {
+    let figureNumber = 0;
     // 画像があるパターン
     const figureTemplate = document.getElementById("figure-template") as HTMLTemplateElement;
 
     for (const figure of paper.figures.reverse()) {
       const figureElement = document.importNode(figureTemplate.content, true);
+      console.log(figureNumber);
 
-      // 画像を設定
-      const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
-      imgElement.src = figure.figure.url;
+      if (figureNumber === 0) {
+        // 1枚目の画像を設定
+        // const firstFigureImageElement = figureElement.querySelector(".paper--figure")!;
+        // firstFigureImageElement.src = figure.figure.url;
+        //firstFigureElement.appendChild(firstFigureImageElement);
+      } else {
+        // 画像を設定
+        const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
+        imgElement.src = figure.figure.url;
+      }
 
       // 画像を囲むdivがクリックされたときの処理
       const imgWrapperElement = figureElement.querySelector(".paper--figure-wrapper")!;
@@ -157,6 +167,7 @@ const appendPapers = (paper: Paper): void => {
 
       // 解析中の表示を消す
       figureAnalyzingElement.classList.remove("active");
+      figureNumber += 1;
     }
   } else if (paper.analized === "Done") {
     // 解析が終了しているが画像が無いパターン

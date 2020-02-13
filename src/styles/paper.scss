@@ -38,41 +38,57 @@
     }
   }
 
-  &--nontitle {
-    display: flex;
-    margin-bottom: $base-space;
-
-    &__date {
-      font-size: $font-size-ss;
-      width: 90%;
-      @media screen and (min-width: 500px) {
-        font-size: $font-size-s;
-      }
-    }
-  }
-
   &--contents {
     padding: $base-space-2;
     padding-bottom: 100px;
+    display: flex;
+
+    @media screen and (max-width: 500px) {
+      display: block;
+    }
 
     @media screen and (min-width: 500px) {
       width: 80%;
       max-width: 798px;
       margin: 0 auto;
-      padding-left: $base-space-4;
+    }
+
+    &__left {
+      width: 600px;
+      margin-top: $base-space-3;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+        margin-top: 0px;
+      }
+    }
+
+    &__right {
+      width: 200px;
+      margin-top: $base-space-3;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
+
+      &__stop {
+        position: relative;
+        top: 0px;
+      }
+
+      &__active {
+        position: fixed;
+        top: 0px;
+      }
     }
   }
 
   &--figures {
     display: none;
     margin-bottom: $base-space-2;
-    margin-top: $base-space;
 
     &.active {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: center;
     }
 
     &__analyzing,
@@ -85,12 +101,58 @@
     }
   }
 
+  &--first-view-contents {
+    display: flex;
+
+    .original-info {
+      margin: 0 $base-space-2;
+      width: -webkit-fill-available;
+
+      &__contents {
+        margin: $base-space;
+        border-bottom: 1px solid $base-color;
+        padding-bottom: $base-space-2;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .date-text {
+          font-size: $font-size-s;
+        }
+
+        .journal-text {
+          font-size: $font-size-s;
+        }
+      }
+    }
+
+    .original-figure {
+      width: 770px;
+      height: 230px;
+      border: 1px solid black;
+      border-radius: 4px;
+      margin-bottom: $base-space-3;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
+    }
+  }
+
   &--figure-wrapper {
     width: 100px;
     height: 100px;
     padding: 5px;
     margin: -0.5px;
     border: 1px solid $base-color-2;
+
+    &:first-child {
+      border-radius: 4px 0px 0px 4px;
+    }
+
+    &:last-child {
+      border-radius: 0px 4px 4px 0px;
+    }
   }
 
   &--figure {
@@ -119,7 +181,7 @@
   margin-bottom: $base-space-2;
 
   &--title {
-    font-size: $font-size-m;
+    font-size: $font-size-sm;
     color: $base-color;
     font-weight: bolder;
     margin: 0;
@@ -197,28 +259,75 @@
     font-weight: bold;
     line-height: 45px;
   }
+
+  /* Font Awesomeを使用しています。*/
+  .shareList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .shareList-item {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  .icon::before {
+    font-size: 16px;
+  }
+
+  .icon::after {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    vertical-align: top;
+    content: attr(title);
+  }
+
+  .icon {
+    display: block;
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+
+  .icon-twitter {
+    background: #55acee;
+  }
 }
 
 // PC用
 @media screen and (min-width: 500px) {
   .paper--pdf-button-wrapper {
-    display: block;
-    position: fixed;
-    bottom: 0;
-    box-sizing: border-box;
-    z-index: 3;
-    right: 10%;
+    //   display: block;
+    //   position: fixed;
+    //   bottom: 0;
+    //   box-sizing: border-box;
+    //   z-index: 3;
+    //   right: 10%;
+    background-color: white;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+    padding: $base-space;
   }
 
   .paper--pdf-button {
-    border-radius: 100px;
-    width: 150px;
-    height: 150px;
-    border: 1px solid $base-color;
+    border-radius: $base-space;
+    //width: 150px;
+    //height: 50px;
+    padding: 0 20px;
+    //border: 1px solid $base-color;
     margin: 8px auto calc(8px * 2);
     background-color: $base-color;
     box-shadow: 0 6px $base-color-2;
-    box-sizing: border-box;
+    //box-sizing: border-box;
   }
 
   .paper--pdf-link {
@@ -231,8 +340,49 @@
     font-size: $font-size-sm;
     font-weight: bold;
     color: #fff;
-    height: 150px;
+    height: 50px;
     line-height: 150px;
+  }
+
+  /* Font Awesomeを使用しています。*/
+  .shareList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .shareList-item {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  .icon::before {
+    font-size: 16px;
+  }
+
+  .icon::after {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    vertical-align: top;
+    content: attr(title);
+  }
+
+  .icon {
+    display: block;
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+
+  .icon-twitter {
+    background: #55acee;
   }
 }
 
