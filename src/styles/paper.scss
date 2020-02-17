@@ -145,14 +145,6 @@
     padding: 5px;
     margin: -0.5px;
     border: 1px solid $base-color-2;
-
-    &:first-child {
-      border-radius: 4px 0px 0px 4px;
-    }
-
-    &:last-child {
-      border-radius: 0px 4px 4px 0px;
-    }
   }
 
   &--figure {
@@ -178,22 +170,56 @@
 }
 
 .section {
-  margin-bottom: $base-space-2;
+  margin-bottom: $base-space-4;
+
+  &__no-margin {
+    margin-bottom: 0px;
+  }
+
+  &--title-contents {
+    display: flex;
+    margin-bottom: $base-space-3;
+
+    .title-text {
+      font-size: $font-size-m;
+      color: $base-color;
+      font-weight: bolder;
+      margin: 0 $base-space-2 0 0;
+      display: inline-block;
+      border-left: $base-space-2 solid #f2f2f2;
+      padding-left: $base-space-2;
+    }
+
+    .title-decoration {
+      background-color: #f2f2f2;
+      width: -webkit-fill-available;
+      height: 30px;
+      display: inline-block;
+    }
+  }
 
   &--title {
-    font-size: $font-size-sm;
+    font-size: $font-size-m;
     color: $base-color;
     font-weight: bolder;
-    margin: 0;
+    margin: $base-space-2 0;
     display: inline-block;
     margin-right: $base-space-2;
+
+    &__small {
+      font-size: $font-size-sm;
+    }
+
+    &__no-margin {
+      margin: 0px;
+    }
   }
 }
 
 .switch {
   &__to-ja,
   &__to-en {
-    width: 50px;
+    width: 70px;
     height: 20px;
     text-align: center;
     font-size: $font-size-ss;
@@ -203,16 +229,13 @@
     border-radius: 5px;
     margin-top: $base-space;
     cursor: pointer;
+    margin-right: $base-space-2;
     display: inline-block;
 
     &.active {
       background-color: white;
       color: $base-color;
     }
-  }
-
-  &__to-en {
-    margin-left: $base-space-2;
   }
 }
 
@@ -320,14 +343,10 @@
 
   .paper--pdf-button {
     border-radius: $base-space;
-    //width: 150px;
-    //height: 50px;
     padding: 0 20px;
-    //border: 1px solid $base-color;
     margin: 8px auto calc(8px * 2);
     background-color: $base-color;
     box-shadow: 0 6px $base-color-2;
-    //box-sizing: border-box;
   }
 
   .paper--pdf-link {
@@ -346,13 +365,10 @@
 
   /* Font Awesomeを使用しています。*/
   .shareList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
     padding: 0;
     margin: 0;
     list-style: none;
+    margin: $base-space-3 auto $base-space-2;
   }
 
   .shareList-item {
@@ -522,6 +538,6 @@
 
 // Twitterシェアボタン
 .twitter-share-button {
-  border-radius: 4px;
-  border: 1px solid white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: $base-space auto;
 }

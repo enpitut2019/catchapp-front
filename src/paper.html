@@ -86,14 +86,20 @@
           <div class="paper--contents__left">
             <section class="section image-section">
               <div class="paper--first-view-contents">
-                <div class="original-figure"></div>
+                <div class="original-figure">
+                  <img class="paper--figure" src="" alt="論文画像" />
+                </div>
                 <div class="original-info">
                   <div class="original-info__contents">
-                    <div class="section--title">Publish</div>
+                    <div class="section--title section--title__small">
+                      Publish
+                    </div>
                     <div class="date-text"></div>
                   </div>
                   <div class="original-info__contents">
-                    <div class="section--title">Journal</div>
+                    <div class="section--title section--title__small">
+                      Journal
+                    </div>
                     <div class="journal-text"></div>
                   </div>
                 </div>
@@ -107,18 +113,31 @@
               </div>
             </section>
             <section class="section">
-              <h3 class="section--title">Abstract</h3>
-              <div class="switch__to-ja">日本語</div>
-              <div class="switch__to-en active">英語</div>
+              <div class="section--title-contents">
+                <h3 class="title-text">
+                  Abstract
+                </h3>
+                <div class="switch__to-ja">日本語</div>
+                <div class="switch__to-en active">英語</div>
+                <div class="title-decoration"></div>
+              </div>
               <div class="paper--abstract__en"></div>
               <div class="paper--abstract__ja active"></div>
             </section>
+            <section class="section section__no-margin">
+              <div class="section--title-contents">
+                <h3 class="title-text">
+                  Information
+                </h3>
+                <div class="title-decoration"></div>
+              </div>
+            </section>
             <section class="section">
-              <h3 class="section--title">Authors</h3>
+              <h3 class="section--title section--title__small">Authors</h3>
               <div class="paper--authors"></div>
             </section>
             <section class="section">
-              <h3 class="section--title">arXiv URL</h3>
+              <h3 class="section--title section--title__small">arXiv URL</h3>
               <div>
                 <a class="paper--arxiv-link" target="_blank"></a>
               </div>
@@ -132,18 +151,13 @@
               <ul class="shareList">
                 <li class="shareList-item">
                   <a
+                    rel="”nofollow”"
                     class="twitter-share-button icon icon-twitter"
-                    href="https://twitter.com/share?ref_src=twsrc%5Etfw"
                     title="Twitterでシェア"
-                    data-show-count="false"
+                    onClick="window.open(encodeURI(decodeURI(this.href)),'twwindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1'); return false;"
                   >
                     <i class="fab fa-twitter"></i>
                   </a>
-                  <script
-                    async
-                    src="https://platform.twitter.com/widgets.js"
-                    charset="utf-8"
-                  ></script>
                 </li>
               </ul>
             </div>

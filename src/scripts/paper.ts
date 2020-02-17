@@ -53,7 +53,10 @@ const appendPapers = (paper: Paper): void => {
   jaTitleElement.textContent = paper.title_ja;
   journalElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
   dateElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
-  shareElement.setAttribute("data-text", paper.title_ja + "\n(" + paper.title + ")\n");
+
+  // Twitterシェアボタンのツイート内容
+  const currentUrl = location.href;
+  shareElement.setAttribute("href", "https://twitter.com/intent/tweet?text=" + paper.title_ja + "%0D%0A(" + paper.title + ")%0D%0A&url=" + currentUrl);
 
   abstractEnElement.textContent = paper.abstract;
   abstractJaElement.textContent = paper.abstract_ja || "翻訳中……";
@@ -85,9 +88,8 @@ const appendPapers = (paper: Paper): void => {
 
       if (figureNumber === 0) {
         // 1枚目の画像を設定
-        // const firstFigureImageElement = figureElement.querySelector(".paper--figure")!;
-        // firstFigureImageElement.src = figure.figure.url;
-        //firstFigureElement.appendChild(firstFigureImageElement);
+        const firstFigureImageElement = firstFigureElement.querySelector(".paper--figure") as HTMLImageElement;
+        firstFigureImageElement.src = figure.figure.url;
       } else {
         // 画像を設定
         const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
@@ -182,11 +184,17 @@ const appendPapers = (paper: Paper): void => {
   pdfLinkElement.href = paper.pdf_url;
 
   // 著者
+  let authorLength = 1;
   for (const author of paper.authors) {
-    const authorElement = document.createElement("div");
+    const authorElement = document.createElement("span");
     authorElement.classList.add("paper--author");
-    authorElement.textContent = author.name;
+    if (authorLength === paper.authors.length) {
+      authorElement.textContent = author.name;
+    } else {
+      authorElement.textContent = author.name + ", ";
+    }
     authorsElement.appendChild(authorElement);
+    authorLength += 1;
   }
 
   arxivLinkElement.href = paper.url;
