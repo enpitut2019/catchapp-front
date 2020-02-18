@@ -111,10 +111,26 @@
     }
   }
 
-  &--date {
-    font-size: $font-size-s;
+  &--info {
+    display: flex;
     margin-bottom: $base-space;
-    color: $base-color;
+
+    &__date {
+      font-size: $font-size-s;
+      color: $base-color;
+      width: 85%;
+    }
+
+    &__badge-active {
+      font-size: $font-size-ss;
+      font-weight: bold;
+      padding: 4px;
+      border-radius: 4px;
+      color: white;
+      background-color: $badge-color;
+      text-align: center;
+      width: 50px;
+    }
   }
 }
 
