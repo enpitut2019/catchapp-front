@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta name="description" content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。" />
+  <meta
+    property="og:description"
+    content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。"
+  />
+  <meta property="og:title" content="CatchApp" />
   <title>CatchApp</title>
   <script src="./scripts/papers.ts"></script>
   <script src="../node_modules/@webcomponents/template/template.min.js"></script>
@@ -53,17 +58,19 @@
     <div></div>
   </div>
 
-  <template id="paper-template">
-    <a class="paper">
-      <div class="paper--title">
-        <div class="paper--title__en tex2jax_process"></div>
-        <div class="paper--title__ja"></div>
-      </div>
-      <div class="paper--content">
-        <div class="paper--content__left">
-          <div class="paper--figure-wrapper">
-            <img class="paper--figure" />
-          </div>
+    <template id="paper-template">
+      <a class="paper">
+        <div class="paper--info">
+          <div class="paper--info__date"></div>
+          <div class="paper--info__badge"></div>
+        </div>
+        <div class="paper--figure-wrapper">
+          <img class="paper--figure" />
+        </div>
+        <div class="paper--authors"></div>
+        <div class="paper--title">
+          <div class="paper--title__ja"></div>
+          <div class="paper--title__en"></div>
         </div>
         <div class="paper--content__right">
           <div class="paper--authors"></div>

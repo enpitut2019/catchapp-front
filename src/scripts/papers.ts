@@ -32,11 +32,46 @@ const paperNameRaw = parser.searchParams.get("name");
 let currentPage = 0;
 let paperTemplate: HTMLTemplateElement | null = null;
 
+// 検索クエリの表示
+const searchResultElement = document.createElement("div");
+const queryTextElement = document.createElement("p");
+searchResultElement.classList.add("search-result");
+queryTextElement.classList.add("search-result--query");
+queryTextElement.textContent = paperNameRaw + " の検索結果";
+searchResultElement.appendChild(queryTextElement);
+
 const appendPapers = (papers: Paper[]): void => {
   const mainElement = document.getElementById("main");
 
+  if (papers.length < 30) {
+    // 検索結果30件未満の場合は「さらに読む」ボタンを表示しない
+    const getMoreElement = document.getElementById("next-button")!;
+    getMoreElement.style.display = "none";
+  }
+
+  if (papers.length === 0) {
+    // 検索結果0件の場合はその旨を表示する
+    const noResultElement = document.createElement("p");
+    noResultElement.classList.add("no-result");
+    noResultElement.textContent = "お探しの論文は見つかりませんでした。キーワードが日本語の場合は英語で入力してください。";
+    if (mainElement === null) return;
+    mainElement.appendChild(noResultElement);
+  }
+
   papers.forEach((paper, idx) => {
     if (paperTemplate === null) return;
+
+    // titleとdescriptionの設定
+    document.title = paperNameRaw + " の検索結果 | CatchApp";
+    document
+      .querySelector("meta[name='description']")!
+      .setAttribute("content", paperNameRaw + " の検索結果 \n CatchAppで「" + paperNameRaw + "」に関する論文をサクサク見つけよう。");
+
+    // ogpタグの設定
+    document.querySelector("meta[property='og:title']")!.setAttribute("content", paperNameRaw + " の検索結果 | CatchApp");
+    document
+      .querySelector("meta[property='og:description']")!
+      .setAttribute("content", paperNameRaw + " の検索結果 \n CatchAppで「" + paperNameRaw + "」に関する論文をサクサク見つけよう。");
 
     // Elementを生成
     const paperElement = document.importNode(paperTemplate.content, true);
@@ -45,22 +80,53 @@ const appendPapers = (papers: Paper[]): void => {
     const titleElement = paperElement.querySelector(".paper--title__en")!;
     const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
     const authorsElement = paperElement.querySelector(".paper--authors")!;
-    const dateElement = paperElement.querySelector(".paper--date")!;
+    const dateElement = paperElement.querySelector(".paper--info__date")!;
+    const badgeElement = paperElement.querySelector(".paper--info__badge")!;
     const figureImgElement = paperElement.querySelector(".paper--figure")!;
 
     paperAnchorElement.setAttribute("href", `/paper.html?id=${paper.id}`);
 
-    titleElement.textContent = paper.title;
+    titleElement.textContent = "(" + paper.title + ")";
+
+    // 新着論文にバッジを付ける
+    // 1日前の日付
+    const beforeAWeek = new Date();
+    beforeAWeek.setDate(beforeAWeek.getDate() - 2);
+    const pubDate = new Date(paper.published_at);
+    // 1日以内にpublishされた論文にバッジを付ける
+    if (pubDate >= beforeAWeek) {
+      badgeElement.textContent = "NEW!";
+      badgeElement.classList.add("paper--info__badge-active");
+    }
 
     // Elementにテキストを挿入
     if (papers[idx].authors !== undefined) {
-      for (let i = 0; i < papers[idx].authors.length; i++) {
-        authorsElement.textContent = "Author：" + papers[idx].authors[i].name;
+      let authorNumber = 1;
+
+      // 著者を複数人表示する
+      for (const author of papers[idx].authors) {
+        const authorElement = document.createElement("span");
+        authorElement.classList.add("paper--authors__name");
+
+        // 著者が4人以上の場合は4人目以下を切り捨て
+        if (papers[idx].authors.length >= 4 && authorNumber === 3) {
+          authorElement.textContent = author.name + "ほか";
+          authorsElement.appendChild(authorElement);
+          break;
+        } else if (authorNumber === papers[idx].authors.length) {
+          authorElement.textContent = author.name;
+          authorsElement.appendChild(authorElement);
+        } else {
+          authorElement.textContent = author.name + ",";
+          authorsElement.appendChild(authorElement);
+        }
+
+        authorNumber += 1;
       }
     }
 
     jaTitleElement.textContent = paper.title_ja || "(和訳しています……)";
-    dateElement.textContent = format(new Date(paper.published_at), "yyyy年MM月dd日");
+    dateElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
 
     if (papers[idx].figures.length > 0) {
       figureImgElement.setAttribute("src", papers[idx].figures[0].figure.url);
@@ -74,7 +140,8 @@ const appendPapers = (papers: Paper[]): void => {
 
     // bodyにpaper elementを挿入
     if (mainElement === null) return;
-    mainElement.appendChild(paperElement);
+    mainElement.appendChild(searchResultElement);
+    searchResultElement.appendChild(paperElement);
 
     if (!paper.title_ja)
       axios
