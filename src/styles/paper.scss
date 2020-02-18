@@ -104,9 +104,21 @@
   &--first-view-contents {
     display: flex;
 
+    @media screen and (max-width: 500px) {
+      display: inline;
+    }
+
     .original-info {
       margin: 0 $base-space-2;
       width: -webkit-fill-available;
+
+      &__invisible {
+        display: none;
+      }
+
+      @media screen and (max-width: 500px) {
+        margin: 0px;
+      }
 
       &__contents {
         margin: $base-space;
@@ -124,6 +136,11 @@
         .journal-text {
           font-size: $font-size-s;
         }
+
+        @media screen and (max-width: 500px) {
+          display: flex;
+          padding: 0px;
+        }
       }
     }
 
@@ -135,6 +152,7 @@
       margin-bottom: $base-space-3;
       @media screen and (max-width: 500px) {
         width: 100%;
+        margin-bottom: $base-space-2;
       }
     }
   }
@@ -145,6 +163,9 @@
     padding: 5px;
     margin: -0.5px;
     border: 1px solid $base-color-2;
+    @media screen and (max-width: 500px) {
+      width: 98px;
+    }
   }
 
   &--figure {
@@ -176,6 +197,11 @@
     margin-bottom: 0px;
   }
 
+  &__invisible {
+    margin: 0px;
+    display: none;
+  }
+
   &--title-contents {
     display: flex;
     margin-bottom: $base-space-3;
@@ -195,6 +221,10 @@
       width: -webkit-fill-available;
       height: 30px;
       display: inline-block;
+
+      @media screen and (max-width: 500px) {
+        width: initial;
+      }
     }
   }
 
@@ -205,6 +235,10 @@
     margin: $base-space-2 0;
     display: inline-block;
     margin-right: $base-space-2;
+
+    @media screen and (max-width: 500px) {
+      margin: 0 $base-space $base-space 0;
+    }
 
     &__small {
       font-size: $font-size-sm;
@@ -258,13 +292,12 @@
 
   .paper--pdf-button {
     border-radius: 5px;
-    width: 80%;
     height: 45px;
-    margin: 8px auto calc(8px * 2);
+    margin: $base-space-2 $base-space;
     background-color: $base-color;
     box-shadow: 0 4px 0 0 $base-color-2;
     box-sizing: border-box;
-    width: 90%;
+    width: 900px;
     background-color: $base-color;
     z-index: 3;
     left: 0px;
@@ -285,39 +318,30 @@
 
   /* Font Awesomeを使用しています。*/
   .shareList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
     padding: 0;
-    margin: 0;
+    margin: $base-space-2 $base-space;
     list-style: none;
   }
 
   .shareList-item {
-    height: 40px;
-    line-height: 40px;
+    height: 45px;
+    line-height: 45px;
     text-align: center;
+    box-shadow: 0 4px 0 0 $base-color;
+    border-radius: 5px;
   }
 
   .icon::before {
-    font-size: 16px;
-  }
-
-  .icon::after {
-    margin-left: 5px;
-    font-size: 14px;
-    font-weight: 700;
-    vertical-align: top;
-    content: attr(title);
+    font-size: $font-size-l;
   }
 
   .icon {
     display: block;
-    padding: 0 20px;
+    padding: 0 $base-space-2;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
+    zoom: 1.2;
   }
 
   .icon-twitter {
@@ -328,17 +352,16 @@
 // PC用
 @media screen and (min-width: 500px) {
   .paper--pdf-button-wrapper {
-    //   display: block;
-    //   position: fixed;
-    //   bottom: 0;
-    //   box-sizing: border-box;
-    //   z-index: 3;
-    //   right: 10%;
     background-color: white;
     border: 1px solid #c4c4c4;
     border-radius: 4px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
     padding: $base-space;
+
+    &__fixed {
+      position: fixed;
+      top: $base-space-3;
+    }
   }
 
   .paper--pdf-button {
@@ -375,6 +398,8 @@
     height: 40px;
     line-height: 40px;
     text-align: center;
+    box-shadow: 0 4px 0 0 $base-color;
+    border-radius: 5px;
   }
 
   .icon::before {
@@ -540,4 +565,7 @@
 .twitter-share-button {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   margin: $base-space auto;
+  @media screen and (max-width: 500px) {
+    margin: 0px;
+  }
 }

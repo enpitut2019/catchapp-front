@@ -35,14 +35,27 @@ const appendPapers = (paper: Paper): void => {
   const figureNoImgElement = paperElement.querySelector(".paper--figures__no-img")!;
   const titleElement = paperElement.querySelector(".paper--title__en")!;
   const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
-  const journalElement = paperElement.querySelector(".journal-text")!;
   const arxivLinkElement = paperElement.querySelector(".paper--arxiv-link")! as HTMLAnchorElement;
-  const dateElement = paperElement.querySelector(".date-text")!;
   const shareElement = paperElement.querySelector(".twitter-share-button")!;
   const pdfLinkElement = paperElement.querySelector(".paper--pdf-link")! as HTMLAnchorElement;
   const abstractEnElement = paperElement.querySelector(".paper--abstract__en")!;
   const abstractJaElement = paperElement.querySelector(".paper--abstract__ja")!;
   const authorsElement = paperElement.querySelector(".paper--authors")!;
+
+  // SPのみのエレメント
+  const publishSectionSPElement = paperElement.querySelector(".section--publish")!;
+  const journalSectionSPElement = paperElement.querySelector(".section--journal")!;
+  const publishTitleSPElement = paperElement.querySelector(".title--publish__sp")!;
+  const publishTextSPElement = paperElement.querySelector(".paper--publish__sp")!;
+  const journalTitleSPElement = paperElement.querySelector(".title--journal__sp")!;
+  const journalTextSPElement = paperElement.querySelector(".paper--journal__sp")!;
+
+  // PCのみのエレメント
+  const originalInfoPCElement = paperElement.querySelector(".original-info")!;
+  const publishTitlePCElement = paperElement.querySelector(".title--publish__pc")!;
+  const publishTextPCElement = paperElement.querySelector(".paper--publish__pc")!;
+  const journalTitlePCElement = paperElement.querySelector(".title--journal__pc")!;
+  const journalTextPCElement = paperElement.querySelector(".paper--journal__pc")!;
 
   // 翻訳切り替えボタン
   const abstractToEnSwitchElement = paperElement.querySelector(".switch__to-en")!;
@@ -51,12 +64,33 @@ const appendPapers = (paper: Paper): void => {
   // Elementにテキストを挿入
   titleElement.textContent = "(" + paper.title + ")";
   jaTitleElement.textContent = paper.title_ja;
-  journalElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
-  dateElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
 
   // Twitterシェアボタンのツイート内容
-  const currentUrl = location.href;
-  shareElement.setAttribute("href", "https://twitter.com/intent/tweet?text=" + paper.title_ja + "%0D%0A(" + paper.title + ")%0D%0A&url=" + currentUrl);
+  shareElement.setAttribute("href", "https://twitter.com/intent/tweet?text=" + paper.title_ja + "%0D%0A(" + paper.title + ")%0D%0A&url=" + parser);
+
+  // SPの場合のみの処理
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  if (getDevice === "sp") {
+    // シェアボタンの文字を無くす
+    shareElement.setAttribute("title", "");
+    // publishを下に表示する
+    publishTitleSPElement.textContent = "Publish";
+    publishTextSPElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
+    // journalを下に表示する
+    journalTitleSPElement.textContent = "Journal";
+    journalTextSPElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
+    // sectionを表示する
+    publishSectionSPElement.classList.remove("section__invisible");
+    journalSectionSPElement.classList.remove("section__invisible");
+  } else {
+    originalInfoPCElement.classList.remove("original-info__invisible");
+    // publishを上に表示する
+    publishTitlePCElement.textContent = "Publish";
+    publishTextPCElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
+    // journalを上に表示する
+    journalTitlePCElement.textContent = "Journal";
+    journalTextPCElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
+  }
 
   abstractEnElement.textContent = paper.abstract;
   abstractJaElement.textContent = paper.abstract_ja || "翻訳中……";
@@ -87,9 +121,12 @@ const appendPapers = (paper: Paper): void => {
       console.log(figureNumber);
 
       if (figureNumber === 0) {
-        // 1枚目の画像を設定
+        // 1枚目の大きな画像を設定
         const firstFigureImageElement = firstFigureElement.querySelector(".paper--figure") as HTMLImageElement;
         firstFigureImageElement.src = figure.figure.url;
+        // 画像を設定
+        const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
+        imgElement.src = figure.figure.url;
       } else {
         // 画像を設定
         const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
@@ -232,6 +269,18 @@ const appendPapers = (paper: Paper): void => {
         return response;
       });
 };
+
+// デバイスを判別するメソッド
+const getDevice = (function() {
+  const ua = navigator.userAgent;
+  if (ua.indexOf("iPhone") > 0 || ua.indexOf("iPod") > 0 || (ua.indexOf("Android") > 0 && ua.indexOf("Mobile") > 0)) {
+    return "sp";
+  } else if (ua.indexOf("iPad") > 0 || ua.indexOf("Android") > 0) {
+    return "tab";
+  } else {
+    return "other";
+  }
+})();
 
 const closeModal = (): void => {
   const modal = document.getElementById("figure-modal")!;
