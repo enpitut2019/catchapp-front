@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-=======
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,99 +17,65 @@
     <script src="./scripts/paper.ts"></script>
     <link rel="stylesheet" href="./styles/paper.scss" />
     <script src="../node_modules/@webcomponents/template/template.min.js"></script>
-  </head>
->>>>>>> 06dc3397601af37c7a1494cc651dbc962dd64192
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <meta name="description" content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。" />
-  <title>CatchApp</title>
-  <script src="./scripts/paper.ts"></script>
-  <link rel="stylesheet" href="./styles/paper.scss" />
-  <script src="../node_modules/@webcomponents/template/template.min.js"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } ,
-    "HTML-CSS": {
-      availableFonts: ["TeX"],
-      undefinedFamily: "'Raleway', Helvetica, Arial, sans-serif"
-    }});
-  </script>
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML">
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } ,
+      "HTML-CSS": {
+        availableFonts: ["TeX"],
+        undefinedFamily: "'Raleway', Helvetica, Arial, sans-serif"
+      }});
     </script>
-  <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
-</head>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"
+    ></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+  </head>
 
-<body class="tex2jax_ignore">
-  <h1 class="header-block">
-    <a href="/">
-      CatchApp
-    </a>
-  </h1>
-  <div class="container">
-    <div id="app"></div>
-  </div>
-
-  <div id="loading" class="loading-wrapper active">
-    <div class="loading">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-
-  <!-- モーダル -->
-  <div id="figure-modal" class="modal--wrapper">
-    <div class="modal--overlay" id="modal-overlay"></div>
-    <div class="modal--window" id="modal-window">
-      <div class="modal--content-wrapper" id="modal-content-wrapper"></div>
-      <div class="modal--close" id="modal-close">✕</div>
-    </div>
-  </div>
-
-  <!-- モーダルテンプレート -->
-  <template id="modal-template">
-    <div class="modal--control__prev">&lt;</div>
-    <div class="modal--content">
-      <a class="modal--img-link" target="_blank">
-        <img class="modal--img" />
+  <body class="tex2jax_ignore">
+    <h1 class="header-block">
+      <a href="/">
+        CatchApp
       </a>
-      <p class="modal--img-click-caption">
-        画像をクリックすると別タブで開きます
-      </p>
-      <div class="switches">
-        <div class="switch__to-ja">日本語</div>
-        <div class="switch__to-en active">英語</div>
-      </div>
-      <p class="modal--text__en tex2jax_process"></p>
-      <p class="modal--text__ja active"></p>
+    </h1>
+    <div class="container">
+      <div id="app"></div>
     </div>
-    <div class="modal--control__next">&gt;</div>
-  </template>
 
-  <!-- 論文テンプレート -->
-  <template id="paper-template">
-    <div class="paper">
-      <div class="paper--header">
-        <div class="paper--header-contents">
-          <div class="paper--title">
-            <div class="paper--title__en tex2jax_process"></div>
-            <div class="paper--title__ja"></div>
-          </div>
-          <div class="paper--date"></div>
-        </div>
+    <div id="loading" class="loading-wrapper active">
+      <div class="loading">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-<<<<<<< HEAD
-      <main class="paper--contents">
-        <section class="section image-section">
-          <h3 class="section--title">Images</h3>
-          <div class="paper--figures"></div>
-          <div class="paper--figures__analyzing active">
-            画像を解析中です……(処理には2, 3分かかることがあります)
-=======
+    </div>
+
+    <!-- モーダル -->
+    <div id="figure-modal" class="modal--wrapper">
+      <div class="modal--overlay" id="modal-overlay"></div>
+      <div class="modal--window" id="modal-window">
+        <div class="modal--content-wrapper" id="modal-content-wrapper"></div>
+        <div class="modal--close" id="modal-close">✕</div>
+      </div>
+    </div>
+
+    <!-- モーダルテンプレート -->
+    <template id="modal-template">
+      <div class="modal--control__prev">&lt;</div>
+      <div class="modal--content">
+        <a class="modal--img-link" target="_blank">
+          <img class="modal--img" />
+        </a>
+        <p class="modal--img-click-caption">
+          画像をクリックすると別タブで開きます
+        </p>
+        <div class="switches">
+          <div class="switch__to-ja">日本語</div>
+          <div class="switch__to-en active">英語</div>
+        </div>
+        <p class="modal--text__en tex2jax_process"></p>
+        <p class="modal--text__ja active"></p>
+      </div>
       <div class="modal--control__next">&gt;</div>
     </template>
 
@@ -122,7 +86,7 @@
           <div class="paper--header-contents">
             <div class="paper--title">
               <div class="paper--title__ja"></div>
-              <div class="paper--title__en"></div>
+              <div class="paper--title__en tex2jax_process"></div>
             </div>
             <div class="paper--nontitle">
               <div class="paper--nontitle__date"></div>
@@ -138,48 +102,54 @@
                 charset="utf-8"
               ></script>
             </div>
->>>>>>> 06dc3397601af37c7a1494cc651dbc962dd64192
-          </div>
-          <div class="paper--figures__no-img">
-            画像はありません(または取得できませんでした)
-          </div>
-        </section>
-        <section class="section">
-          <h3 class="section--title">Abstract</h3>
-          <div class="switch__to-ja">日本語</div>
-          <div class="switch__to-en active">英語</div>
-          <div class="paper--abstract__en tex2jax_process"></div>
-          <div class="paper--abstract__ja active"></div>
-        </section>
-        <section class="section">
-          <h3 class="section--title">Journal</h3>
-          <div class="paper--journal"></div>
-        </section>
-        <section class="section">
-          <h3 class="section--title">Authors</h3>
-          <div class="paper--authors"></div>
-        </section>
-        <section class="section">
-          <h3 class="section--title">arXiv URL</h3>
-          <div>
-            <a class="paper--arxiv-link" target="_blank"></a>
-          </div>
-        </section>
-        <div class="paper--pdf-button-wrapper">
-          <div class="paper--pdf-button">
-            <a class="paper--pdf-link" target="_blank">PDF版を読む</a>
           </div>
         </div>
-      </main>
-    </div>
-  </template>
+        <main class="paper--contents">
+          <section class="section image-section">
+            <h3 class="section--title">Images</h3>
+            <div class="paper--figures"></div>
+            <div class="paper--figures__analyzing active">
+              画像を解析中です……(処理には2, 3分かかることがあります)
+            </div>
+            <div class="paper--figures__no-img">
+              画像はありません(または取得できませんでした)
+            </div>
+          </section>
+          <section class="section">
+            <h3 class="section--title">Abstract</h3>
+            <div class="switch__to-ja">日本語</div>
+            <div class="switch__to-en active">英語</div>
+            <div class="paper--abstract__en tex2jax_process"></div>
+            <div class="paper--abstract__ja active"></div>
+          </section>
+          <section class="section">
+            <h3 class="section--title">Journal</h3>
+            <div class="paper--journal"></div>
+          </section>
+          <section class="section">
+            <h3 class="section--title">Authors</h3>
+            <div class="paper--authors"></div>
+          </section>
+          <section class="section">
+            <h3 class="section--title">arXiv URL</h3>
+            <div>
+              <a class="paper--arxiv-link" target="_blank"></a>
+            </div>
+          </section>
+          <div class="paper--pdf-button-wrapper">
+            <div class="paper--pdf-button">
+              <a class="paper--pdf-link" target="_blank">PDF版を読む</a>
+            </div>
+          </div>
+        </main>
+      </div>
+    </template>
 
-  <!-- 論文画像テンプレート -->
-  <template id="figure-template">
-    <div class="paper--figure-wrapper">
-      <img class="paper--figure" src="" alt="論文画像" />
-    </div>
-  </template>
-</body>
-
+    <!-- 論文画像テンプレート -->
+    <template id="figure-template">
+      <div class="paper--figure-wrapper">
+        <img class="paper--figure" src="" alt="論文画像" />
+      </div>
+    </template>
+  </body>
 </html>
