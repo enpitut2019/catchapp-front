@@ -86,19 +86,19 @@ const appendPapers = (papers: Paper[]): void => {
     titleElement.textContent = "(" + paper.title + ")";
 
     // 新着論文にバッジを付ける
-    // 1週間前の日付
+    // 1日前の日付
     const beforeAWeek = new Date();
-    beforeAWeek.setDate(beforeAWeek.getDate() - 7);
+    beforeAWeek.setDate(beforeAWeek.getDate() - 2);
     const pubDate = new Date(paper.published_at);
-    // 1週間以内にpublishされた論文にバッジを付ける
-    if (pubDate > beforeAWeek) {
+    // 1日以内にpublishされた論文にバッジを付ける
+    if (pubDate >= beforeAWeek) {
       badgeElement.textContent = "NEW!";
       badgeElement.classList.add("paper--info__badge-active");
     }
 
     // Elementにテキストを挿入
     if (papers[idx].authors !== undefined) {
-      let authorLength = 1;
+      let authorNumber = 1;
 
       // 著者を複数人表示する
       for (const author of papers[idx].authors) {
@@ -106,17 +106,19 @@ const appendPapers = (papers: Paper[]): void => {
         authorElement.classList.add("paper--authors__name");
 
         // 著者が4人以上の場合は4人目以下を切り捨て
-        if (papers[idx].authors.length >= 4 && authorLength === 3) {
+        if (papers[idx].authors.length >= 4 && authorNumber === 3) {
           authorElement.textContent = author.name + "ほか";
-        } else if (papers[idx].authors.length >= 4 && authorLength === 4) {
+          authorsElement.appendChild(authorElement);
           break;
-        } else if (authorLength === papers[idx].authors.length) {
+        } else if (authorNumber === papers[idx].authors.length) {
           authorElement.textContent = author.name;
+          authorsElement.appendChild(authorElement);
         } else {
           authorElement.textContent = author.name + ",";
+          authorsElement.appendChild(authorElement);
         }
-        authorsElement.appendChild(authorElement);
-        authorLength += 1;
+
+        authorNumber += 1;
       }
     }
 
