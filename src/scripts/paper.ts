@@ -56,6 +56,7 @@ const appendPapers = (paper: Paper): void => {
   const publishTextPCElement = paperElement.querySelector(".paper--publish__pc")!;
   const journalTitlePCElement = paperElement.querySelector(".title--journal__pc")!;
   const journalTextPCElement = paperElement.querySelector(".paper--journal__pc")!;
+  const floatButtonPCElement = paperElement.querySelector(".paper--pdf-button-wrapper")!;
 
   // 翻訳切り替えボタン
   const abstractToEnSwitchElement = paperElement.querySelector(".switch__to-en")!;
@@ -95,6 +96,16 @@ const appendPapers = (paper: Paper): void => {
   abstractEnElement.textContent = paper.abstract;
   abstractJaElement.textContent = paper.abstract_ja || "翻訳中……";
 
+  // Floatボタンの制御
+  window.onscroll = function() {
+    console.log(document.documentElement.scrollTop);
+    if (document.documentElement.scrollTop > 150) {
+      floatButtonPCElement.classList.add("paper--pdf-button-wrapper__fixed");
+    } else {
+      floatButtonPCElement.classList.remove("paper--pdf-button-wrapper__fixed");
+    }
+  });
+
   // 翻訳切り替えボタン
 
   abstractToEnSwitchElement.addEventListener("click", () => {
@@ -118,7 +129,6 @@ const appendPapers = (paper: Paper): void => {
 
     for (const figure of paper.figures.reverse()) {
       const figureElement = document.importNode(figureTemplate.content, true);
-      console.log(figureNumber);
 
       if (figureNumber === 0) {
         // 1枚目の大きな画像を設定

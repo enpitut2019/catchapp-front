@@ -56,9 +56,11 @@
     &__left {
       width: 600px;
       margin-top: $base-space-3;
+      margin-right: $base-space-2;
       @media screen and (max-width: 500px) {
         width: 100%;
         margin-top: 0px;
+        margin-right: 0px;
       }
     }
 
@@ -357,6 +359,7 @@
     border-radius: 4px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
     padding: $base-space;
+    overflow-y: auto;
 
     &__fixed {
       position: fixed;
