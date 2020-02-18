@@ -1,53 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta
-      name="description"
-      content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。"
-    />
-    <meta
-      property="og:description"
-      content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。"
-    />
-    <meta property="og:title" content="CatchApp" />
-    <title>CatchApp</title>
-    <script src="./scripts/papers.ts"></script>
-    <script src="../node_modules/@webcomponents/template/template.min.js"></script>
-    <link rel="stylesheet" href="./styles/papers.scss" />
-  </head>
 
-  <body>
-    <h1 class="header-block">
-      <a href="/">
-        CatchApp
-      </a>
-    </h1>
-    <main id="main"></main>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。" />
+  <meta
+    property="og:description"
+    content="CatchAppは、あなたが読みたい論文をサクサク探すためのサイトです。"
+  />
+  <meta property="og:title" content="CatchApp" />
+  <title>CatchApp</title>
+  <script src="./scripts/papers.ts"></script>
+  <script src="../node_modules/@webcomponents/template/template.min.js"></script>
+  <link rel="stylesheet" href="./styles/papers.scss" />
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } ,
+    "HTML-CSS": {
+      availableFonts: ["TeX"],
+      undefinedFamily: "'Raleway', Helvetica, Arial, sans-serif"
+    }});
+  </script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML">
+    </script>
+  <meta http-equiv="X-UA-Compatible" CONTENT="IE=EmulateIE7" />
+</head>
 
-    <!-- ローディングアニメーション -->
-    <div class="loading-wrapper active" id="list-loading">
-      <div class="loading">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+<body class="tex2jax_ignore">
+  <h1 class="header-block">
+    <a href="/">
+      CatchApp
+    </a>
+  </h1>
+  <main id="main"></main>
 
-    <div class="paging-block" id="next-button">
-      <p class="paging-block--text">
-        さらに読み込む
-      </p>
-    </div>
-    <div class="lds-ellipsis" id="loading">
+  <!-- ローディングアニメーション -->
+  <div class="loading-wrapper active" id="list-loading">
+    <div class="loading">
       <div></div>
       <div></div>
       <div></div>
       <div></div>
     </div>
+  </div>
+
+  <div class="paging-block" id="next-button">
+    <p class="paging-block--text">
+      さらに読み込む
+    </p>
+  </div>
+  <div class="lds-ellipsis" id="loading">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 
     <template id="paper-template">
       <a class="paper">
@@ -61,9 +70,11 @@
         <div class="paper--authors"></div>
         <div class="paper--title">
           <div class="paper--title__ja"></div>
-          <div class="paper--title__en"></div>
+          <div class="paper--title__en tex2jax_process"></div>
         </div>
-      </a>
-    </template>
-  </body>
+      </div>
+    </a>
+  </template>
+</body>
+
 </html>

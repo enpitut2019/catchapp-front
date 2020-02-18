@@ -22,6 +22,9 @@ import { format } from "date-fns";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const images = require("../image/*.png");
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare let MathJax: any;
+
 const railsHost = process.env.RAILS_HOST;
 const sourceUrl = `${railsHost}/papers/search`;
 const parser = new URL(window.location.href);
@@ -162,6 +165,8 @@ const appendPapers = (papers: Paper[]): void => {
   // さらに読むボタンをアクティブ化
   const getMoreElement = document.getElementById("next-button")!;
   getMoreElement.classList.add("active");
+
+  MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 };
 
 const getMorePapers = (): void => {

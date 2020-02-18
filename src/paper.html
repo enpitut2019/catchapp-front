@@ -17,9 +17,21 @@
     <script src="./scripts/paper.ts"></script>
     <link rel="stylesheet" href="./styles/paper.scss" />
     <script src="../node_modules/@webcomponents/template/template.min.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } ,
+      "HTML-CSS": {
+        availableFonts: ["TeX"],
+        undefinedFamily: "'Raleway', Helvetica, Arial, sans-serif"
+      }});
+    </script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_CHTML"
+    ></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
   </head>
 
-  <body>
+  <body class="tex2jax_ignore">
     <h1 class="header-block">
       <a href="/">
         CatchApp
@@ -61,7 +73,7 @@
           <div class="switch__to-ja">日本語</div>
           <div class="switch__to-en active">英語</div>
         </div>
-        <p class="modal--text__en"></p>
+        <p class="modal--text__en tex2jax_process"></p>
         <p class="modal--text__ja active"></p>
       </div>
       <div class="modal--control__next">&gt;</div>
@@ -74,7 +86,7 @@
           <div class="paper--header-contents">
             <div class="paper--title">
               <div class="paper--title__ja"></div>
-              <div class="paper--title__en"></div>
+              <div class="paper--title__en tex2jax_process"></div>
             </div>
             <div class="paper--nontitle">
               <div class="paper--nontitle__date"></div>
@@ -107,7 +119,7 @@
             <h3 class="section--title">Abstract</h3>
             <div class="switch__to-ja">日本語</div>
             <div class="switch__to-en active">英語</div>
-            <div class="paper--abstract__en"></div>
+            <div class="paper--abstract__en tex2jax_process"></div>
             <div class="paper--abstract__ja active"></div>
           </section>
           <section class="section">
