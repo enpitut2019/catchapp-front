@@ -55,6 +55,7 @@
 
     &__left {
       width: 600px;
+      //width: 75%;
       margin-top: $base-space-3;
       margin-right: $base-space-2;
       @media screen and (max-width: 500px) {
@@ -62,13 +63,20 @@
         margin-top: 0px;
         margin-right: 0px;
       }
+      @media screen and (min-width: 500px) and (max-width: 1024px) {
+        width: 75%;
+      }
     }
 
     &__right {
       width: 200px;
+      //width: 25%;
       margin-top: $base-space-3;
       @media screen and (max-width: 500px) {
         width: 100%;
+      }
+      @media screen and (min-width: 500px) and (max-width: 1024px) {
+        width: 25%;
       }
 
       &__stop {
@@ -86,6 +94,9 @@
   &--figures {
     display: none;
     margin-bottom: $base-space-2;
+    @media screen and (max-width: 500px) {
+      justify-content: center;
+    }
 
     &.active {
       display: flex;
@@ -153,8 +164,8 @@
       border-radius: 4px;
       margin-bottom: $base-space-3;
       @media screen and (max-width: 500px) {
-        width: 100%;
-        margin-bottom: $base-space-2;
+        width: 95%;
+        margin: 0 auto $base-space-2;
       }
     }
   }
@@ -176,6 +187,12 @@
     object-fit: contain;
   }
 
+  &--first-figure {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   &--abstract {
     &__en,
     &__ja {
@@ -194,6 +211,9 @@
 
 .section {
   margin-bottom: $base-space-4;
+  @media screen and (max-width: 500px) {
+    margin-bottom: $base-space-2;
+  }
 
   &__no-margin {
     margin-bottom: 0px;
@@ -207,6 +227,9 @@
   &--title-contents {
     display: flex;
     margin-bottom: $base-space-3;
+    @media screen and (max-width: 500px) {
+      margin: $base-space-4 0 $base-space-3;
+    }
 
     .title-text {
       font-size: $font-size-m;
@@ -234,7 +257,7 @@
     font-size: $font-size-m;
     color: $base-color;
     font-weight: bolder;
-    margin: $base-space-2 0;
+    margin: $base-space 0 $base-space-2 0;
     display: inline-block;
     margin-right: $base-space-2;
 
@@ -329,7 +352,7 @@
     height: 45px;
     line-height: 45px;
     text-align: center;
-    box-shadow: 0 4px 0 0 $base-color;
+    box-shadow: 0 4px 0 0 $base-blue;
     border-radius: 5px;
   }
 
@@ -360,6 +383,7 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
     padding: $base-space;
     overflow-y: auto;
+    position: absolute;
 
     &__fixed {
       position: fixed;
@@ -373,6 +397,9 @@
     margin: 8px auto calc(8px * 2);
     background-color: $base-color;
     box-shadow: 0 6px $base-color-2;
+    @media screen and (min-width: 500px) and (max-width: 1024px) {
+      padding: 0 $base-space;
+    }
   }
 
   .paper--pdf-link {
@@ -387,6 +414,10 @@
     color: #fff;
     height: 50px;
     line-height: 150px;
+    @media screen and (min-width: 500px) and (max-width: 1024px) {
+      font-size: $font-size-s;
+      width: inherit;
+    }
   }
 
   /* Font Awesomeを使用しています。*/
@@ -398,11 +429,14 @@
   }
 
   .shareList-item {
-    height: 40px;
-    line-height: 40px;
+    height: 50px;
+    line-height: 50px;
     text-align: center;
-    box-shadow: 0 4px 0 0 $base-color;
+    box-shadow: 0 4px 0 0 $base-blue;
     border-radius: 5px;
+    @media screen and (min-width: 500px) and (max-width: 1024px) {
+      height: inherit;
+    }
   }
 
   .icon::before {
@@ -423,6 +457,9 @@
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
+    @media screen and (min-width: 500px) and (max-width: 1024px) {
+      padding: 0 $base-space;
+    }
   }
 
   .icon-twitter {
