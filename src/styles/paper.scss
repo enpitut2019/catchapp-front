@@ -38,41 +38,70 @@
     }
   }
 
-  &--nontitle {
-    display: flex;
-    margin-bottom: $base-space;
-
-    &__date {
-      font-size: $font-size-ss;
-      width: 90%;
-      @media screen and (min-width: 500px) {
-        font-size: $font-size-s;
-      }
-    }
-  }
-
   &--contents {
     padding: $base-space-2;
     padding-bottom: 100px;
+    display: flex;
+
+    @media screen and (max-width: 500px) {
+      display: block;
+    }
 
     @media screen and (min-width: 500px) {
       width: 80%;
       max-width: 798px;
       margin: 0 auto;
-      padding-left: $base-space-4;
+    }
+
+    &__left {
+      width: 600px;
+      //width: 75%;
+      margin-top: $base-space-3;
+      margin-right: $base-space-2;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+        margin-top: 0px;
+        margin-right: 0px;
+      }
+      @media screen and (min-width: 500px) and (max-width: 1024px) {
+        width: 75%;
+      }
+    }
+
+    &__right {
+      width: 200px;
+      //width: 25%;
+      margin-top: $base-space-3;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
+      @media screen and (min-width: 500px) and (max-width: 1024px) {
+        width: 25%;
+      }
+
+      &__stop {
+        position: relative;
+        top: 0px;
+      }
+
+      &__active {
+        position: fixed;
+        top: 0px;
+      }
     }
   }
 
   &--figures {
     display: none;
     margin-bottom: $base-space-2;
-    margin-top: $base-space;
+    @media screen and (max-width: 500px) {
+      justify-content: center;
+    }
 
     &.active {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: center;
     }
 
     &__analyzing,
@@ -85,18 +114,83 @@
     }
   }
 
+  &--first-view-contents {
+    display: flex;
+
+    @media screen and (max-width: 500px) {
+      display: inline;
+    }
+
+    .original-info {
+      margin: 0 $base-space-2;
+      width: -webkit-fill-available;
+
+      &__invisible {
+        display: none;
+      }
+
+      @media screen and (max-width: 500px) {
+        margin: 0px;
+      }
+
+      &__contents {
+        margin: $base-space;
+        border-bottom: 1px solid $base-color;
+        padding-bottom: $base-space-2;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .date-text {
+          font-size: $font-size-s;
+        }
+
+        .journal-text {
+          font-size: $font-size-s;
+        }
+
+        @media screen and (max-width: 500px) {
+          display: flex;
+          padding: 0px;
+        }
+      }
+    }
+
+    .original-figure {
+      width: 770px;
+      height: 230px;
+      border: 1px solid black;
+      border-radius: 4px;
+      margin-bottom: $base-space-3;
+      @media screen and (max-width: 500px) {
+        width: 95%;
+        margin: 0 auto $base-space-2;
+      }
+    }
+  }
+
   &--figure-wrapper {
     width: 100px;
     height: 100px;
     padding: 5px;
     margin: -0.5px;
     border: 1px solid $base-color-2;
+    @media screen and (max-width: 500px) {
+      width: 98px;
+    }
   }
 
   &--figure {
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  &--first-figure {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   &--abstract {
@@ -116,22 +210,75 @@
 }
 
 .section {
-  margin-bottom: $base-space-2;
+  margin-bottom: $base-space-4;
+  @media screen and (max-width: 500px) {
+    margin-bottom: $base-space-2;
+  }
+
+  &__no-margin {
+    margin-bottom: 0px;
+  }
+
+  &__invisible {
+    margin: 0px;
+    display: none;
+  }
+
+  &--title-contents {
+    display: flex;
+    margin-bottom: $base-space-3;
+    @media screen and (max-width: 500px) {
+      margin: $base-space-4 0 $base-space-3;
+    }
+
+    .title-text {
+      font-size: $font-size-m;
+      color: $base-color;
+      font-weight: bolder;
+      margin: 0 $base-space-2 0 0;
+      display: inline-block;
+      border-left: $base-space-2 solid #f2f2f2;
+      padding-left: $base-space-2;
+    }
+
+    .title-decoration {
+      background-color: #f2f2f2;
+      width: -webkit-fill-available;
+      height: 30px;
+      display: inline-block;
+
+      @media screen and (max-width: 500px) {
+        width: initial;
+      }
+    }
+  }
 
   &--title {
     font-size: $font-size-m;
     color: $base-color;
     font-weight: bolder;
-    margin: 0;
+    margin: $base-space 0 $base-space-2 0;
     display: inline-block;
     margin-right: $base-space-2;
+
+    @media screen and (max-width: 500px) {
+      margin: 0 $base-space $base-space 0;
+    }
+
+    &__small {
+      font-size: $font-size-sm;
+    }
+
+    &__no-margin {
+      margin: 0px;
+    }
   }
 }
 
 .switch {
   &__to-ja,
   &__to-en {
-    width: 50px;
+    width: 70px;
     height: 20px;
     text-align: center;
     font-size: $font-size-ss;
@@ -141,16 +288,13 @@
     border-radius: 5px;
     margin-top: $base-space;
     cursor: pointer;
+    margin-right: $base-space-2;
     display: inline-block;
 
     &.active {
       background-color: white;
       color: $base-color;
     }
-  }
-
-  &__to-en {
-    margin-left: $base-space-2;
   }
 }
 
@@ -173,13 +317,12 @@
 
   .paper--pdf-button {
     border-radius: 5px;
-    width: 80%;
     height: 45px;
-    margin: 8px auto calc(8px * 2);
+    margin: $base-space-2 $base-space;
     background-color: $base-color;
     box-shadow: 0 4px 0 0 $base-color-2;
     box-sizing: border-box;
-    width: 90%;
+    width: 900px;
     background-color: $base-color;
     z-index: 3;
     left: 0px;
@@ -197,28 +340,66 @@
     font-weight: bold;
     line-height: 45px;
   }
+
+  /* Font Awesomeを使用しています。*/
+  .shareList {
+    padding: 0;
+    margin: $base-space-2 $base-space;
+    list-style: none;
+  }
+
+  .shareList-item {
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    box-shadow: 0 4px 0 0 $base-blue;
+    border-radius: 5px;
+  }
+
+  .icon::before {
+    font-size: $font-size-l;
+  }
+
+  .icon {
+    display: block;
+    padding: 0 $base-space-2;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    zoom: 1.2;
+  }
+
+  .icon-twitter {
+    background: #55acee;
+  }
 }
 
 // PC用
 @media screen and (min-width: 500px) {
   .paper--pdf-button-wrapper {
-    display: block;
-    position: fixed;
-    bottom: 0;
-    box-sizing: border-box;
-    z-index: 3;
-    right: 10%;
+    background-color: white;
+    border: 1px solid #c4c4c4;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+    padding: $base-space;
+    overflow-y: auto;
+    position: absolute;
+
+    &__fixed {
+      position: fixed;
+      top: $base-space-3;
+    }
   }
 
   .paper--pdf-button {
-    border-radius: 100px;
-    width: 150px;
-    height: 150px;
-    border: 1px solid $base-color;
+    border-radius: $base-space;
+    padding: 0 20px;
     margin: 8px auto calc(8px * 2);
     background-color: $base-color;
     box-shadow: 0 6px $base-color-2;
-    box-sizing: border-box;
+    @media screen and (min-width: 500px) and (max-width: 1024px) {
+      padding: 0 $base-space;
+    }
   }
 
   .paper--pdf-link {
@@ -231,8 +412,58 @@
     font-size: $font-size-sm;
     font-weight: bold;
     color: #fff;
-    height: 150px;
+    height: 50px;
     line-height: 150px;
+    @media screen and (min-width: 500px) and (max-width: 1024px) {
+      font-size: $font-size-s;
+      width: inherit;
+    }
+  }
+
+  /* Font Awesomeを使用しています。*/
+  .shareList {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    margin: $base-space-3 auto $base-space-2;
+  }
+
+  .shareList-item {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    box-shadow: 0 4px 0 0 $base-blue;
+    border-radius: 5px;
+    @media screen and (min-width: 500px) and (max-width: 1024px) {
+      height: inherit;
+    }
+  }
+
+  .icon::before {
+    font-size: 16px;
+  }
+
+  .icon::after {
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    vertical-align: top;
+    content: attr(title);
+  }
+
+  .icon {
+    display: block;
+    padding: 0 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    @media screen and (min-width: 500px) and (max-width: 1024px) {
+      padding: 0 $base-space;
+    }
+  }
+
+  .icon-twitter {
+    background: #55acee;
   }
 }
 
@@ -372,6 +603,9 @@
 
 // Twitterシェアボタン
 .twitter-share-button {
-  border-radius: 4px;
-  border: 1px solid white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: $base-space auto;
+  @media screen and (max-width: 500px) {
+    margin: 0px;
+  }
 }

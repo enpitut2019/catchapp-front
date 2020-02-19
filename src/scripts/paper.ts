@@ -2,6 +2,9 @@ import axios from "axios";
 import { Paper, Figure } from "./models";
 import { format } from "date-fns";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const images = require("../image/*.png");
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let MathJax: any;
 
@@ -33,18 +36,28 @@ const appendPapers = (paper: Paper): void => {
   // Element Elementを生成
   const paperElement = document.importNode(paperTemplate.content, true);
   const figuresElement = paperElement.querySelector(".paper--figures")!;
-  const figureAnalyzingElement = paperElement.querySelector(".paper--figures__analyzing")!;
-  const figureNoImgElement = paperElement.querySelector(".paper--figures__no-img")!;
+  const firstFigureElement = paperElement.querySelector(".original-figure")!;
+  const firstFigureImgElement = paperElement.querySelector(".paper--first-figure")!;
   const titleElement = paperElement.querySelector(".paper--title__en")!;
   const jaTitleElement = paperElement.querySelector(".paper--title__ja")!;
-  const journalElement = paperElement.querySelector(".paper--journal")!;
   const arxivLinkElement = paperElement.querySelector(".paper--arxiv-link")! as HTMLAnchorElement;
-  const dateElement = paperElement.querySelector(".paper--nontitle__date")!;
   const shareElement = paperElement.querySelector(".twitter-share-button")!;
   const pdfLinkElement = paperElement.querySelector(".paper--pdf-link")! as HTMLAnchorElement;
   const abstractEnElement = paperElement.querySelector(".paper--abstract__en")!;
   const abstractJaElement = paperElement.querySelector(".paper--abstract__ja")!;
   const authorsElement = paperElement.querySelector(".paper--authors")!;
+
+  // SPのみのエレメント
+  const publishSectionSPElement = paperElement.querySelector(".section--publish")!;
+  const journalSectionSPElement = paperElement.querySelector(".section--journal")!;
+  const publishTextSPElement = paperElement.querySelector(".paper--publish__sp")!;
+  const journalTextSPElement = paperElement.querySelector(".paper--journal__sp")!;
+
+  // PCのみのエレメント
+  const originalInfoPCElement = paperElement.querySelector(".original-info")!;
+  const publishTextPCElement = paperElement.querySelector(".paper--publish__pc")!;
+  const journalTextPCElement = paperElement.querySelector(".paper--journal__pc")!;
+  const floatButtonPCElement = paperElement.querySelector(".paper--pdf-button-wrapper")!;
 
   // 翻訳切り替えボタン
   const abstractToEnSwitchElement = paperElement.querySelector(".switch__to-en")!;
@@ -53,15 +66,44 @@ const appendPapers = (paper: Paper): void => {
   // Elementにテキストを挿入
   titleElement.textContent = "(" + paper.title + ")";
   jaTitleElement.textContent = paper.title_ja;
-  journalElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
-  dateElement.textContent = "published: " + format(new Date(paper.published_at), "yyyy-MM-dd");
-  shareElement.setAttribute("data-text", paper.title_ja + "\n(" + paper.title + ")\n");
+
+  // Twitterシェアボタンのツイート内容
+  shareElement.setAttribute("href", "https://twitter.com/intent/tweet?text=" + paper.title_ja + "%0D%0A" + paper.title + "%0D%0A&url=" + parser);
+
+  // SPの場合のみの処理
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  if (getDevice === "sp") {
+    // シェアボタンの文字を無くす
+    shareElement.setAttribute("title", "");
+    // publishを下に表示する
+    publishTextSPElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
+    // journalを下に表示する
+    journalTextSPElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
+    // sectionを表示する
+    publishSectionSPElement.classList.remove("section__invisible");
+    journalSectionSPElement.classList.remove("section__invisible");
+  } else {
+    originalInfoPCElement.classList.remove("original-info__invisible");
+    // publishを上に表示する
+    publishTextPCElement.textContent = format(new Date(paper.published_at), "yyyy-MM-dd");
+    // journalを上に表示する
+    journalTextPCElement.textContent = paper.journal || "ジャーナルを取得できませんでした";
+  }
 
   abstractEnElement.textContent = paper.abstract;
   abstractJaElement.textContent = paper.abstract_ja || "翻訳中……";
 
-  // 翻訳切り替えボタン
+  // Floatボタンの制御
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  window.onscroll = function() {
+    if (document.documentElement.scrollTop > 215) {
+      floatButtonPCElement.classList.add("paper--pdf-button-wrapper__fixed");
+    } else {
+      floatButtonPCElement.classList.remove("paper--pdf-button-wrapper__fixed");
+    }
+  };
 
+  // 翻訳切り替えボタン
   abstractToEnSwitchElement.addEventListener("click", () => {
     abstractEnElement.classList.add("active");
     abstractJaElement.classList.remove("active");
@@ -77,15 +119,25 @@ const appendPapers = (paper: Paper): void => {
   });
 
   if (paper.figures.length > 0) {
+    let figureNumber = 0;
     // 画像があるパターン
     const figureTemplate = document.getElementById("figure-template") as HTMLTemplateElement;
 
     for (const figure of paper.figures.reverse()) {
       const figureElement = document.importNode(figureTemplate.content, true);
 
-      // 画像を設定
-      const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
-      imgElement.src = figure.figure.url;
+      if (figureNumber === 0) {
+        // 1枚目の大きな画像を設定
+        const firstFigureImageElement = firstFigureElement.querySelector(".paper--figure") as HTMLImageElement;
+        firstFigureImageElement.src = figure.figure.url;
+        // 画像を設定
+        const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
+        imgElement.src = figure.figure.url;
+      } else {
+        // 画像を設定
+        const imgElement = figureElement.querySelector(".paper--figure") as HTMLImageElement;
+        imgElement.src = figure.figure.url;
+      }
 
       // 画像を囲むdivがクリックされたときの処理
       const imgWrapperElement = figureElement.querySelector(".paper--figure-wrapper")!;
@@ -157,28 +209,28 @@ const appendPapers = (paper: Paper): void => {
 
       // 画像の表示をアクティブ化
       figuresElement.classList.add("active");
-
-      // 解析中の表示を消す
-      figureAnalyzingElement.classList.remove("active");
+      figureNumber += 1;
     }
   } else if (paper.analized === "Done") {
     // 解析が終了しているが画像が無いパターン
-    // 解析中の表示を消す
-    figureAnalyzingElement.classList.remove("active");
-
-    // 画像無しの表示をアクティブ化
-    figureNoImgElement.classList.add("active");
+    firstFigureImgElement.setAttribute("src", images["NoImg"]);
   }
 
   // フッターボタン
   pdfLinkElement.href = paper.pdf_url;
 
   // 著者
+  let authorLength = 1;
   for (const author of paper.authors) {
-    const authorElement = document.createElement("div");
+    const authorElement = document.createElement("span");
     authorElement.classList.add("paper--author");
-    authorElement.textContent = author.name;
+    if (authorLength === paper.authors.length) {
+      authorElement.textContent = author.name;
+    } else {
+      authorElement.textContent = author.name + ", ";
+    }
     authorsElement.appendChild(authorElement);
+    authorLength += 1;
   }
 
   arxivLinkElement.href = paper.url;
@@ -218,6 +270,18 @@ const appendPapers = (paper: Paper): void => {
 
   MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 };
+
+// デバイスを判別するメソッド
+const getDevice = (function() {
+  const ua = navigator.userAgent;
+  if (ua.indexOf("iPhone") > 0 || ua.indexOf("iPod") > 0 || (ua.indexOf("Android") > 0 && ua.indexOf("Mobile") > 0)) {
+    return "sp";
+  } else if (ua.indexOf("iPad") > 0 || ua.indexOf("Android") > 0) {
+    return "tab";
+  } else {
+    return "other";
+  }
+})();
 
 const closeModal = (): void => {
   const modal = document.getElementById("figure-modal")!;

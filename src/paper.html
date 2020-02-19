@@ -17,6 +17,10 @@
     <script src="./scripts/paper.ts"></script>
     <link rel="stylesheet" href="./styles/paper.scss" />
     <script src="../node_modules/@webcomponents/template/template.min.js"></script>
+    <link
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      rel="stylesheet"
+    />
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } ,
       "HTML-CSS": {
@@ -88,57 +92,104 @@
               <div class="paper--title__ja"></div>
               <div class="paper--title__en tex2jax_process"></div>
             </div>
-            <div class="paper--nontitle">
-              <div class="paper--nontitle__date"></div>
-              <a
-                href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-                class="twitter-share-button"
-                data-show-count="false"
-                >Tweet
-              </a>
-              <script
-                async
-                src="https://platform.twitter.com/widgets.js"
-                charset="utf-8"
-              ></script>
-            </div>
           </div>
         </div>
         <main class="paper--contents">
-          <section class="section image-section">
-            <h3 class="section--title">Images</h3>
-            <div class="paper--figures"></div>
-            <div class="paper--figures__analyzing active">
-              画像を解析中です……(処理には2, 3分かかることがあります)
-            </div>
-            <div class="paper--figures__no-img">
-              画像はありません(または取得できませんでした)
-            </div>
-          </section>
-          <section class="section">
-            <h3 class="section--title">Abstract</h3>
-            <div class="switch__to-ja">日本語</div>
-            <div class="switch__to-en active">英語</div>
-            <div class="paper--abstract__en tex2jax_process"></div>
-            <div class="paper--abstract__ja active"></div>
-          </section>
-          <section class="section">
-            <h3 class="section--title">Journal</h3>
-            <div class="paper--journal"></div>
-          </section>
-          <section class="section">
-            <h3 class="section--title">Authors</h3>
-            <div class="paper--authors"></div>
-          </section>
-          <section class="section">
-            <h3 class="section--title">arXiv URL</h3>
-            <div>
-              <a class="paper--arxiv-link" target="_blank"></a>
-            </div>
-          </section>
-          <div class="paper--pdf-button-wrapper">
-            <div class="paper--pdf-button">
-              <a class="paper--pdf-link" target="_blank">PDF版を読む</a>
+          <div class="paper--contents__left">
+            <section class="section image-section">
+              <div class="paper--first-view-contents">
+                <div class="original-figure">
+                  <img
+                    class="paper--figure paper--first-figure"
+                    src="./image/Analyzing.png"
+                    alt="論文画像"
+                  />
+                </div>
+                <div class="original-info original-info__invisible">
+                  <div class="original-info__contents">
+                    <div
+                      class="section--title section--title__small title--publish__pc"
+                    >
+                      Publish
+                    </div>
+                    <div class="date-text paper--publish__pc"></div>
+                  </div>
+                  <div class="original-info__contents">
+                    <div
+                      class="section--title section--title__small title--journal__pc"
+                    >
+                      Journal
+                    </div>
+                    <div class="journal-text paper--journal__pc"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="paper--figures"></div>
+            </section>
+            <section class="section">
+              <div class="section--title-contents">
+                <h3 class="title-text">
+                  Abstract
+                </h3>
+                <div class="switch__to-ja">日本語</div>
+                <div class="switch__to-en active">英語</div>
+                <div class="title-decoration"></div>
+              </div>
+              <div class="paper--abstract__en tex2jax_process"></div>
+              <div class="paper--abstract__ja active"></div>
+            </section>
+            <section class="section section__no-margin">
+              <div class="section--title-contents">
+                <h3 class="title-text">
+                  Information
+                </h3>
+                <div class="title-decoration"></div>
+              </div>
+            </section>
+            <section class="section section--publish section__invisible">
+              <h3
+                class="section--title section--title__small title--publish__sp"
+              >
+                Publish
+              </h3>
+              <div class="paper--publish__sp"></div>
+            </section>
+            <section class="section section--journal section__invisible">
+              <h3
+                class="section--title section--title__small title--journal__sp"
+              >
+                Journal
+              </h3>
+              <div class="paper--journal__sp"></div>
+            </section>
+            <section class="section">
+              <h3 class="section--title section--title__small">Authors</h3>
+              <div class="paper--authors"></div>
+            </section>
+            <section class="section">
+              <h3 class="section--title section--title__small">arXiv URL</h3>
+              <div>
+                <a class="paper--arxiv-link" target="_blank"></a>
+              </div>
+            </section>
+          </div>
+          <div class="paper--contents__right">
+            <div class="paper--pdf-button-wrapper">
+              <div class="paper--pdf-button">
+                <a class="paper--pdf-link" target="_blank">PDF版を読む</a>
+              </div>
+              <ul class="shareList">
+                <li class="shareList-item">
+                  <a
+                    rel="”nofollow”"
+                    class="twitter-share-button icon icon-twitter"
+                    title="Twitterでシェア"
+                    onClick="window.open(encodeURI(decodeURI(this.href)),'twwindow','width=550, height=450, personalbar=0, toolbar=0, scrollbars=1'); return false;"
+                  >
+                    <i class="fab fa-twitter"></i>
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </main>
